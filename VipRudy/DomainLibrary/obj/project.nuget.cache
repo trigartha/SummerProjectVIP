@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "zFenwzzbq8mIY91qGn8EOzqXY1yzbdj/RS7uT9JSkGuvI5uajXpCWQjTYoIH9IdR57m0ZoyB+5r6LX81pdz0UA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Triga\\Documents\\GitHub\\SummerProjectVIP\\VipRudy\\DomainLibrary\\DomainLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Triga\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Triga\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
