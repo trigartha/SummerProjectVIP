@@ -28,7 +28,7 @@ namespace DataLayer
         #region Methods
         private void SetConnectionString(string db = "Reservation")
         {
-            var builder = new ConfigurationBuilder();
+            IConfigurationBuilder builder = new ConfigurationBuilder();
             builder.SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false);
 
@@ -53,9 +53,16 @@ namespace DataLayer
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+           
             modelBuilder.Entity<Client>()
-                .HasKey(c=> c.ClientNumber)
-                .HasName("PrimaryKey_ClientId");
+                .Property(c=>c.ClientNumber)
+                .ValueGeneratedNever();
+            modelBuilder.Entity<Client>()
+               .HasKey(c => c.ClientNumber)
+               .HasName("PrimaryKey_ClientId");
+            modelBuilder.Entity<Client>()
+                .Property(c => c.ClientCategory)
+                .HasConversion<string>();
         }
         #endregion
     }

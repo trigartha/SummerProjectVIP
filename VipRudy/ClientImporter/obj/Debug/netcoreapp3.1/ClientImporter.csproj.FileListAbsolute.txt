@@ -54,3 +54,4 @@ C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\ClientImporter\bin\Debu
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\ClientImporter\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\ClientImporter\bin\Debug\netcoreapp3.1\DataLayer.dll
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\ClientImporter\bin\Debug\netcoreapp3.1\DataLayer.pdb
+C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\ClientImporter\bin\Debug\netcoreapp3.1\appsettings.json

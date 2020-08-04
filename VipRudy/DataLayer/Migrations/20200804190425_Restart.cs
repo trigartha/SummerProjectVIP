@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataLayer.Migrations
 {
-    public partial class InitCreate : Migration
+    public partial class Restart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,11 +55,10 @@ namespace DataLayer.Migrations
                 name: "Clients",
                 columns: table => new
                 {
-                    ClientNumber = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientNumber = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     TaxNumber = table.Column<string>(nullable: true),
-                    ClientCategory = table.Column<int>(nullable: false),
+                    ClientCategory = table.Column<string>(nullable: false),
                     AddressId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

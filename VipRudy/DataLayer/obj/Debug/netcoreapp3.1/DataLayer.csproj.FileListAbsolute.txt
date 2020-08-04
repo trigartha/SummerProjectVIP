@@ -13,3 +13,4 @@ C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DataLayer\obj\Debug\net
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DataLayer\obj\Debug\netcoreapp3.1\DataLayer.csproj.CopyComplete
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DataLayer\obj\Debug\netcoreapp3.1\DataLayer.dll
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DataLayer\obj\Debug\netcoreapp3.1\DataLayer.pdb
+C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DataLayer\bin\Debug\netcoreapp3.1\appsettings.json

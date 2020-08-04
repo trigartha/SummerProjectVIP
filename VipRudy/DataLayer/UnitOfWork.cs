@@ -1,4 +1,5 @@
-﻿using DomainLibrary;
+﻿using DataLayer.Repository;
+using DomainLibrary;
 using DomainLibrary.Repositories;
 using System;
 
@@ -19,7 +20,8 @@ namespace DataLayer
         public UnitOfWork(ReservationContext context)
         {
             this._context = context;
-
+            this.Clients = new ClientRepository(context);
+            this.Reservations = new ReservationRepository(context);
         }
         #endregion
         #region Methods

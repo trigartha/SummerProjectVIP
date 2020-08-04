@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(ReservationContext))]
-    [Migration("20200804132007_InitCreate")]
-    partial class InitCreate
+    [Migration("20200804190425_Restart")]
+    partial class Restart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,15 +45,14 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DomainLibrary.Client", b =>
                 {
                     b.Property<int>("ClientNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClientCategory")
-                        .HasColumnType("int");
+                    b.Property<string>("ClientCategory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

@@ -20,6 +20,7 @@ namespace DomainLibrary
         public void AddClient(Client client)
         {
             _uow.Clients.AddClient(client);
+            _uow.Complete();
         }
         #endregion
     }

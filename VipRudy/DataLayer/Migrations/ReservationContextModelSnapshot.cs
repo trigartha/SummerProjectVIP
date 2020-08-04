@@ -43,15 +43,14 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DomainLibrary.Client", b =>
                 {
                     b.Property<int>("ClientNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClientCategory")
-                        .HasColumnType("int");
+                    b.Property<string>("ClientCategory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
