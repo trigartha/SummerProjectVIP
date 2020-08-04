@@ -1,4 +1,5 @@
-﻿using DomainLibrary;
+﻿using DataLayer;
+using DomainLibrary;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,7 +12,7 @@ namespace ClientImporter
         public static string ClientFile = @"C:\Users\Triga\Documents\GitHub\SummerProjectVIP\klanten.txt";
         #endregion
         #region Methods
-        public static List<Client> ReadClients()
+        private static List<Client> ReadClients()
         {
             List<Client> clients = new List<Client>();
             string[] linesData = System.IO.File.ReadAllLines(FileReader.ClientFile);
@@ -24,6 +25,15 @@ namespace ClientImporter
                 clients.Add(new Client(clientNumber, fieldsData[1], fieldsData[3], Client.GetClientCategory(fieldsData[2]), new Address(addressdata[0], addressdata[1], addressdata[4])));
             }
             return clients;
+        }
+        public static void AddClients()
+        {
+            ReservationManager RM = new ReservationManager(new UnitOfWork(new ReservationContext("Reservation")));
+            List<Client> clients = ReadClients();
+            foreach(Client c in clients)
+            {
+                RM.AddClient(c);
+            }
         }
         #endregion
     }

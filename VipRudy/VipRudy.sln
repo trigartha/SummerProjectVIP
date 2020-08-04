@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainLibrary", "DomainLibr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientImporter", "ClientImporter\ClientImporter.csproj", "{9C3A9914-9643-4FE0-BF64-1482DD37D68C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{8018FD0C-AF60-4E6B-BFCC-BFD1B7317DB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9C3A9914-9643-4FE0-BF64-1482DD37D68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C3A9914-9643-4FE0-BF64-1482DD37D68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C3A9914-9643-4FE0-BF64-1482DD37D68C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8018FD0C-AF60-4E6B-BFCC-BFD1B7317DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8018FD0C-AF60-4E6B-BFCC-BFD1B7317DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8018FD0C-AF60-4E6B-BFCC-BFD1B7317DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8018FD0C-AF60-4E6B-BFCC-BFD1B7317DB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

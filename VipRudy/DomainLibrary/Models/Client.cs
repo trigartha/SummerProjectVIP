@@ -15,6 +15,7 @@ namespace DomainLibrary
         public Address Address { get; set; }
         #endregion
         #region Constructor
+        public Client() { }
         public Client(int clientNumber, string name, string taxNumber, ClientCategory clientCategory, Address address)
         {
             this.ClientNumber = clientNumber;
