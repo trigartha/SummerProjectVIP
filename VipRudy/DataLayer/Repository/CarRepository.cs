@@ -1,4 +1,5 @@
-﻿using DomainLibrary.Models;
+﻿using DomainLibrary.Enums;
+using DomainLibrary.Models;
 using DomainLibrary.Repositories;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,11 @@ namespace DataLayer.Repository
         public IEnumerable<Car> FindAll()
         {
             return _context.Cars.OrderBy(c => c.CarId).AsEnumerable<Car>();
+        }
+        public void UpdateCarAvailability(Car car, CarAvailability availability)
+        {
+            Car tempoCar = _context.Cars.Find(car.CarId);
+            tempoCar.Availability = availability;
         }
         public void DeleteAll()
         {

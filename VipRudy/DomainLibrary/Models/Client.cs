@@ -1,4 +1,5 @@
 ﻿using DomainLibrary.Enums;
+using DomainLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,7 @@ namespace DomainLibrary
         public string TaxNumber { get; set; }
         public ClientCategory ClientCategory { get; set; }
         public Address Address { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
         #endregion
         #region Constructor
         public Client() { }

@@ -14,6 +14,7 @@ namespace DomainLibrary.Models
         public int CarId { get; set; }
         public Price Price { get; set; }
         public CarAvailability Availability { get; set; }
+        public ICollection<ReservationInfo> ReservationDetails { get; set; }
         #endregion
         #region Constructor
         public Car() { }

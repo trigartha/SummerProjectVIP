@@ -243,7 +243,7 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DomainLibrary.Models.Reservation", b =>
                 {
                     b.HasOne("DomainLibrary.Client", "Client")
-                        .WithMany()
+                        .WithMany("Reservations")
                         .HasForeignKey("ClientNumber");
 
                     b.HasOne("DomainLibrary.Models.ReservationInfo", "ReservationInfo")
@@ -254,7 +254,7 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DomainLibrary.Models.ReservationInfo", b =>
                 {
                     b.HasOne("DomainLibrary.Models.Car", "Car")
-                        .WithMany()
+                        .WithMany("ReservationDetails")
                         .HasForeignKey("CarId");
 
                     b.HasOne("DomainLibrary.Models.Discount", "Discount")

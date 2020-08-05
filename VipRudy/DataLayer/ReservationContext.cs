@@ -54,7 +54,12 @@ namespace DataLayer
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+            modelBuilder.Entity<Reservation>()
+             .HasOne(r => r.Client)
+             .WithMany(c => c.Reservations);
+            modelBuilder.Entity<ReservationInfo>()
+            .HasOne(r => r.Car)
+            .WithMany(c => c.ReservationDetails);
             modelBuilder.Entity<Client>()
                 .Property(c=>c.ClientNumber)
                 .ValueGeneratedNever();

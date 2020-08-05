@@ -7,7 +7,6 @@ namespace DomainLibrary.Enums
     public enum CarAvailability
     {
         Available,
-        Cleaning,
-        Repair
+       NotAvailable
     }
 }
