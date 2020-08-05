@@ -25,6 +25,7 @@ namespace DomainLibrary
         public void DeleteAllClients()
         {
             _uow.Clients.DeleteAll();
+            _uow.Complete();
         }
         #endregion
     }
