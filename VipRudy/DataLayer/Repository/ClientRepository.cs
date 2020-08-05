@@ -25,6 +25,10 @@ namespace DataLayer.Repository
         {
             _context.Clients.Add(client);
         }
+        public void DeleteAll()
+        {
+            _context.Clients.RemoveRange(_context.Clients);
+        }
         #endregion
     }
 }

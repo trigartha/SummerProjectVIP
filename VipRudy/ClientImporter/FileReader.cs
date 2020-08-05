@@ -29,6 +29,7 @@ namespace ClientImporter
         public static void AddClients()
         {
             ReservationManager RM = new ReservationManager(new UnitOfWork(new ReservationContext("Reservation")));
+            RM.DeleteAllClients();
             List<Client> clients = ReadClients();
             foreach(Client c in clients)
             {

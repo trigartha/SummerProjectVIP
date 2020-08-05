@@ -31,22 +31,22 @@ namespace DomainLibrary
             ClientCategory clientCategory = ClientCategory.Particulier;
             switch (cat)
             {
-                case "Particulier":
+                case "particulier":
                     clientCategory = ClientCategory.Particulier;
                     break;
-                case "Organisation":
+                case "organisatie":
                     clientCategory = ClientCategory.Organisation;
                     break;
-                case "VIP":
+                case "vip":
                     clientCategory = ClientCategory.Vip;
                     break;
-                case "ConcertPromotor":
+                case "concertpromotor":
                     clientCategory = ClientCategory.ConcertPromotor;
                     break;
-                case "WeddingPlanner":
+                case "huwelijksplanner":
                     clientCategory = ClientCategory.WeddingPlanner;
                     break;
-                case "EventBureau":
+                case "evenementenbureau <":
                     clientCategory = ClientCategory.EventBureau;
                     break;
             }

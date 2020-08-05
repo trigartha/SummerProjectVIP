@@ -7,6 +7,7 @@ namespace ClientImporter
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
             FileReader.AddClients();
             
             Console.ReadKey();

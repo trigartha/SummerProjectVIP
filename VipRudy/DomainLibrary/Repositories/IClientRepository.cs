@@ -7,5 +7,6 @@ namespace DomainLibrary.Repositories
     public interface IClientRepository
     {
         void AddClient(Client client);
+        void DeleteAll();
     }
 }
