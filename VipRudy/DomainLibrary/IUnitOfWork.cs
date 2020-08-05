@@ -10,6 +10,7 @@ namespace DomainLibrary
         IClientRepository Clients { get; set; }
         IReservationRepository Reservations { get; set; }
 
+        ICarRepository Cars { get; set; }
         int Complete();
         void Dispose();
     }

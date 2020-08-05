@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainLibrary.Models;
+using System;
 
 namespace DomainLibrary
 {
@@ -22,9 +23,19 @@ namespace DomainLibrary
             _uow.Clients.AddClient(client);
             _uow.Complete();
         }
+        public void AddCar(Car car)
+        {
+            _uow.Cars.AddCar(car);
+            _uow.Complete();
+        }
         public void DeleteAllClients()
         {
             _uow.Clients.DeleteAll();
+            _uow.Complete();
+        }
+        public void DeleteAllCars()
+        {
+            _uow.Cars.DeleteAll();
             _uow.Complete();
         }
         #endregion

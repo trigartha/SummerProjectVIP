@@ -1,5 +1,6 @@
 ﻿using DataLayer;
 using DomainLibrary;
+using DomainLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +11,7 @@ namespace ClientImporter
     {
         #region Fields
         public static string ClientFile = @"C:\Users\Triga\Documents\GitHub\SummerProjectVIP\klanten.txt";
+        public static string CarFile = @"C:\Users\Triga\Documents\GitHub\SummerProjectVIP\carpark.txt";
         #endregion
         #region Methods
         private static List<Client> ReadClients()
@@ -26,6 +28,24 @@ namespace ClientImporter
             }
             return clients;
         }
+        private static List<Car> ReadCars()
+        {
+            List<Car> cars = new List<Car>();
+            string[] linesData = System.IO.File.ReadAllLines(FileReader.CarFile);
+            for (int index = 0; index < linesData.Length; index++)
+            {
+                string[] fieldsData = linesData[index].Split(',');
+                char[] toTrim = { '€', ' ','-','–' };
+
+
+                decimal? firstH = FileReader.DecimalParser(fieldsData[3].Trim(toTrim));
+                decimal? nightL = FileReader.DecimalParser(fieldsData[4].Trim(toTrim));
+                decimal? wedding = FileReader.DecimalParser(fieldsData[5].Trim(toTrim));
+                decimal? wellness = FileReader.DecimalParser(fieldsData[6].Trim(toTrim));
+                cars.Add(new Car(fieldsData[0], fieldsData[1].TrimStart(), fieldsData[2].Trim(toTrim), new Price(firstH, nightL, wedding, wellness)));
+            }
+            return cars;
+        }
         public static void AddClients()
         {
             ReservationManager RM = new ReservationManager(new UnitOfWork(new ReservationContext("Reservation")));
@@ -35,6 +55,26 @@ namespace ClientImporter
             {
                 RM.AddClient(c);
             }
+        }
+        public static void AddCars()
+        {
+            ReservationManager RM = new ReservationManager(new UnitOfWork(new ReservationContext("Reservation")));
+            RM.DeleteAllCars();
+            List<Car> cars = ReadCars();
+            foreach (Car c in cars)
+            {
+                RM.AddCar(c);
+            }
+        }
+        private static decimal? DecimalParser(string value)
+        {
+            decimal test;
+            decimal? result;
+            if (decimal.TryParse(value, out test))
+                result = decimal.Parse(value);
+            else
+                result = null;
+            return result;
         }
         #endregion
     }

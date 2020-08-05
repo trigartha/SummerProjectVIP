@@ -14,6 +14,7 @@ namespace DataLayer
         #region Properties
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Car> Cars { get; set; }
         #endregion
         #region Fields
         private string _connectionString;
@@ -63,6 +64,9 @@ namespace DataLayer
             modelBuilder.Entity<Client>()
                 .Property(c => c.ClientCategory)
                 .HasConversion<string>();
+            modelBuilder.Entity<Car>()
+               .Property(c => c.Availability)
+               .HasConversion<string>();
         }
         #endregion
     }

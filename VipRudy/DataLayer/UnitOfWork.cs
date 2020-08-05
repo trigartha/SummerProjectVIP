@@ -12,6 +12,7 @@ namespace DataLayer
         #region Properties
         public IClientRepository Clients { get; set; }
         public IReservationRepository Reservations { get; set; }
+        public ICarRepository Cars { get; set; }
         #endregion
         #region Fields
         private ReservationContext _context;
@@ -22,6 +23,7 @@ namespace DataLayer
             this._context = context;
             this.Clients = new ClientRepository(context);
             this.Reservations = new ReservationRepository(context);
+            this.Cars = new CarRepository(context);
         }
         #endregion
         #region Methods
