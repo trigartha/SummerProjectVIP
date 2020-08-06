@@ -31,16 +31,20 @@ namespace DomainLibrary
         }
         public void AddReservation(Client client, Location start, Location stop, Car car, DateTime startTime, Arrangement arrangement, int first, int night, int overtime)
         {
-            Client thisC = _uow.Clients.Find(client.ClientNumber);
-            if (thisC == null) throw new DomainException("Client doesn't exist");
+            
+            if  (_uow.Clients.Find(client.ClientNumber) == null) throw new DomainException("Client doesn't exist");
             if (car.Availability != CarAvailability.Available) throw new DomainException("Car is not available");
             if (startTime < DateTime.Now) throw new DomainException("StartTime is in the past");
             if (arrangement == Arrangement.NightLife || arrangement == Arrangement.Wedding) if (overtime > 4) throw new DomainException("The overtime hours exceed the maximum");
             if (arrangement == Arrangement.Wellness) if (first > 10 || night > 0 || overtime > 0) throw new DomainException("Wellness Arrangement doens't allow overtime");
             if (arrangement != Arrangement.Wellness) if (first + overtime > 11 || first + night > 11 || night + overtime > 11) throw new DomainException("Reservation exceeds maximum time");
+            if (arrangement == Arrangement.Wedding) if (ControlStartTimeWedding(startTime)) throw new DomainException("Wedding Arrangement doesn't allow this startime");
+            if (arrangement == Arrangement.Wellness) if (ControlStartTimeWellness(startTime)) throw new DomainException("Wellness Arrangement doesn't allow this startime");
+            if (arrangement == Arrangement.NightLife) if (ControlStartTimeNightLife(startTime)) throw new DomainException("NightLife Arrangement doesn't allow this startime");
+
             _uow.Reservations.AddReservation(new Reservation(_uow.Clients.Find(client.ClientNumber), new ReservationInfo(start, stop, car, startTime, arrangement, first, night, overtime)));
             _uow.Complete();
-            UpdateCarAvailability(car, CarAvailability.NotAvailable);
+                UpdateCarAvailability(car, CarAvailability.NotAvailable);
         }
         public void UpdateCarAvailability(Car car, CarAvailability availability)
         {
@@ -56,6 +60,30 @@ namespace DomainLibrary
         {
             _uow.Cars.DeleteAll();
             _uow.Complete();
+        }
+        private bool ControlStartTimeWedding(DateTime time)
+        {
+            int start = 7;
+            int end = 15;
+            int real = time.Hour;
+            if (start <= real && real >= end) return true;
+            return false;
+        }
+        private bool ControlStartTimeWellness(DateTime time)
+        {
+            int start = 7;
+            int end = 12;
+            int real = time.Hour;
+            if (start <= real && real >= end) return true;
+            return false;
+        }
+        private bool ControlStartTimeNightLife(DateTime time)
+        {
+            int start = 20;
+            int end = 24;
+            int real = time.Hour;
+            if (start <= real && real >= end) return true;
+            return false;
         }
         #endregion
     }

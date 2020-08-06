@@ -29,7 +29,7 @@ namespace DataLayer
         }
         #endregion
         #region Methods
-
+        public void Close() { Database.EnsureDeleted(); }
         #endregion
     }
 }

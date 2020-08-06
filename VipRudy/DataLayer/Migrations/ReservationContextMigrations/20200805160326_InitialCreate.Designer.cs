@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DataLayer.Migrations
+namespace DataLayer.Migrations.ReservationContextMigrations
 {
     [DbContext(typeof(ReservationContext))]
-    [Migration("20200804190425_Restart")]
-    partial class Restart
+    [Migration("20200805160326_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,6 +75,10 @@ namespace DataLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Availability")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
 
@@ -91,7 +95,7 @@ namespace DataLayer.Migrations
 
                     b.HasIndex("PriceId");
 
-                    b.ToTable("Car");
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("DomainLibrary.Models.Discount", b =>
@@ -116,16 +120,16 @@ namespace DataLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("FirstHourPrice")
+                    b.Property<decimal?>("FirstHourPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("NightLifePrice")
+                    b.Property<decimal?>("NightLifePrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("WeddingPrice")
+                    b.Property<decimal?>("WeddingPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("WellnessPrice")
+                    b.Property<decimal?>("WellnessPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("PriceId");
@@ -241,7 +245,7 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DomainLibrary.Models.Reservation", b =>
                 {
                     b.HasOne("DomainLibrary.Client", "Client")
-                        .WithMany()
+                        .WithMany("Reservations")
                         .HasForeignKey("ClientNumber");
 
                     b.HasOne("DomainLibrary.Models.ReservationInfo", "ReservationInfo")
@@ -252,7 +256,7 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DomainLibrary.Models.ReservationInfo", b =>
                 {
                     b.HasOne("DomainLibrary.Models.Car", "Car")
-                        .WithMany()
+                        .WithMany("ReservationDetails")
                         .HasForeignKey("CarId");
 
                     b.HasOne("DomainLibrary.Models.Discount", "Discount")

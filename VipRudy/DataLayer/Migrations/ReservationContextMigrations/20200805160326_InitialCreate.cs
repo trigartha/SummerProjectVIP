@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DataLayer.Migrations
+namespace DataLayer.Migrations.ReservationContextMigrations
 {
-    public partial class Restart : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,10 +41,10 @@ namespace DataLayer.Migrations
                 {
                     PriceId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstHourPrice = table.Column<decimal>(nullable: false),
-                    NightLifePrice = table.Column<decimal>(nullable: false),
-                    WeddingPrice = table.Column<decimal>(nullable: false),
-                    WellnessPrice = table.Column<decimal>(nullable: false)
+                    FirstHourPrice = table.Column<decimal>(nullable: true),
+                    NightLifePrice = table.Column<decimal>(nullable: true),
+                    WeddingPrice = table.Column<decimal>(nullable: true),
+                    WellnessPrice = table.Column<decimal>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,7 +94,7 @@ namespace DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Car",
+                name: "Cars",
                 columns: table => new
                 {
                     CarId = table.Column<int>(nullable: false)
@@ -102,13 +102,14 @@ namespace DataLayer.Migrations
                     Brand = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),
                     Colour = table.Column<string>(nullable: true),
-                    PriceId = table.Column<int>(nullable: true)
+                    PriceId = table.Column<int>(nullable: true),
+                    Availability = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Car", x => x.CarId);
+                    table.PrimaryKey("PK_Cars", x => x.CarId);
                     table.ForeignKey(
-                        name: "FK_Car_Price_PriceId",
+                        name: "FK_Cars_Price_PriceId",
                         column: x => x.PriceId,
                         principalTable: "Price",
                         principalColumn: "PriceId",
@@ -135,9 +136,9 @@ namespace DataLayer.Migrations
                 {
                     table.PrimaryKey("PK_ReservationInfo", x => x.ReservationInfoId);
                     table.ForeignKey(
-                        name: "FK_ReservationInfo_Car_CarId",
+                        name: "FK_ReservationInfo_Cars_CarId",
                         column: x => x.CarId,
-                        principalTable: "Car",
+                        principalTable: "Cars",
                         principalColumn: "CarId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -176,8 +177,8 @@ namespace DataLayer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Car_PriceId",
-                table: "Car",
+                name: "IX_Cars_PriceId",
+                table: "Cars",
                 column: "PriceId");
 
             migrationBuilder.CreateIndex(
@@ -229,7 +230,7 @@ namespace DataLayer.Migrations
                 name: "Address");
 
             migrationBuilder.DropTable(
-                name: "Car");
+                name: "Cars");
 
             migrationBuilder.DropTable(
                 name: "Discount");
