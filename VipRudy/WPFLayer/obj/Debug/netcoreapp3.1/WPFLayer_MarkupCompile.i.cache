@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\App.xaml
-11151548125
+21507367669
 
 10564467653
 198797772640
-MainWindow.xaml;
+MainWindow.xaml;Styles\FrontPageButton.xaml;
 
-False
+True
 

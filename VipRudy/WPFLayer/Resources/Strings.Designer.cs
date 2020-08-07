@@ -61,6 +61,24 @@ namespace WPFLayer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Reservation.
+        /// </summary>
+        public static string AddReservation {
+            get {
+                return ResourceManager.GetString("AddReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find Reservation.
+        /// </summary>
+        public static string LookUpReservation {
+            get {
+                return ResourceManager.GetString("LookUpReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vip Services Rudy 2020.
         /// </summary>
         public static string StatusBarText {

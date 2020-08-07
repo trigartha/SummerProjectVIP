@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:resx="clr-namespace:WPFLayer.Resources;assembly=WpfLayer" 
         
-        Background="#11467a"
+        Background="#3d81c4"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         Title="MainWindow" 
         Height="800"
@@ -26,7 +26,11 @@
             <StatusBarItem DockPanel.Dock="Left" HorizontalAlignment="Left">
                 <TextBlock Text="{Binding StatusBarText, Source={StaticResource LocStrings}}" Height="40" HorizontalAlignment="Stretch" FontFamily="Bahnschrift Light" FontSize="16" Foreground="#FFEBFCF6" Margin="0,8,0,0"/>
             </StatusBarItem>
-            
         </StatusBar>
+       
+        <UniformGrid>
+            <Button  Name ="BtnAddReservation" Content="{Binding AddReservation, Source={StaticResource LocStrings}}" Margin="32,32,16,16" Style="{StaticResource FirstPageButtonStyle}"/>
+            <Button Name ="BtnFindReservation"  Content="{Binding LookUpReservation, Source={StaticResource LocStrings}}" Margin="16,32,32,16" Style="{StaticResource FirstPageButtonStyle}"/>
+        </UniformGrid>
     </DockPanel>
 </Window>

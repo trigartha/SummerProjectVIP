@@ -5,13 +5,17 @@
              xmlns:vm="clr-namespace:WPFLayer.Framework"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="/PresentationFramework.Aero;V4.0.0.0;31bf3856ad364e35;component\themes/aero.normalcolor.xaml"/>
+            <ResourceDictionary Source="Styles\FrontPageButton.xaml" />
+        </ResourceDictionary.MergedDictionaries>
        
-           
         <!--Global View Model Locator-->
         <vm:ViewModelLocator  x:Key="Locator" />
         <resx:Strings x:Key="LocStrings" />
-           
-       
+
+        </ResourceDictionary>
     </Application.Resources>
 
 </Application>

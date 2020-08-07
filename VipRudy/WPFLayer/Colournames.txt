@@ -1,0 +1,4 @@
+﻿LightBlue = #3d81c4
+DarkBlue = #126896
+DarkestBlue = #03486e
+GreenishBlue = #068d8f

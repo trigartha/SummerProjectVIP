@@ -10,7 +10,6 @@ C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netc
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\System.Windows.Interactivity.dll
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\Unity.Abstractions.dll
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\Unity.Container.dll
-C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netcoreapp3.1\WPFLayer.csprojAssemblyReference.cache
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netcoreapp3.1\MainWindow.baml
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netcoreapp3.1\App.g.cs
@@ -18,6 +17,7 @@ C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netc
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netcoreapp3.1\WPFLayer_MarkupCompile.cache
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netcoreapp3.1\WPFLayer_MarkupCompile.lref
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netcoreapp3.1\App.baml
+C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netcoreapp3.1\Styles\FrontPageButton.baml
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netcoreapp3.1\WPFLayer.g.resources
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netcoreapp3.1\WPFLayer.Resources.Strings.resources
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netcoreapp3.1\WPFLayer.csproj.GenerateResource.cache
