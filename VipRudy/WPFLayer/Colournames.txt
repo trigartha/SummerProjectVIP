@@ -1,4 +1,5 @@
-﻿LightBlue = #3d81c4
+﻿LightestBlue =#cee6f2
+LightBlue = #3d81c4
 DarkBlue = #126896
 DarkestBlue = #03486e
 GreenishBlue = #068d8f

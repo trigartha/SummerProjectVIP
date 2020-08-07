@@ -70,6 +70,96 @@ namespace WPFLayer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address:.
+        /// </summary>
+        public static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arrangement:.
+        /// </summary>
+        public static string Arrangement {
+            get {
+                return ResourceManager.GetString("Arrangement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limousine:.
+        /// </summary>
+        public static string Car {
+            get {
+                return ResourceManager.GetString("Car", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City:.
+        /// </summary>
+        public static string City {
+            get {
+                return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client:.
+        /// </summary>
+        public static string Client {
+            get {
+                return ResourceManager.GetString("Client", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Overview.
+        /// </summary>
+        public static string CreateOverview {
+            get {
+                return ResourceManager.GetString("CreateOverview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Day:.
+        /// </summary>
+        public static string EndDay {
+            get {
+                return ResourceManager.GetString("EndDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Hour:.
+        /// </summary>
+        public static string EndHour {
+            get {
+                return ResourceManager.GetString("EndHour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to N°:.
+        /// </summary>
+        public static string HouseNumber {
+            get {
+                return ResourceManager.GetString("HouseNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location:.
+        /// </summary>
+        public static string Location {
+            get {
+                return ResourceManager.GetString("Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Find Reservation.
         /// </summary>
         public static string LookUpReservation {
@@ -79,11 +169,47 @@ namespace WPFLayer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start Day:.
+        /// </summary>
+        public static string StartDay {
+            get {
+                return ResourceManager.GetString("StartDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Hour:.
+        /// </summary>
+        public static string StartHour {
+            get {
+                return ResourceManager.GetString("StartHour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vip Services Rudy 2020.
         /// </summary>
         public static string StatusBarText {
             get {
                 return ResourceManager.GetString("StatusBarText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street:.
+        /// </summary>
+        public static string Street {
+            get {
+                return ResourceManager.GetString("Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string string1 {
+            get {
+                return ResourceManager.GetString("string1", resourceCulture);
             }
         }
         
