@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Styles\TextBoxForms.xaml" />
                 <ResourceDictionary Source="Styles\ComboBoxForms.xaml" />
                 <ResourceDictionary Source="Styles\CalendarForms.xaml" />
+                <ResourceDictionary Source="Styles\ItemBorder.xaml" />
             </ResourceDictionary.MergedDictionaries>
        
         <!--Global View Model Locator-->
