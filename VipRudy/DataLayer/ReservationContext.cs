@@ -57,7 +57,7 @@ namespace DataLayer
             modelBuilder.Entity<Reservation>()
              .HasOne(r => r.Client)
              .WithMany(c => c.Reservations);
-            modelBuilder.Entity<ReservationInfo>()
+            modelBuilder.Entity<Reservation>()
             .HasOne(r => r.Car)
             .WithMany(c => c.ReservationDetails);
             modelBuilder.Entity<Client>()

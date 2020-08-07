@@ -13,27 +13,20 @@ namespace DomainLibrary.Models
         public Location StartLocation { get; set; }
         public Location EndLocation { get; set; }
 
-        public Car Car { get; set; }
         public Arrangement Arrangement { get; set; }
         public DateTime StartTime { get; set; }
-        public int AmountNormalHours { get; set; }
-        public int AmountNightHours { get; set; }
-        public int AmountOverTimeHours { get; set; }
-        public Discount Discount { get; set; }
+        public DateTime EndTime { get; set; }
 
         #endregion
         #region Constructor
         public ReservationInfo() { }
-        public ReservationInfo (Location start, Location stop, Car car, DateTime dateTime, Arrangement arrangement,int first, int night, int overtime)
+        public ReservationInfo (Location start, Location stop,  DateTime startT, Arrangement arrangement, DateTime end)
         {
             this.StartLocation = start;
             this.EndLocation = stop;
-            this.Car = car;
-            this.StartTime = dateTime;
-            this.Arrangement = Arrangement;
-            this.AmountNormalHours = first;
-            this.AmountNightHours = night;
-            this.AmountOverTimeHours = overtime;
+            this.StartTime = startT;
+            this.Arrangement = arrangement;
+            this.EndTime = end;
         }
         #endregion
     }

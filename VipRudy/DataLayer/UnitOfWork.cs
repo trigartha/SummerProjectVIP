@@ -34,7 +34,6 @@ namespace DataLayer
                 return _context.SaveChanges();
             }
             catch (Exception ex)
-            //TODO : SqlExceptions
             {
                 throw;
             }

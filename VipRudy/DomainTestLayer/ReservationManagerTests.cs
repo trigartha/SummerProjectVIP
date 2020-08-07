@@ -24,11 +24,9 @@ namespace DomainLibrary.Tests
             rm.AddCar(car);
             DateTime startTime = new DateTime(2100, 12, 12,12,0,0);
             Arrangement arrangement = Arrangement.Airport;
-            int first = 4;
-            int night = 2;
-            int overtime = 0;
+            DateTime endTime = new DateTime(2100, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
+            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, endTime));
         }
         [TestMethod()]
         public void AddReservationTest_ShouldThrowDomainException_WhenCarIsNotAvailable()
@@ -43,10 +41,9 @@ namespace DomainLibrary.Tests
             rm.UpdateCarAvailability(car, CarAvailability.NotAvailable);
             DateTime startTime = new DateTime(2100, 12, 12, 12, 0, 0);
             Arrangement arrangement = Arrangement.Airport;
-            int first = 4;
-            int night = 2;
-            int overtime = 0;
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
+            DateTime endTime = new DateTime(2100, 12, 12, 15, 0, 0);
+
+            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, endTime));
         }
         [TestMethod()]
         public void AddReservationTest_ShouldThrowDomainException_WhenStartTimeIsInTHePast()
@@ -60,11 +57,9 @@ namespace DomainLibrary.Tests
             rm.AddCar(car);
             DateTime startTime = new DateTime(2000, 12, 12, 12, 0, 0);
             Arrangement arrangement = Arrangement.Airport;
-            int first = 4;
-            int night = 2;
-            int overtime = 0;
+            DateTime endTime = new DateTime(2100, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
+            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, endTime));
         }
         [TestMethod()]
         public void AddReservationTest_ShouldThrowDomainException_WhenTotalTimeExceedsMaxExceptWellness()
@@ -78,11 +73,9 @@ namespace DomainLibrary.Tests
             rm.AddCar(car);
             DateTime startTime = new DateTime(2000, 12, 12, 12, 0, 0);
             Arrangement arrangement = Arrangement.Airport;
-            int first = 7;
-            int night = 2;
-            int overtime = 3;
+            DateTime endTime = new DateTime(2100, 12, 12, 23, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
+            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, endTime));
         }
         [TestMethod()]
         public void AddReservationTest_ShouldThrowDomainException_WhenTotalTimeExceedsTenForWellness()
@@ -94,51 +87,13 @@ namespace DomainLibrary.Tests
             Location stop = Location.Brussel;
             Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
             rm.AddCar(car);
-            DateTime startTime = new DateTime(2000, 12, 12, 12, 0, 0);
+            DateTime startTime = new DateTime(2000, 12, 12, 11, 0, 0);
             Arrangement arrangement = Arrangement.Wellness;
-            int first = 11;
-            int night = 0;
-            int overtime = 0;
+            DateTime endTime = new DateTime(2100, 12, 12, 23, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
+            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, endTime));
         }
-        [TestMethod()]
-        public void AddReservationTest_ShouldThrowDomainException_WhenNighthoursAreAddedForWellness()
-        {
-            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
-            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
-            rm.AddClient(client);
-            Location start = Location.Antwerpen;
-            Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
-            rm.AddCar(car);
-            DateTime startTime = new DateTime(2000, 12, 12, 12, 0, 0);
-            Arrangement arrangement = Arrangement.Airport;
-            int first = 9;
-            int night = 1;
-            int overtime = 0;
-
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
-        }
-        [TestMethod()]
-        public void AddReservationTest_ShouldThrowDomainException_WhenOverTimehoursAreAddedForWellness()
-        {
-            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
-            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
-            rm.AddClient(client);
-            Location start = Location.Antwerpen;
-            Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
-            rm.AddCar(car);
-            DateTime startTime = new DateTime(2000, 12, 12, 12, 0, 0);
-            Arrangement arrangement = Arrangement.Airport;
-            int first = 9;
-            int night = 0;
-            int overtime = 1;
-
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
-        }
-        [TestMethod()]
+      [TestMethod()]
         public void AddReservationTest_ShouldThrowDomainException_WhenStartTimeBeforeArrangementConditionsWedding()
         {
             ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
@@ -150,11 +105,9 @@ namespace DomainLibrary.Tests
             rm.AddCar(car);
             DateTime startTime = new DateTime(2000, 12, 12, 5, 0, 0);
             Arrangement arrangement = Arrangement.Wedding;
-            int first = 9;
-            int night = 0;
-            int overtime = 1;
+            DateTime endTime = new DateTime(2100, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
+            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, endTime));
         }
         [TestMethod()]
         public void AddReservationTest_ShouldThrowDomainException_WhenStartTimeAfterArrangementConditionsWedding()
@@ -168,11 +121,9 @@ namespace DomainLibrary.Tests
             rm.AddCar(car);
             DateTime startTime = new DateTime(2000, 12, 12, 17, 0, 0);
             Arrangement arrangement = Arrangement.Wedding;
-            int first = 9;
-            int night = 0;
-            int overtime = 1;
+            DateTime endTime = new DateTime(2100, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
+            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, endTime));
         }
         [TestMethod()]
         public void AddReservationTest_ShouldThrowDomainException_WhenStartTimeBeforeArrangementConditionsWellness()
@@ -186,11 +137,9 @@ namespace DomainLibrary.Tests
             rm.AddCar(car);
             DateTime startTime = new DateTime(2000, 12, 12, 5, 0, 0);
             Arrangement arrangement = Arrangement.Wellness;
-            int first = 9;
-            int night = 0;
-            int overtime = 1;
+            DateTime endTime = new DateTime(2100, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
+            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, endTime));
         }
         [TestMethod()]
         public void AddReservationTest_ShouldThrowDomainException_WhenStartTimeAfterArrangementConditionsWellness()
@@ -204,11 +153,9 @@ namespace DomainLibrary.Tests
             rm.AddCar(car);
             DateTime startTime = new DateTime(2000, 12, 12, 17, 0, 0);
             Arrangement arrangement = Arrangement.Wellness;
-            int first = 9;
-            int night = 0;
-            int overtime = 1;
+            DateTime endTime = new DateTime(2100, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
+            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, endTime));
         }
         [TestMethod()]
         public void AddReservationTest_ShouldThrowDomainException_WhenStartTimeBeforeArrangementConditionsNightLife()
@@ -222,11 +169,9 @@ namespace DomainLibrary.Tests
             rm.AddCar(car);
             DateTime startTime = new DateTime(2000, 12, 12, 17, 0, 0);
             Arrangement arrangement = Arrangement.NightLife;
-            int first = 9;
-            int night = 0;
-            int overtime = 1;
+            DateTime endTime = new DateTime(2100, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
+            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, endTime));
         }
         [TestMethod()]
         public void AddReservationTest_ShouldThrowDomainException_WhenStartTimeAfterArrangementConditionsNightLife()
@@ -240,11 +185,9 @@ namespace DomainLibrary.Tests
             rm.AddCar(car);
             DateTime startTime = new DateTime(2000, 12, 12, 2, 0, 0);
             Arrangement arrangement = Arrangement.NightLife;
-            int first = 9;
-            int night = 0;
-            int overtime = 1;
+            DateTime endTime = new DateTime(2100, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, first, night, overtime));
+            Assert.ThrowsException<DomainException>(() => rm.AddReservation(client, start, stop, car, startTime, arrangement, endTime));
         }
     }
 }
