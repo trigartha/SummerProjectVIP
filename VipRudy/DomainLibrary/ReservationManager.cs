@@ -1,10 +1,12 @@
 ﻿using DomainLibrary.Enums;
 using DomainLibrary.Models;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DomainLibrary
 {
-    public class ReservationManager 
+    public class ReservationManager
     {
         #region Properties
 
@@ -29,24 +31,24 @@ namespace DomainLibrary
             _uow.Cars.AddCar(car);
             _uow.Complete();
         }
-        public void AddReservation(Client client, Location start, Location stop, Car car, DateTime startTime, Arrangement arrangement, DateTime endTime)
+        public void AddReservation(Reservation reservation)
         {
-            _uow.Reservations.AddReservation(CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            _uow.Reservations.AddReservation(reservation);
             _uow.Complete();
-            UpdateCarAvailability(car, CarAvailability.NotAvailable);
+
         }
-            public Reservation CreateReservation(Client client, Location start, Location stop, Car car, DateTime startTime, Arrangement arrangement, DateTime endTime)
+        public Reservation CreateReservation(Client client, Location start, Location stop, Car car, DateTime startTime, Arrangement arrangement, DateTime endTime)
         {
             if (_uow.Clients.Find(client.ClientNumber) == null) throw new DomainException("Client doesn't exist");
             if (car.Availability != CarAvailability.Available) throw new DomainException("Car is not available");
             if (startTime < DateTime.Now) throw new DomainException("StartTime is in the past");
-            if (arrangement == Arrangement.Wedding) if (ControlStartTimeWedding(startTime)) throw new DomainException("Wedding Arrangement doesn't allow this startime");
-            if (arrangement == Arrangement.Wellness) if (ControlStartTimeWellness(startTime)) throw new DomainException("Wellness Arrangement doesn't allow this startime");
-            if (arrangement == Arrangement.NightLife) if (ControlStartTimeNightLife(startTime)) throw new DomainException("NightLife Arrangement doesn't allow this startime");
+            if (arrangement == Arrangement.Wedding) if (!ControlStartTimeWedding(startTime)) throw new DomainException("Wedding Arrangement doesn't allow this startime");
+            if (arrangement == Arrangement.Wellness) if (!ControlStartTimeWellness(startTime)) throw new DomainException("Wellness Arrangement doesn't allow this startime");
+            if (arrangement == Arrangement.NightLife) if (!ControlStartTimeNightLife(startTime)) throw new DomainException("NightLife Arrangement doesn't allow this startime");
             if (arrangement == Arrangement.Wellness) if ((endTime.Hour - startTime.Hour) > 10) throw new DomainException("Wellness Arrangement doens't allow overtime");
             if (arrangement != Arrangement.Wellness) if ((endTime.Hour - startTime.Hour) > 11) throw new DomainException("Reservation exceeds maximum time");
-            return  new Reservation(_uow.Clients.Find(client.ClientNumber), car, new ReservationInfo(start, stop, startTime, arrangement, endTime));
-           
+            return new Reservation(_uow.Clients.Find(client.ClientNumber), car, new ReservationInfo(start, stop, startTime, arrangement, endTime));
+
         }
         public ReservationOverview CreateOverview(Reservation reservation)
         {
@@ -64,13 +66,13 @@ namespace DomainLibrary
                     break;
                 case Arrangement.Wedding:
                     rO.TotalHoursNormalPrice = 7;
-                    
+
                     break;
                 case Arrangement.NightLife:
                     rO.TotalHoursNormalPrice = 7;
                     break;
                 case Arrangement.Wellness:
-                    rO.TotalHoursNormalPrice = 10;  
+                    rO.TotalHoursNormalPrice = 10;
                     break;
             }
             return rO;
@@ -89,6 +91,18 @@ namespace DomainLibrary
         {
             _uow.Cars.DeleteAll();
             _uow.Complete();
+        }
+        public IEnumerable<Reservation> FindAllReservations()
+        {
+            return _uow.Reservations.FindAll();
+        }
+        public IEnumerable<Car> FindAllCars()
+        {
+            return _uow.Cars.FindAll();
+        }
+        public IEnumerable<Client> FindAllClients()
+        {
+            return _uow.Clients.FindAll();
         }
         private int CalculateTotalNormalHours(DateTime startTime, DateTime endTime)
         {
@@ -121,7 +135,7 @@ namespace DomainLibrary
             int start = 7;
             int end = 15;
             int real = time.Hour;
-            if (start <= real && real >= end) return true;
+            if (start <= real && real <= end) return true;
             return false;
         }
         private bool ControlStartTimeWellness(DateTime time)
@@ -129,7 +143,7 @@ namespace DomainLibrary
             int start = 7;
             int end = 12;
             int real = time.Hour;
-            if (start <= real && real >= end) return true;
+            if (start <= real && real <= end) return true;
             return false;
         }
         private bool ControlStartTimeNightLife(DateTime time)
@@ -137,7 +151,7 @@ namespace DomainLibrary
             int start = 20;
             int end = 24;
             int real = time.Hour;
-            if (start <= real && real >= end) return true;
+            if (start <= real && real <= end) return true;
             return false;
         }
         #endregion

@@ -110,6 +110,10 @@
       "frameworks": {
         "netstandard2.0": {
           "dependencies": {
+            "MvvmLightLibs": {
+              "target": "Package",
+              "version": "[5.4.1.1, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
@@ -119,6 +123,10 @@
             "System.ComponentModel.Annotations": {
               "target": "Package",
               "version": "[4.7.0, )"
+            },
+            "Unity": {
+              "target": "Package",
+              "version": "[5.11.7, )"
             }
           },
           "imports": [

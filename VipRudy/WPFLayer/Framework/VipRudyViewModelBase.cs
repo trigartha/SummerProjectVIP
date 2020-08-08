@@ -15,6 +15,7 @@ namespace WPFLayer.FrameWork
                 throw new ArgumentException("Property Expression should represent access to a member");
             string memberName = memberExpr.Member.Name;
             RaisePropertyChanged(memberName);
+
         }
     }
 }

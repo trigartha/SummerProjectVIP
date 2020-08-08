@@ -29,7 +29,8 @@
         </StatusBar>
        
         <UniformGrid>
-            <Button  Name ="BtnAddReservation" Content="{Binding AddReservation, Source={StaticResource LocStrings}}" Margin="32,32,16,16" Style="{StaticResource FirstPageButtonStyle}"/>
+            <Button  Name ="BtnAddReservation" Command="{Binding NewReservationViewCommand}" Content="{Binding AddReservation, Source={StaticResource LocStrings}}" Margin="32,32,16,16" Style="{StaticResource FirstPageButtonStyle}"/>
+            <!---->
             <Button Name ="BtnFindReservation"  Content="{Binding LookUpReservation, Source={StaticResource LocStrings}}" Margin="16,32,32,16" Style="{StaticResource FirstPageButtonStyle}"/>
         </UniformGrid>
     </DockPanel>

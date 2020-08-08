@@ -24,5 +24,7 @@ namespace WPFLayer
         {
             InitializeComponent();
         }
+
+       
     }
 }

@@ -2,6 +2,7 @@
 
 using Unity;
 using WPFLayer.ViewModels;
+using DomainLibrary.Repositories;
 
 namespace WPFLayer.Framework
 {
@@ -24,10 +25,10 @@ namespace WPFLayer.Framework
         /// </summary>
         private void ConfigureContainer()
         {
-           // Container.RegisterInstance<INoteRepository>(new NoteRepository("notes"));
-            //Container.RegisterInstance<ICategoryRepository>(new CategoryRepository("categories"));
+           //Container.RegisterInstance<ICarRepository>(new CarRepository());
+           //Container.RegisterInstance<ICategoryRepository>(new CategoryRepository("categories"));
             Container.RegisterType<MainViewModel>();
-            //Container.RegisterType<CategoryEditorViewModel>();
+            Container.RegisterType<AddReservationViewModel>();
         }
     }
 }
