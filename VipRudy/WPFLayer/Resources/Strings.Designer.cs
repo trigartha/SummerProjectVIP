@@ -151,11 +151,20 @@ namespace WPFLayer.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Location:.
+        ///   Looks up a localized string similar to Location Arrival:.
         /// </summary>
-        public static string Location {
+        public static string LocationEnd {
             get {
-                return ResourceManager.GetString("Location", resourceCulture);
+                return ResourceManager.GetString("LocationEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location Departure:.
+        /// </summary>
+        public static string LocationStart {
+            get {
+                return ResourceManager.GetString("LocationStart", resourceCulture);
             }
         }
         

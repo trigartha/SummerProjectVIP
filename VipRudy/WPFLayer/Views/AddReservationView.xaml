@@ -77,8 +77,18 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Location, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="0"/>
-                    <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="LocationsComboBox" Grid.Column="1"
+                    <Label Content="{Binding LocationStart, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="0"/>
+                    <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="LocationsStartComboBox" Grid.Column="1"
+                      Margin="7 0 0 0" ItemsSource="{Binding Locations}"
+                      SelectedItem="{Binding SelectedLocation}" Style="{StaticResource ComboBoxForForms}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label Content="{Binding LocationEnd, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="2"/>
+                    <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="LocationsEndComboBox" Grid.Column="3"
                       Margin="7 0 0 0" ItemsSource="{Binding Locations}"
                       SelectedItem="{Binding SelectedLocation}" Style="{StaticResource ComboBoxForForms}">
                         <ComboBox.ItemTemplate>

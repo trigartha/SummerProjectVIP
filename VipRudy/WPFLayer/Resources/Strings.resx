@@ -147,8 +147,11 @@
   <data name="HouseNumber" xml:space="preserve">
     <value>N°:</value>
   </data>
-  <data name="Location" xml:space="preserve">
-    <value>Location:</value>
+  <data name="LocationEnd" xml:space="preserve">
+    <value>Location Arrival:</value>
+  </data>
+  <data name="LocationStart" xml:space="preserve">
+    <value>Location Departure:</value>
   </data>
   <data name="LookUpReservation" xml:space="preserve">
     <value>Find Reservation</value>

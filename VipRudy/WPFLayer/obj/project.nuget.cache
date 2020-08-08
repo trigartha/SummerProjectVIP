@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "HBKfzDCO8mZkEALggBr0xLBMI2S0wqxYEUQYTIjk2uvSh9QeYuFUYeW040fdrCNgskgjF6iq7S+HRbAUXdzFcA==",
+  "dgSpecHash": "G3UJ5tk5eW3hVkoa26cQZce8y9VMRsfOd17ORy3dLBJ0OFpNqnNDZvJmjbDSZdabfRQljO0kvrnUGlHgBTg+OQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Triga\\Documents\\GitHub\\SummerProjectVIP\\VipRudy\\WPFLayer\\WPFLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Triga\\.nuget\\packages\\mvvmlight\\5.4.1.1\\mvvmlight.5.4.1.1.nupkg.sha512",
     "C:\\Users\\Triga\\.nuget\\packages\\mvvmlightlibs\\5.4.1.1\\mvvmlightlibs.5.4.1.1.nupkg.sha512",
+    "C:\\Users\\Triga\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
     "C:\\Users\\Triga\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
     "C:\\Users\\Triga\\.nuget\\packages\\unity\\5.11.7\\unity.5.11.7.nupkg.sha512"
   ],

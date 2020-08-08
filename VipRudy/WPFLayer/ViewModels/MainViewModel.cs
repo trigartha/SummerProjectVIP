@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainLibrary.Repositories;
+using System;
 using WPFLayer.FrameWork;
 
 namespace WPFLayer.ViewModels
@@ -9,6 +10,7 @@ namespace WPFLayer.ViewModels
 
         #endregion
         #region Fields
+        private readonly IReservationRepository _reservationRepository;
         #endregion
         #region Constructor
 

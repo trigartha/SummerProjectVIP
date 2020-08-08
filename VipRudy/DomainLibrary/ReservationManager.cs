@@ -4,7 +4,7 @@ using System;
 
 namespace DomainLibrary
 {
-    public class ReservationManager : IReservationManager
+    public class ReservationManager 
     {
         #region Properties
 
@@ -31,7 +31,12 @@ namespace DomainLibrary
         }
         public void AddReservation(Client client, Location start, Location stop, Car car, DateTime startTime, Arrangement arrangement, DateTime endTime)
         {
-
+            _uow.Reservations.AddReservation(CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            _uow.Complete();
+            UpdateCarAvailability(car, CarAvailability.NotAvailable);
+        }
+            public Reservation CreateReservation(Client client, Location start, Location stop, Car car, DateTime startTime, Arrangement arrangement, DateTime endTime)
+        {
             if (_uow.Clients.Find(client.ClientNumber) == null) throw new DomainException("Client doesn't exist");
             if (car.Availability != CarAvailability.Available) throw new DomainException("Car is not available");
             if (startTime < DateTime.Now) throw new DomainException("StartTime is in the past");
@@ -40,9 +45,8 @@ namespace DomainLibrary
             if (arrangement == Arrangement.NightLife) if (ControlStartTimeNightLife(startTime)) throw new DomainException("NightLife Arrangement doesn't allow this startime");
             if (arrangement == Arrangement.Wellness) if ((endTime.Hour - startTime.Hour) > 10) throw new DomainException("Wellness Arrangement doens't allow overtime");
             if (arrangement != Arrangement.Wellness) if ((endTime.Hour - startTime.Hour) > 11) throw new DomainException("Reservation exceeds maximum time");
-            _uow.Reservations.AddReservation(new Reservation(_uow.Clients.Find(client.ClientNumber), car, new ReservationInfo(start, stop, startTime, arrangement, endTime)));
-            _uow.Complete();
-            UpdateCarAvailability(car, CarAvailability.NotAvailable);
+            return  new Reservation(_uow.Clients.Find(client.ClientNumber), car, new ReservationInfo(start, stop, startTime, arrangement, endTime));
+           
         }
         public ReservationOverview CreateOverview(Reservation reservation)
         {
@@ -69,6 +73,7 @@ namespace DomainLibrary
                     rO.TotalHoursNormalPrice = 10;  
                     break;
             }
+            return rO;
         }
         public void UpdateCarAvailability(Car car, CarAvailability availability)
         {
