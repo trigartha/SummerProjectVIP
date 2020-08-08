@@ -59,20 +59,27 @@ namespace DomainLibrary
                 case Arrangement.Airport:
                     rO.TotalHoursNormalPrice = CalculateTotalNormalHours(reservation.ReservationInfo.StartTime, reservation.ReservationInfo.EndTime);
                     rO.TotalHoursNightPrice = CalculateTotalNightHours(reservation.ReservationInfo.StartTime, reservation.ReservationInfo.EndTime);
+                    rO.HourPriceNormalPrice = reservation.Car.Price.FirstHourPrice.Value;
+                    rO.TotalHoursNightPrice = CalculateTotalNormalAmount(rO.TotalHoursNormalPrice, rO.HourPriceNormalPrice);
                     break;
                 case Arrangement.Business:
                     rO.TotalHoursNormalPrice = CalculateTotalNormalHours(reservation.ReservationInfo.StartTime, reservation.ReservationInfo.EndTime);
                     rO.TotalHoursNightPrice = CalculateTotalNightHours(reservation.ReservationInfo.StartTime, reservation.ReservationInfo.EndTime);
+                    rO.HourPriceNormalPrice = reservation.Car.Price.FirstHourPrice.Value;
                     break;
                 case Arrangement.Wedding:
                     rO.TotalHoursNormalPrice = 7;
-
+                    rO.TotalHoursNightPrice = CalculateTotalOverTimeHours(reservation.ReservationInfo.StartTime, reservation.ReservationInfo.EndTime);
+                    rO.HourPriceNormalPrice = reservation.Car.Price.WeddingPrice.Value;
                     break;
                 case Arrangement.NightLife:
                     rO.TotalHoursNormalPrice = 7;
+                    rO.TotalHoursNightPrice = CalculateTotalOverTimeHours(reservation.ReservationInfo.StartTime, reservation.ReservationInfo.EndTime);
+                    rO.HourPriceNormalPrice = reservation.Car.Price.NightLifePrice.Value;
                     break;
                 case Arrangement.Wellness:
                     rO.TotalHoursNormalPrice = 10;
+                    rO.HourPriceNormalPrice = reservation.Car.Price.WellnessPrice.Value;
                     break;
             }
             return rO;
@@ -104,6 +111,11 @@ namespace DomainLibrary
         {
             return _uow.Clients.FindAll();
         }
+        private decimal CalculateTotalNormalAmount(int totalHours, decimal price)
+        {
+            decimal total = price + (totalHours - 1) * (price * 0.65m);
+            return total;
+        }
         private int CalculateTotalNormalHours(DateTime startTime, DateTime endTime)
         {
             int total = 0;
@@ -129,7 +141,13 @@ namespace DomainLibrary
                 total += startTime.Hour;
             return total;
         }
+        private int CalculateTotalOverTimeHours(DateTime startTime, DateTime endTime)
+        {
 
+            int total = endTime.Hour-startTime.Hour -7;
+           
+            return total;
+        }
         private bool ControlStartTimeWedding(DateTime time)
         {
             int start = 7;

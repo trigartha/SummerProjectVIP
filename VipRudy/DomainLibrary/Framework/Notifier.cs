@@ -1,14 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Text;
 
-namespace WPFLayer.Framework
+namespace DomainLibrary.Framework
 {
-    /// <summary>
-    /// Provides a method for Notification support.
-    /// We use this class for model classes.
-   
-    [Serializable]
     public class Notifier : INotifyPropertyChanged
     {
         #region Properties
@@ -52,4 +49,5 @@ namespace WPFLayer.Framework
         }
         #endregion
     }
+
 }

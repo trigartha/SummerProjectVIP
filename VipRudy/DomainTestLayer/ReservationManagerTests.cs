@@ -193,7 +193,7 @@ namespace DomainLibrary.Tests
         }
 
         #endregion
-        #region AddReservation 
+        #region Add Functions
         [TestMethod()]
         public void AddReservationTest_DidAddReservation()
         {
@@ -230,7 +230,29 @@ namespace DomainLibrary.Tests
             rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
             Assert.IsTrue(rm.FindAllClients().ToList().Count == amountClients);
         }
-        #endregion
+        [TestMethod()]
+        public void AddClientTest_DidAddClient()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+           
+            int amountClients = rm.FindAllClients().ToList().Count;
+            rm.AddClient(client);
 
+            Assert.IsTrue(rm.FindAllClients().ToList().Count == amountClients + 1);
+        }
+        [TestMethod()]
+        public void AddCarTest_DidAddCar()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Car car = new Car("Volkswagen", "HippyVan", "Pink", new Price(75.00m, 95.00m, 800, null));
+
+            int amountCars = rm.FindAllCars().ToList().Count;
+            rm.AddCar(car);
+
+            Assert.IsTrue(rm.FindAllCars().ToList().Count == amountCars + 1);
+        }
+        #endregion
     }
 }
+

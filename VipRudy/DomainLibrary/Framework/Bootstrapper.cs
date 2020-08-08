@@ -1,18 +1,14 @@
-﻿
-
+﻿using DomainLibrary.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using Unity;
-using WPFLayer.ViewModels;
-using DomainLibrary.Repositories;
-using DomainLibrary;
-using DataLayer;
 
-namespace WPFLayer.Framework
+namespace DomainLibrary.Framework
 {
-    /// <summary>
-    /// Here the DI magic come on.
-    /// </summary>
     public class Bootstrapper
     {
+
         public IUnityContainer Container { get; set; }
 
         public Bootstrapper()
@@ -27,8 +23,9 @@ namespace WPFLayer.Framework
         /// </summary>
         private void ConfigureContainer()
         {
-           Container.RegisterInstance<ReservationManager>(new ReservationManager(new UnitOfWork(new ReservationContext())));
-           //Container.RegisterInstance<ICategoryRepository>(new CategoryRepository("categories"));
+            //TODO: How to acces Datalayer? Circular project referencing - can a view create this? 
+           // Container.RegisterInstance<ReservationManager>(new ReservationManager(new UnitOfWork(new ReservationContext())));
+            //Container.RegisterInstance<ICategoryRepository>(new CategoryRepository("categories"));
             Container.RegisterType<MainViewModel>();
             Container.RegisterType<AddReservationViewModel>();
         }

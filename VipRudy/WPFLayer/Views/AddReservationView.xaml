@@ -88,7 +88,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Label Content="{Binding LocationEnd, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="2"/>
-                    <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="LocationsEndComboBox" Grid.Column="3"
+                    <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="LocationsEndComboBox" Grid.Column="1"
                       Margin="7 0 0 0" ItemsSource="{Binding Locations}"
                       SelectedItem="{Binding SelectedLocation}" Style="{StaticResource ComboBoxForForms}">
                         <ComboBox.ItemTemplate>

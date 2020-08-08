@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\Triga\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Triga\\.nuget\\packages"
-    ]
-  }
-}
