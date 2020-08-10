@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight.Threading;
+﻿using DataLayer;
+using DomainLibrary;
+using GalaSoft.MvvmLight.Threading;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,6 +19,6 @@ namespace WPFLayer
     /// </summary>
     public partial class App : Application
     {
-        
+       
     }
 }

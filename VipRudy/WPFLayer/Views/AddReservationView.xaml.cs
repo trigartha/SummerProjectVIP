@@ -17,6 +17,7 @@ namespace WPFLayer.Views
     /// </summary>
     public partial class AddReservationView : Window
     {
+
         public AddReservationView()
         {
             InitializeComponent();

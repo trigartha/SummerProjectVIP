@@ -17,7 +17,7 @@
             </ResourceDictionary.MergedDictionaries>
        
         <!--Global View Model Locator-->
-        <vm:ViewModelLocator xmlns:vm="clr-namespace:DomainLibrary.Framework;assembly=DomainLibrary"  x:Key="Locator" />
+            <vm:ViewModelLocator   xmlns:vm="clr-namespace:WPFLayer.FrameworkMvvm" x:Key="Locator" />
         <resx:Strings x:Key="LocStrings" />
 
         </ResourceDictionary>

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GIwahg8ACraHLZ3+YVdPTzDWB9P0okVW4hZEopCqmT45oIEmr3exMG5yEHA1HT0rGbUtjIKgAIrD2P9vlpdX9Q==",
+  "dgSpecHash": "h/1Dw3NAsZDNoYtZdKWvyF14W6TJO40BTDZiHI306dN0uIu2+0Ghbjvt6MUATJKBZ0BnvQO0/FTQN5y6m3lNNg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Triga\\Documents\\GitHub\\SummerProjectVIP\\VipRudy\\DataLayer\\DataLayer.csproj",
   "expectedPackageFiles": [
@@ -41,6 +41,7 @@
     "C:\\Users\\Triga\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Triga\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Triga\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Triga\\.nuget\\packages\\servicelocation\\1.3.1\\servicelocation.1.3.1.nupkg.sha512",
     "C:\\Users\\Triga\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\Triga\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
     "C:\\Users\\Triga\\.nuget\\packages\\system.collections.immutable\\1.7.1\\system.collections.immutable.1.7.1.nupkg.sha512",
@@ -107,6 +108,16 @@
       "warningLevel": 1,
       "message": "Package 'MvvmLightLibs 5.4.1.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
       "libraryId": "MvvmLightLibs",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'ServiceLocation 1.3.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "ServiceLocation",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
       ]

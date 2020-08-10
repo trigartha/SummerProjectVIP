@@ -3,17 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:resx="clr-namespace:WPFLayer.Resources;assembly=WpfLayer" 
-        
+        xmlns:resx="clr-namespace:WPFLayer.Resources;assembly=WPFLayer" 
         Background="#3d81c4"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         Title="MainWindow" 
         Height="800"
         Width="200"
-       
         >
-
     <DockPanel>
+        
+            <StackPanel Orientation="Vertical">
+                <Button  Name ="BtnAddReservation" Click="BtnAddReservation_Click" Content="{Binding AddReservation, Source={StaticResource LocStrings}}" Margin="16,32,16,16" Style="{StaticResource FirstPageButtonStyle}"/>
+                <!--Command="{Binding NewReservationViewCommand}"-->
+                <Button Name ="BtnFindReservation"  Content="{Binding LookUpReservation, Source={StaticResource LocStrings}}" Margin="16,16,16,16" Style="{StaticResource FirstPageButtonStyle}"/>
+            </StackPanel>
+            <ContentControl Grid.Column="1" Content="{Binding}"/>
+       
         <StatusBar Background="#068d8f" DockPanel.Dock="Bottom" Height="36">
             <StatusBarItem DockPanel.Dock="Right">
                 <Slider x:Name="zoomSlider" Width="125"
@@ -27,11 +32,5 @@
                 <TextBlock Text="{Binding StatusBarText, Source={StaticResource LocStrings}}" Height="40" HorizontalAlignment="Stretch" FontFamily="Bahnschrift Light" FontSize="16" Foreground="#FFEBFCF6" Margin="0,8,0,0"/>
             </StatusBarItem>
         </StatusBar>
-       
-        <StackPanel Orientation="Vertical">
-            <Button  Name ="BtnAddReservation" Command="{Binding NewReservationViewCommand}" Content="{Binding AddReservation, Source={StaticResource LocStrings}}" Margin="16,32,16,16" Style="{StaticResource FirstPageButtonStyle}"/>
-            <!---->
-            <Button Name ="BtnFindReservation"  Content="{Binding LookUpReservation, Source={StaticResource LocStrings}}" Margin="16,16,16,16" Style="{StaticResource FirstPageButtonStyle}"/>
-        </StackPanel>
     </DockPanel>
 </Window>

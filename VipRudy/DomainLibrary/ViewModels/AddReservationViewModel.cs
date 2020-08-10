@@ -11,7 +11,7 @@ namespace DomainLibrary.ViewModels
     public class AddReservationViewModel : VipRudyViewModelBase
     {
         #region Properties
-        public RelayCommand AddReservationCommand { get; set; }
+        public RelayCommand AddReservationCommand { get; private set; }
         #endregion
         #region Fields
         /* private readonly IReservationRepository _reservationRepository;
@@ -42,10 +42,15 @@ namespace DomainLibrary.ViewModels
             Reservations = new ObservableCollection<Reservation>(_reservationManager.FindAllReservations());
 
             //To manage event handling in the viewmodel
-            AddReservationCommand = new RelayCommand(AddReservation, CanAddReservation);
+            WireCommands();
+            
         }
         #endregion
         #region Methods
+        private void WireCommands()
+        {
+            AddReservationCommand = new RelayCommand(AddReservation);
+        }
         /// <summary>
         /// Gets or sets the Cars.
         /// </summary>
@@ -105,6 +110,7 @@ namespace DomainLibrary.ViewModels
         }
         /// <summary>
         /// Gets or sets the temporary Reservation.
+        /// Enables add reservation command if reservation is correctly made
         /// </summary>
         /// <value>The Reservation.</value>
         public Reservation CurrentReservation
@@ -119,6 +125,7 @@ namespace DomainLibrary.ViewModels
                 {
                     _currentReservation = value;
                     RaisePropertyChanged(() => CurrentReservation);
+                    //AddReservationCommand.IsEnabled = CanAddReservation();
                 }
             }
         }

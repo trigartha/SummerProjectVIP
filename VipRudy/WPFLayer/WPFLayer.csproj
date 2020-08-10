@@ -4,11 +4,31 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <AssemblyName>WPFLayer</AssemblyName>
+    <RootNamespace>WPFLayer</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Framework\**" />
+    <Compile Remove="ViewModels\**" />
+    <EmbeddedResource Remove="Framework\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
+    <None Remove="Framework\**" />
+    <None Remove="ViewModels\**" />
+    <Page Remove="Framework\**" />
+    <Page Remove="ViewModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\AddReservationViewUControl.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Views\AddReservationViewUControl.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MvvmLight" Version="5.4.1.1" />
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="Unity" Version="5.11.7" />
   </ItemGroup>
 

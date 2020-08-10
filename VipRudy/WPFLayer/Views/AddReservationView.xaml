@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFLayer.Views"
+        xmlns:local="clr-namespace:WPFLayer.Resources"
         mc:Ignorable="d"
         Title="AddReservationView" 
         Height="900" 
         Width="800"
          Background="#3d81c4"
-        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        DataContext="{Binding ReservationViewModel, Source={StaticResource Locator}}"
         >
     <DockPanel>
         <DockPanel DockPanel.Dock="Top" Margin="16,16,16,16">
