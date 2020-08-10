@@ -1354,6 +1354,20 @@
           "lib/netcoreapp3.0/Unity.Container.dll": {}
         }
       },
+      "ClientImporter/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "DataLayer": "1.0.0",
+          "DomainLibrary": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ClientImporter.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ClientImporter.dll": {}
+        }
+      },
       "DataLayer/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -5333,6 +5347,11 @@
         "unity.nuspec"
       ]
     },
+    "ClientImporter/1.0.0": {
+      "type": "project",
+      "path": "../ClientImporter/ClientImporter.csproj",
+      "msbuildProject": "../ClientImporter/ClientImporter.csproj"
+    },
     "DataLayer/1.0.0": {
       "type": "project",
       "path": "../DataLayer/DataLayer.csproj",
@@ -5346,6 +5365,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "ClientImporter >= 1.0.0",
       "DataLayer >= 1.0.0",
       "DomainLibrary >= 1.0.0",
       "MvvmLight >= 5.4.1.1",
@@ -5378,6 +5398,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
+            "C:\\Users\\Triga\\Documents\\GitHub\\SummerProjectVIP\\VipRudy\\ClientImporter\\ClientImporter.csproj": {
+              "projectPath": "C:\\Users\\Triga\\Documents\\GitHub\\SummerProjectVIP\\VipRudy\\ClientImporter\\ClientImporter.csproj"
+            },
             "C:\\Users\\Triga\\Documents\\GitHub\\SummerProjectVIP\\VipRudy\\DataLayer\\DataLayer.csproj": {
               "projectPath": "C:\\Users\\Triga\\Documents\\GitHub\\SummerProjectVIP\\VipRudy\\DataLayer\\DataLayer.csproj"
             },

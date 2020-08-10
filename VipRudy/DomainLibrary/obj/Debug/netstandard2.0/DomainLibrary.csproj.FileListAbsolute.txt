@@ -1,6 +1,7 @@
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainLibrary\bin\Debug\netstandard2.0\DomainLibrary.deps.json
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainLibrary\bin\Debug\netstandard2.0\DomainLibrary.dll
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainLibrary\bin\Debug\netstandard2.0\DomainLibrary.pdb
+C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainLibrary\obj\Debug\netstandard2.0\DomainLibrary.csprojAssemblyReference.cache
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainLibrary\obj\Debug\netstandard2.0\DomainLibrary.AssemblyInfoInputs.cache
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainLibrary\obj\Debug\netstandard2.0\DomainLibrary.AssemblyInfo.cs
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainLibrary\obj\Debug\netstandard2.0\DomainLibrary.csproj.CoreCompileInputs.cache

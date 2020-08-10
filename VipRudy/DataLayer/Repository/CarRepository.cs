@@ -37,7 +37,6 @@ namespace DataLayer.Repository
         public void UpdateCarAvailability(Car car, CarAvailability availability)
         {
             Car tempoCar = _context.Cars.Find(car.CarId);
-            tempoCar.Availability = availability;
         }
         public void DeleteAll()
         {

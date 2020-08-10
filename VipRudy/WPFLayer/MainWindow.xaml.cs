@@ -28,7 +28,7 @@ namespace WPFLayer
         private ReservationManager _reservationManager;
         public MainWindow()
         {
-            _reservationManager = new ReservationManager(new UnitOfWork(new ReservationContext()));
+            _reservationManager = new ReservationManager(new UnitOfWork(new ReservationContext("Reservation")));
             InitializeComponent();
            
         }

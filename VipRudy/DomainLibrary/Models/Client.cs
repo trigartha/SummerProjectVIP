@@ -1,4 +1,5 @@
 ﻿using DomainLibrary.Enums;
+using DomainLibrary.Framework;
 using DomainLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -6,15 +7,15 @@ using System.Text;
 
 namespace DomainLibrary
 {
-    public class Client
+    public class Client : Notifier
     {
-        #region Properties
-        public int ClientNumber { get; set; }
-        public string Name { get; set; }
-        public string TaxNumber { get; set; }
-        public ClientCategory ClientCategory { get; set; }
-        public Address Address { get; set; }
-        public ICollection<Reservation> Reservations { get; set; }
+        #region Fields
+        private int _clientNumber;
+        private string _name;
+        private string _taxNumber;
+        private ClientCategory _clientCategory;
+        private Address _address;
+        private ICollection<Reservation> _reservations;
         #endregion
         #region Constructor
         public Client() { }
@@ -55,5 +56,77 @@ namespace DomainLibrary
             return clientCategory;
         }
         #endregion
+        public int ClientNumber
+        {
+            get { return _clientNumber; }
+            private set
+            {
+                if (_clientNumber != value)
+                {
+                    _clientNumber = value;
+                    RaisePropertyChanged(() => ClientNumber);
+                }
+            }
+        }
+        public string Name
+        {
+            get { return _name; }
+            private set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    RaisePropertyChanged(() => Name);
+                }
+            }
+        }
+        public string TaxNumber
+        {
+            get { return _taxNumber; }
+            private set
+            {
+                if (_taxNumber != value)
+                {
+                    _taxNumber = value;
+                    RaisePropertyChanged(() => TaxNumber);
+                }
+            }
+        }
+        public ClientCategory ClientCategory
+        {
+            get { return _clientCategory; }
+            private set
+            {
+                if (_clientCategory != value)
+                {
+                    _clientCategory = value;
+                    RaisePropertyChanged(() => ClientCategory);
+                }
+            }
+        }
+        public Address Address
+        {
+            get { return _address; }
+            private set
+            {
+                if (_address != value)
+                {
+                    _address = value;
+                    RaisePropertyChanged(() => Address);
+                }
+            }
+        }
+        public ICollection<Reservation> Reservations
+        {
+            get { return _reservations; }
+            private set
+            {
+                if (_reservations != value)
+                {
+                    _reservations = value;
+                    RaisePropertyChanged(() => Reservations);
+                }
+            }
+        }
     }
 }

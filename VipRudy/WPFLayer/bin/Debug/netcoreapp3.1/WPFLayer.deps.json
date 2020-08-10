@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "WPFLayer/1.0.0": {
         "dependencies": {
+          "ClientImporter": "1.0.0",
           "DataLayer": "1.0.0",
           "DomainLibrary": "1.0.0",
           "MvvmLight": "5.4.1.1",
@@ -923,6 +924,15 @@
           }
         }
       },
+      "ClientImporter/1.0.0": {
+        "dependencies": {
+          "DataLayer": "1.0.0",
+          "DomainLibrary": "1.0.0"
+        },
+        "runtime": {
+          "ClientImporter.dll": {}
+        }
+      },
       "DataLayer/1.0.0": {
         "dependencies": {
           "DomainLibrary": "1.0.0",
@@ -1616,6 +1626,11 @@
       "sha512": "sha512-hlJ6/MuLnSb//f4wwMZyOYko6iiDt2WNNP1R8vqL0heruP/7qDhL0vCq+FRIMrtj1rUa9BaEdzR5weMbhi6gQA==",
       "path": "unity/5.11.7",
       "hashPath": "unity.5.11.7.nupkg.sha512"
+    },
+    "ClientImporter/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "DataLayer/1.0.0": {
       "type": "project",

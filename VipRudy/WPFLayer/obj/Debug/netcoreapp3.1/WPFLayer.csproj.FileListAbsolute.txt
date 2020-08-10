@@ -1,3 +1,4 @@
+C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\ClientImporter.exe
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\WPFLayer.exe
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\WPFLayer.deps.json
@@ -46,8 +47,10 @@ C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netc
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\ClientImporter.dll
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\DataLayer.dll
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\DomainLibrary.dll
+C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\ClientImporter.pdb
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\DataLayer.pdb
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\bin\Debug\netcoreapp3.1\DomainLibrary.pdb
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\obj\Debug\netcoreapp3.1\WPFLayer.csprojAssemblyReference.cache

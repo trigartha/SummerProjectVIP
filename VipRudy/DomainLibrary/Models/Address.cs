@@ -1,16 +1,17 @@
-﻿using System;
+﻿using DomainLibrary.Framework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DomainLibrary
 {
-    public class Address
+    public class Address : Notifier
     {
-        #region Properties
-        public int AddressId { get; set; }
-        public string Streetname { get; set; }
-        public string HouseNumber { get; set; }
-        public string City { get; set; }
+        #region Fields
+        private int _addresId;
+        private string _streetName;
+        private string _houseNumber;
+        private string _city;
         #endregion
         #region Constructor
         public Address() { }
@@ -21,5 +22,55 @@ namespace DomainLibrary
             this.City = city;
         }
         #endregion
+       
+        public int AddressId
+        {
+            get { return _addresId; }
+            private set
+            {
+                if (_addresId != value)
+                {
+                    _addresId = value;
+                    RaisePropertyChanged(() => AddressId);
+                }
+            }
+        }
+        public string Streetname 
+        {
+            get { return _streetName; }
+            private set
+            {
+                if (_streetName != value)
+                {
+                    _streetName = value;
+                    RaisePropertyChanged(() => Streetname);
+                }
+            }
+        }
+        public string HouseNumber
+        {
+            get { return _houseNumber; }
+            private set
+            {
+                if (_houseNumber != value)
+                {
+                    _houseNumber = value;
+                    RaisePropertyChanged(() => HouseNumber);
+                }
+            }
+        }
+        public string City
+        {
+            get { return _city; }
+            private set
+            {
+                if (_city != value)
+                {
+                    _city = value;
+                    RaisePropertyChanged(() => City);
+                }
+            }
+        }
+    
     }
 }

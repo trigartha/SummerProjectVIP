@@ -1,4 +1,5 @@
-﻿using DataLayer;
+﻿using ClientImporter;
+using DataLayer;
 using DomainLibrary;
 using GalaSoft.MvvmLight.Threading;
 using System;
@@ -19,6 +20,10 @@ namespace WPFLayer
     /// </summary>
     public partial class App : Application
     {
-       
-    }
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            //FileReader.AddCars();
+            //FileReader.AddClients();
+        }
+	}
 }

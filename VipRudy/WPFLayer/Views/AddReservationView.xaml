@@ -12,7 +12,9 @@
         DataContext="{Binding ReservationViewModel, Source={StaticResource Locator}}"
         >
     <DockPanel>
+      
         <DockPanel DockPanel.Dock="Top" Margin="16,16,16,16">
+            <!--Client-->
             <Border DockPanel.Dock="Top" Style="{StaticResource ItemBorder}">
             <Grid  Margin="0,0,0,8">
                     <Grid.ColumnDefinitions>
@@ -43,6 +45,28 @@
                         </ComboBox>
                 </Grid>
             </Border>
+            <!--Car-->
+            <Border  DockPanel.Dock="Top" Style="{StaticResource ItemBorder}">
+                <Grid Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Car, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="0"/>
+                    <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="CarComboBox" Grid.Column="1"
+                      Margin="7 0 0 0" ItemsSource="{Binding Cars}"
+                      SelectedItem="{Binding SelectedCar}" Style="{StaticResource ComboBoxForForms}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+            </Border>
+            <!--Address-->
             <Border  DockPanel.Dock="Top" Style="{StaticResource ItemBorder}">
                 <Grid Margin="0,0,0,8">
                     <Grid.RowDefinitions>
@@ -69,6 +93,7 @@
                      Text="{Binding City.Content}" Grid.Column="5" HorizontalAlignment="Stretch" Style="{StaticResource TextBoxForms}" />
                 </Grid>
             </Border>
+            <!--Location intern-->
             <Border  DockPanel.Dock="Top" Style="{StaticResource ItemBorder}">
                 <Grid Margin="0,0,0,8">
                     <Grid.ColumnDefinitions>
@@ -99,6 +124,7 @@
                     </ComboBox>
                 </Grid>
             </Border>
+            <!--Reservation Date-->
             <Border  DockPanel.Dock="Top" Style="{StaticResource ItemBorder}">
                 <Grid  Margin="0,0,0,16">
                     <Grid.ColumnDefinitions>
@@ -143,6 +169,7 @@
                     <Calendar Style="{DynamicResource CalendarStyle1}" x:Name="EndDayCalender" Grid.Column="3"/>
                 </Grid>
             </Border>
+            <!--Bottom-->
             <Button  DockPanel.Dock="Top" x:Name="btnCreateOverview" Content="{Binding CreateOverview, Source={StaticResource LocStrings}}" Style="{StaticResource FirstPageButtonStyle}" HorizontalAlignment="Center" Padding="8,8,8,8" Margin="0,0,0,8"/>
             <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" Background="#cee6f2" Height="250" Margin="0,0,0,3">
                 <!--Here comes the Reservation Overview-->
