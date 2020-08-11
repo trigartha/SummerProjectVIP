@@ -16,6 +16,7 @@ namespace DomainLibrary.Models
         private Price _price;
         private CarAvailability _availability;
         private ICollection<Reservation> _reservationDetails;
+       
         #endregion
         #region Constructor
         public Car() { }
@@ -25,6 +26,7 @@ namespace DomainLibrary.Models
             this.Model = model;
             this.Colour = colour;
             this.Price = price;
+           
         }
         #endregion
         public string Brand
@@ -110,6 +112,11 @@ namespace DomainLibrary.Models
                     RaisePropertyChanged(() => ReservationDetails);
                 }
             }
+        }
+       
+        public override string ToString()
+        {
+            return _brand + ", " + _model + ", " + _colour;
         }
     }
 }

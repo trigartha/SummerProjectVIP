@@ -1,9 +1,11 @@
-﻿using DomainLibrary.Framework;
+﻿using DomainLibrary.Enums;
+using DomainLibrary.Framework;
 using DomainLibrary.Models;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace DomainLibrary.ViewModels
@@ -129,6 +131,20 @@ namespace DomainLibrary.ViewModels
                 }
             }
         }
+        public List<string> Hours
+        {
+            get
+            {
+                List<string> hours = new List<string>();
+                for(int i=1; i<25;i++)
+                {
+                    hours.Add(i.ToString());
+                }
+                return hours;
+            }
+            
+        }
+        
         /// <summary>
         /// Adds a Reservation to the list and repo.
         /// </summary>
@@ -149,6 +165,15 @@ namespace DomainLibrary.ViewModels
         private bool CanAddReservation()
         {
             return CurrentReservation.Client != null;
+        }
+        private string ConvertEnumToString(Location location)
+        {
+            return location.ToString();
+        }
+
+        public Location ConvertStringToEnum(string location)
+        {
+            return (Location)Enum.Parse(typeof(Location), location);
         }
         #endregion
     }

@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFLayer.Resources"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:enm="clr-namespace:DomainLibrary.Enums;assembly=DomainLibrary"
         mc:Ignorable="d"
         Title="AddReservationView" 
         Height="900" 
@@ -11,6 +13,18 @@
          Background="#3d81c4"
         DataContext="{Binding ReservationViewModel, Source={StaticResource Locator}}"
         >
+    <Window.Resources>
+        <ObjectDataProvider x:Key="getDataFromEnumLocation" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enm:Location"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="getDataFromEnumArrangement" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enm:Arrangement"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
     <DockPanel>
       
         <DockPanel DockPanel.Dock="Top" Margin="16,16,16,16">
@@ -34,15 +48,9 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Label Content="{Binding Arrangement, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="2"/>
-                        <ComboBox Template="{DynamicResource ComboBoxTemplate1}" x:Name="ArrangementsComboBox" Grid.Column="3"
-                      Margin="7 0 0 0" ItemsSource="{Binding Arrangements}"
-                      SelectedItem="{Binding SelectedArrangement}" Style="{StaticResource ComboBoxForForms}">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
+                    <ComboBox Template="{DynamicResource ComboBoxTemplate1}" x:Name="ArrangementsComboBox" Grid.Column="3"
+                      Margin="7 0 0 0" ItemsSource="{Binding  Source={StaticResource getDataFromEnumArrangement}}" 
+                      SelectedItem="{Binding SelectedArrangement}" Style="{StaticResource ComboBoxForForms}"/>
                 </Grid>
             </Border>
             <!--Car-->
@@ -54,18 +62,44 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="8" />
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
                     <Label Content="{Binding Car, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="0"/>
-                    <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="CarComboBox" Grid.Column="1"
+                    <Label Content="{Binding Brand, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="2"/>
+                    <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="CarBrandComboBox" Grid.Column="3"
+                      Margin="7,0,0,1" ItemsSource="{Binding Cars}"
+                      SelectedItem="{Binding SelectedCar}" Style="{StaticResource ComboBoxForForms}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Brand}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label Content="{Binding Model, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="0" Grid.Row="2"/>
+                    <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="CarModelComboBox" Grid.Column="1" Grid.Row="2"
                       Margin="7 0 0 0" ItemsSource="{Binding Cars}"
                       SelectedItem="{Binding SelectedCar}" Style="{StaticResource ComboBoxForForms}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Model}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label Content="{Binding Colour, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="2" Grid.Row="2"/>
+                    <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="CarColourComboBox" Grid.Column="3" Grid.Row="2"
+                      Margin="7 0 0 0" ItemsSource="{Binding Cars}"
+                      SelectedItem="{Binding SelectedCar}" Style="{StaticResource ComboBoxForForms}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Colour}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </Grid>
-            </Border>
+            </Border> 
             <!--Address-->
             <Border  DockPanel.Dock="Top" Style="{StaticResource ItemBorder}">
                 <Grid Margin="0,0,0,8">
@@ -104,23 +138,13 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="{Binding LocationStart, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="0"/>
                     <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="LocationsStartComboBox" Grid.Column="1"
-                      Margin="7 0 0 0" ItemsSource="{Binding Locations}"
-                      SelectedItem="{Binding SelectedLocation}" Style="{StaticResource ComboBoxForForms}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
+                      Margin="7 0 0 0" ItemsSource="{Binding Source={StaticResource getDataFromEnumLocation}}" 
+                      Style="{StaticResource ComboBoxForForms}"  SelectedItem="{Binding SelectedLocation}">
                     </ComboBox>
                     <Label Content="{Binding LocationEnd, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="2"/>
-                    <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="LocationsEndComboBox" Grid.Column="1"
-                      Margin="7 0 0 0" ItemsSource="{Binding Locations}"
+                    <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="LocationsEndComboBox" Grid.Column="3"
+                      Margin="7 0 0 0" ItemsSource="{Binding Source={StaticResource getDataFromEnumLocation}}" 
                       SelectedItem="{Binding SelectedLocation}" Style="{StaticResource ComboBoxForForms}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
                     </ComboBox>
                 </Grid>
             </Border>
@@ -141,11 +165,7 @@
                       ItemsSource="{Binding Hours}"
                       SelectedItem="{Binding SelectedHours}" 
                                Style="{StaticResource ComboBoxForForms}" Margin="16,0,0,0">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}" />
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
+                                
                             </ComboBox>
                         </StackPanel>
                     </StackPanel>
@@ -157,11 +177,7 @@
                       ItemsSource="{Binding Hours}"
                       SelectedItem="{Binding SelectedHours}" 
                                Style="{StaticResource ComboBoxForForms}" Margin="16,0,0,0">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}" />
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
+                               
                             </ComboBox>
                         </StackPanel>
                     </StackPanel>

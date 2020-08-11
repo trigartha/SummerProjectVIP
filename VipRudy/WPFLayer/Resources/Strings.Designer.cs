@@ -88,6 +88,15 @@ namespace WPFLayer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brand:.
+        /// </summary>
+        public static string Brand {
+            get {
+                return ResourceManager.GetString("Brand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Limousine:.
         /// </summary>
         public static string Car {
@@ -111,6 +120,15 @@ namespace WPFLayer.Resources {
         public static string Client {
             get {
                 return ResourceManager.GetString("Client", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Colour:.
+        /// </summary>
+        public static string Colour {
+            get {
+                return ResourceManager.GetString("Colour", resourceCulture);
             }
         }
         
@@ -178,6 +196,15 @@ namespace WPFLayer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Model:.
+        /// </summary>
+        public static string Model {
+            get {
+                return ResourceManager.GetString("Model", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start Day:.
         /// </summary>
         public static string StartDay {
@@ -210,15 +237,6 @@ namespace WPFLayer.Resources {
         public static string Street {
             get {
                 return ResourceManager.GetString("Street", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string string1 {
-            get {
-                return ResourceManager.GetString("string1", resourceCulture);
             }
         }
         

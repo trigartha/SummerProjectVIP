@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Framework\EnumBindingSourceExtension.cs" />
     <Compile Remove="ViewModels\RelayCommand.cs" />
   </ItemGroup>
 
