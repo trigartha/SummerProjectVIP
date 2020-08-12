@@ -32,7 +32,8 @@ namespace WPFLayer.FrameworkMvvm
             Container.RegisterType<IUnitOfWork, UnitOfWork>();
             Container.RegisterType<MainViewModel>();
             Container.RegisterType<AddReservationViewModel>();
-           
+            Container.RegisterType<FindReservationViewModel>();
+
         }
     }
 }

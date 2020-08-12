@@ -79,8 +79,8 @@ namespace DomainLibrary.Models
         }
         public ICollection<Price> Price
         {
-            get { return _price; }
-             set
+            get { return new List<Price>(); }
+            set
             {
                 if (_price != value)
                 {
@@ -88,7 +88,7 @@ namespace DomainLibrary.Models
                     RaisePropertyChanged(() => Price);
                 }
             }
-        }
+        } 
         public CarAvailability Availability
         {
             get { return _availability; }

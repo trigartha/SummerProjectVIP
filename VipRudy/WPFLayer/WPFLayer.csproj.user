@@ -10,6 +10,9 @@
     <Compile Update="Views\AddReservationView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\FindReservationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
@@ -34,6 +37,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AddReservationView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FindReservationView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

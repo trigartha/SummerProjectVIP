@@ -144,6 +144,9 @@
   <data name="CreateOverview" xml:space="preserve">
     <value>Create Overview</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date:</value>
+  </data>
   <data name="EndDay" xml:space="preserve">
     <value>End Day:</value>
   </data>

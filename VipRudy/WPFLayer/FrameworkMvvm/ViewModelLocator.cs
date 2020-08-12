@@ -27,10 +27,10 @@ namespace WPFLayer.FrameworkMvvm
         {
             get { return _bootStrapper.Container.Resolve<AddReservationViewModel>(); }
         }
-        //public INavigationService Navigation
-        //{
-        //    get { return _bootStrapper.Container.Resolve<INavigationService>(); }
-        //}
+        public FindReservationViewModel FindReservationViewModel
+        {
+            get { return _bootStrapper.Container.Resolve<FindReservationViewModel>(); }
+        }
 
 
     }
