@@ -1,5 +1,6 @@
 ﻿using DataLayer;
 using DomainLibrary;
+using DomainLibrary.Enums;
 using DomainLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -37,12 +38,18 @@ namespace ClientImporter
                 string[] fieldsData = linesData[index].Split(',');
                 char[] toTrim = { '€', ' ','-','–' };
 
-
+                List<Price> prices = new List<Price>();
+                
                 decimal? firstH = FileReader.DecimalParser(fieldsData[3].Trim(toTrim));
                 decimal? nightL = FileReader.DecimalParser(fieldsData[4].Trim(toTrim));
                 decimal? wedding = FileReader.DecimalParser(fieldsData[5].Trim(toTrim));
                 decimal? wellness = FileReader.DecimalParser(fieldsData[6].Trim(toTrim));
-                cars.Add(new Car(fieldsData[0], fieldsData[1].TrimStart(), fieldsData[2].Trim(toTrim), new Price(firstH, nightL, wedding, wellness)));
+                prices.Add(new Price(Arrangement.Airport, firstH));
+                prices.Add(new Price(Arrangement.Business, firstH));
+                prices.Add(new Price(Arrangement.NightLife, nightL));
+                prices.Add(new Price(Arrangement.Wedding, wedding));
+                prices.Add(new Price(Arrangement.Wellness, wellness));
+                cars.Add(new Car(fieldsData[0], fieldsData[1].TrimStart(), fieldsData[2].Trim(toTrim), prices));
             }
             return cars;
         }

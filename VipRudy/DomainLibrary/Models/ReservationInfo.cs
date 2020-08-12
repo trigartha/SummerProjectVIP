@@ -17,17 +17,19 @@ namespace DomainLibrary.Models
         private Arrangement _arrangement;
         private DateTime _startTime;
         private DateTime _endTime;
+        private Address _address;
 
         #endregion
         #region Constructor
         public ReservationInfo() { }
-        public ReservationInfo (Location start, Location stop,  DateTime startT, Arrangement arrangement, DateTime end)
+        public ReservationInfo (Location start, Location stop,  DateTime startT, Arrangement arrangement, DateTime end, Address address)
         {
             this.StartLocation = start;
             this.EndLocation = stop;
             this.StartTime = startT;
             this.Arrangement = arrangement;
             this.EndTime = end;
+            this.Address = address;
         }
         #endregion
         public int ReservationInfoId
@@ -45,7 +47,7 @@ namespace DomainLibrary.Models
         public Location StartLocation
         {
             get { return _startLocation; }
-            private set
+            set
             {
                 if (_startLocation != value)
                 {
@@ -57,7 +59,7 @@ namespace DomainLibrary.Models
         public Location EndLocation
         {
             get { return _endLocation; }
-            private set
+            set
             {
                 if (_endLocation != value)
                 {
@@ -70,7 +72,7 @@ namespace DomainLibrary.Models
         public Arrangement Arrangement
         {
             get { return _arrangement; }
-            private set
+            set
             {
                 if (_arrangement != value)
                 {
@@ -82,7 +84,7 @@ namespace DomainLibrary.Models
         public DateTime StartTime
         {
             get { return _startTime; }
-            private set
+            set
             {
                 if (_startTime != value)
                 {
@@ -94,12 +96,24 @@ namespace DomainLibrary.Models
         public DateTime EndTime
         {
             get { return _endTime; }
-            private set
+            set
             {
                 if (_endTime != value)
                 {
                     _endTime = value;
                     RaisePropertyChanged(() => EndTime);
+                }
+            }
+        }
+        public Address Address
+        {
+            get { return _address; }
+            set
+            {
+                if (_address != value)
+                {
+                    _address = value;
+                    RaisePropertyChanged(() => Address);
                 }
             }
         }

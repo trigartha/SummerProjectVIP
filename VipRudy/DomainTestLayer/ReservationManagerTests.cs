@@ -22,13 +22,20 @@ namespace DomainLibrary.Tests
             Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2100, 12, 12, 12, 0, 0);
             Arrangement arrangement = Arrangement.Airport;
             DateTime endTime = new DateTime(2100, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
         }
         [TestMethod()]
         public void CreateReservationTest_ShouldThrowDomainException_WhenCarIsNotAvailable()
@@ -38,14 +45,21 @@ namespace DomainLibrary.Tests
             rm.AddClient(client);
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             rm.UpdateCarAvailability(car, CarAvailability.NotAvailable);
             DateTime startTime = new DateTime(2100, 12, 12, 12, 0, 0);
             Arrangement arrangement = Arrangement.Airport;
             DateTime endTime = new DateTime(2100, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
         }
         [TestMethod()]
         public void CreateReservationTest_ShouldThrowDomainException_WhenStartTimeIsInTHePast()
@@ -55,13 +69,20 @@ namespace DomainLibrary.Tests
             rm.AddClient(client);
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2019, 12, 12, 12, 0, 0);
             Arrangement arrangement = Arrangement.Airport;
             DateTime endTime = new DateTime(2019, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
         }
         [TestMethod()]
         public void CreateReservationTest_ShouldThrowDomainException_WhenTotalTimeExceedsMaxExceptWellness()
@@ -71,13 +92,20 @@ namespace DomainLibrary.Tests
             rm.AddClient(client);
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 11, 0, 0);
             Arrangement arrangement = Arrangement.Airport;
             DateTime endTime = new DateTime(2020, 12, 12, 23, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
         }
         [TestMethod()]
         public void CreateReservationTest_ShouldThrowDomainException_WhenTotalTimeExceedsTenForWellness()
@@ -87,13 +115,20 @@ namespace DomainLibrary.Tests
             rm.AddClient(client);
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 11, 0, 0);
             Arrangement arrangement = Arrangement.Wellness;
             DateTime endTime = new DateTime(2020, 12, 12, 23, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
         }
         [TestMethod()]
         public void CreateReservationTest_ShouldThrowDomainException_WhenStartTimeBeforeArrangementConditionsWedding()
@@ -103,13 +138,20 @@ namespace DomainLibrary.Tests
             rm.AddClient(client);
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 5, 0, 0);
             Arrangement arrangement = Arrangement.Wedding;
             DateTime endTime = new DateTime(2020, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
         }
         [TestMethod()]
         public void CreateReservationTest_ShouldThrowDomainException_WhenStartTimeAfterArrangementConditionsWedding()
@@ -119,13 +161,20 @@ namespace DomainLibrary.Tests
             rm.AddClient(client);
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 17, 0, 0);
             Arrangement arrangement = Arrangement.Wedding;
             DateTime endTime = new DateTime(2020, 12, 12, 23, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
         }
         [TestMethod()]
         public void CreateReservationTest_ShouldThrowDomainException_WhenStartTimeBeforeArrangementConditionsWellness()
@@ -135,13 +184,20 @@ namespace DomainLibrary.Tests
             rm.AddClient(client);
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 5, 0, 0);
             Arrangement arrangement = Arrangement.Wellness;
             DateTime endTime = new DateTime(2020, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
         }
         [TestMethod()]
         public void CreateReservationTest_ShouldThrowDomainException_WhenStartTimeAfterArrangementConditionsWellness()
@@ -151,13 +207,20 @@ namespace DomainLibrary.Tests
             rm.AddClient(client);
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 17, 0, 0);
             Arrangement arrangement = Arrangement.Wellness;
             DateTime endTime = new DateTime(2020, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
         }
         [TestMethod()]
         public void CreateReservationTest_ShouldThrowDomainException_WhenStartTimeBeforeArrangementConditionsNightLife()
@@ -167,13 +230,20 @@ namespace DomainLibrary.Tests
             rm.AddClient(client);
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 17, 0, 0);
             Arrangement arrangement = Arrangement.NightLife;
             DateTime endTime = new DateTime(2020, 12, 12, 23, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
         }
         [TestMethod()]
         public void CreateReservationTest_ShouldThrowDomainException_WhenStartTimeAfterArrangementConditionsNightLife()
@@ -183,13 +253,20 @@ namespace DomainLibrary.Tests
             rm.AddClient(client);
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 2, 0, 0);
             Arrangement arrangement = Arrangement.NightLife;
             DateTime endTime = new DateTime(2020, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
         }
 
         #endregion
@@ -202,14 +279,21 @@ namespace DomainLibrary.Tests
             rm.AddClient(client);
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 21, 0, 0);
             Arrangement arrangement = Arrangement.NightLife;
             DateTime endTime = new DateTime(2020, 12, 13, 1, 0, 0);
             int amountReservations = rm.FindAllReservations().ToList().Count;
 
-            rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
             Assert.IsTrue(rm.FindAllReservations().ToList().Count == amountReservations + 1);
         }
         [TestMethod()]
@@ -220,14 +304,21 @@ namespace DomainLibrary.Tests
             rm.AddClient(client);
             Location start = Location.Antwerpen;
             Location stop = Location.Brussel;
-            Car car = new Car("RabbitHole", "Delux", "Brown", new Price());
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Address address = new Address("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 21, 0, 0);
             Arrangement arrangement = Arrangement.NightLife;
             DateTime endTime = new DateTime(2020, 12, 13, 1, 0, 0);
             int amountClients = rm.FindAllClients().ToList().Count;
 
-            rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime));
+            rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
             Assert.IsTrue(rm.FindAllClients().ToList().Count == amountClients);
         }
         [TestMethod()]
@@ -245,7 +336,15 @@ namespace DomainLibrary.Tests
         public void AddCarTest_DidAddCar()
         {
             ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
-            Car car = new Car("Volkswagen", "HippyVan", "Pink", new Price(75.00m, 95.00m, 800, null));
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            
+           
 
             int amountCars = rm.FindAllCars().ToList().Count;
             rm.AddCar(car);

@@ -7,6 +7,8 @@ using System.Linq;
 
 namespace DataLayer.Repository
 {
+    
+
     public class CarRepository : ICarRepository
     {
         #region Properties
@@ -33,6 +35,29 @@ namespace DataLayer.Repository
         public IEnumerable<Car> FindAll()
         {
             return _context.Cars.OrderBy(c => c.CarId).AsEnumerable<Car>();
+        }
+        public IEnumerable<Car>FindAllBrands()
+        {
+            return _context.Cars.GroupBy(c => c.Brand).Select(grp => grp.First()).AsEnumerable<Car>();
+        }
+        public IEnumerable<Car> FindAllOnArrangement(Arrangement arrangement)
+        {
+
+            return _context.Cars.Where(car => car.Price.Any(p => p.Arrangement == arrangement && p.PriceRate != null)).AsEnumerable<Car>();
+        }
+        public IEnumerable<Car> FindAllOnBrand(string brand)
+        {
+            return _context.Cars.Where(car => car.Brand == brand).AsEnumerable<Car>();
+        }
+        public IEnumerable<Car> FindAllOnModel(string model)
+        {
+
+            return _context.Cars.Where(car => car.Model == model).AsEnumerable<Car>();
+        }
+        public IEnumerable<Car> FindAllOnColour(string colour)
+        {
+
+            return _context.Cars.Where(car => car.Colour == colour).AsEnumerable<Car>();
         }
         public void UpdateCarAvailability(Car car, CarAvailability availability)
         {

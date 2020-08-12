@@ -4,14 +4,16 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataLayer.Migrations.ReservationContextMigrations
 {
     [DbContext(typeof(ReservationContext))]
-    partial class ReservationContextModelSnapshot : ModelSnapshot
+    [Migration("20200812101657_AdaptionPriceCar2")]
+    partial class AdaptionPriceCar2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,7 +188,7 @@ namespace DataLayer.Migrations.ReservationContextMigrations
 
             modelBuilder.Entity("DomainLibrary.Models.Price", b =>
                 {
-                    b.HasOne("DomainLibrary.Models.Car", "Car")
+                    b.HasOne("DomainLibrary.Models.Car", null)
                         .WithMany("Price")
                         .HasForeignKey("CarId");
                 });

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WPFLayer.Resources"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:enm="clr-namespace:DomainLibrary.Enums;assembly=DomainLibrary"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
         mc:Ignorable="d"
         Title="AddReservationView" 
         Height="900" 
@@ -40,7 +41,7 @@
                     <Label Content="{Binding Client, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}"/>
                 <ComboBox Template="{DynamicResource ComboBoxTemplate1}" x:Name="ClientsComboBox" Grid.Column="1"
                       Margin="7 0 0 0" ItemsSource="{Binding Clients}"
-                      SelectedItem="{Binding SelectedClient}" Style="{StaticResource ComboBoxForForms}">
+                      SelectedItem="{Binding CurrentClient, Mode=TwoWay}" Style="{StaticResource ComboBoxForForms}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}" />
@@ -50,7 +51,7 @@
                 <Label Content="{Binding Arrangement, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="2"/>
                     <ComboBox Template="{DynamicResource ComboBoxTemplate1}" x:Name="ArrangementsComboBox" Grid.Column="3"
                       Margin="7 0 0 0" ItemsSource="{Binding  Source={StaticResource getDataFromEnumArrangement}}" 
-                      SelectedItem="{Binding SelectedArrangement}" Style="{StaticResource ComboBoxForForms}"/>
+                      SelectedItem="{Binding Arrangement, Mode=TwoWay}" Style="{StaticResource ComboBoxForForms}"/>
                 </Grid>
             </Border>
             <!--Car-->
@@ -71,17 +72,18 @@
                     <Label Content="{Binding Brand, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="2"/>
                     <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="CarBrandComboBox" Grid.Column="3"
                       Margin="7,0,0,1" ItemsSource="{Binding Cars}"
-                      SelectedItem="{Binding SelectedCar}" Style="{StaticResource ComboBoxForForms}">
+                      SelectedItem="{Binding CurrentCar}" Style="{StaticResource ComboBoxForForms}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Brand}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+                    <!--
                     <Label Content="{Binding Model, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="0" Grid.Row="2"/>
                     <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="CarModelComboBox" Grid.Column="1" Grid.Row="2"
                       Margin="7 0 0 0" ItemsSource="{Binding Cars}"
-                      SelectedItem="{Binding SelectedCar}" Style="{StaticResource ComboBoxForForms}">
+                      SelectedItem="{Binding CurrentCar}" Style="{StaticResource ComboBoxForForms}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Model}" />
@@ -91,13 +93,13 @@
                     <Label Content="{Binding Colour, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="2" Grid.Row="2"/>
                     <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="CarColourComboBox" Grid.Column="3" Grid.Row="2"
                       Margin="7 0 0 0" ItemsSource="{Binding Cars}"
-                      SelectedItem="{Binding SelectedCar}" Style="{StaticResource ComboBoxForForms}">
+                      SelectedItem="{Binding CurrentCar}" Style="{StaticResource ComboBoxForForms}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Colour}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    </ComboBox>-->
                 </Grid>
             </Border> 
             <!--Address-->
@@ -117,14 +119,14 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Content="{Binding Address, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Margin="16,0,0,8"/>
                     <Label Grid.Row="1" Content="{Binding Street, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}"/>
-                    <TextBox Grid.Row="1" x:Name="StreetTxt"
-                     Text="{Binding Streetname.Content}" Grid.Column="1" HorizontalAlignment="Stretch" Style="{StaticResource TextBoxForms}" />
+                    <TextBox Grid.Row="1" x:Name="StreetTxt" 
+                     Text="{Binding Streetname, Mode=OneWayToSource}"  Grid.Column="1" HorizontalAlignment="Stretch" Style="{StaticResource TextBoxForms}" />
                     <Label Grid.Row="1" Grid.Column="2" Content="{Binding HouseNumber, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}"/>
                     <TextBox Grid.Row="1" x:Name="HouseNumberTxt"
-                     Text="{Binding HouseNumber.Content}" Grid.Column="3" HorizontalAlignment="Stretch" Style="{StaticResource TextBoxForms}" />
+                     Text="{Binding HouseNumber}" Grid.Column="3" HorizontalAlignment="Stretch" Style="{StaticResource TextBoxForms}" />
                     <Label Grid.Row="1" Grid.Column="4" Content="{Binding City, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}"/>
                     <TextBox  Grid.Row="1" x:Name="CityTxt"
-                     Text="{Binding City.Content}" Grid.Column="5" HorizontalAlignment="Stretch" Style="{StaticResource TextBoxForms}" />
+                     Text="{Binding City}" Grid.Column="5" HorizontalAlignment="Stretch" Style="{StaticResource TextBoxForms}" />
                 </Grid>
             </Border>
             <!--Location intern-->
@@ -139,12 +141,12 @@
                     <Label Content="{Binding LocationStart, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="0"/>
                     <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="LocationsStartComboBox" Grid.Column="1"
                       Margin="7 0 0 0" ItemsSource="{Binding Source={StaticResource getDataFromEnumLocation}}" 
-                      Style="{StaticResource ComboBoxForForms}"  SelectedItem="{Binding SelectedLocation}">
+                      Style="{StaticResource ComboBoxForForms}"  SelectedItem="{Binding StartLocation}">
                     </ComboBox>
                     <Label Content="{Binding LocationEnd, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="2"/>
                     <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="LocationsEndComboBox" Grid.Column="3"
                       Margin="7 0 0 0" ItemsSource="{Binding Source={StaticResource getDataFromEnumLocation}}" 
-                      SelectedItem="{Binding SelectedLocation}" Style="{StaticResource ComboBoxForForms}">
+                      SelectedItem="{Binding EndLocation}" Style="{StaticResource ComboBoxForForms}">
                     </ComboBox>
                 </Grid>
             </Border>
@@ -163,7 +165,7 @@
                             <Label Content="{Binding StartHour, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" />
                             <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="HourComboBox1" 
                       ItemsSource="{Binding Hours}"
-                      SelectedItem="{Binding SelectedHours}" 
+                      SelectedItem="{Binding ReservationInfo.StartTime.Hour, Mode=OneWay}" 
                                Style="{StaticResource ComboBoxForForms}" Margin="16,0,0,0">
                                 
                             </ComboBox>
@@ -175,20 +177,47 @@
                             <Label Content="{Binding EndHour, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" />
                             <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="HourComboBox2" 
                       ItemsSource="{Binding Hours}"
-                      SelectedItem="{Binding SelectedHours}" 
+                      SelectedItem="{Binding ReservationInfo.EndTime.Hour, Mode=OneWay}"
                                Style="{StaticResource ComboBoxForForms}" Margin="16,0,0,0">
                                
                             </ComboBox>
                         </StackPanel>
                     </StackPanel>
-                    <Calendar Style="{DynamicResource CalendarStyle1}" x:Name="StartDayCalender" Grid.Column="1"/>
-                    <Calendar Style="{DynamicResource CalendarStyle1}" x:Name="EndDayCalender" Grid.Column="3"/>
+
+                    <Calendar SelectedDate="{Binding ReservationInfo.StartTime}" Style="{DynamicResource CalendarStyle1}" x:Name="StartDayCalender" Grid.Column="1"/>
+                    <Calendar SelectedDate="{Binding ReservationInfo.EndTime}" Style="{DynamicResource CalendarStyle1}" x:Name="EndDayCalender" Grid.Column="3"/>
                 </Grid>
             </Border>
             <!--Bottom-->
-            <Button  DockPanel.Dock="Top" x:Name="btnCreateOverview" Content="{Binding CreateOverview, Source={StaticResource LocStrings}}" Style="{StaticResource FirstPageButtonStyle}" HorizontalAlignment="Center" Padding="8,8,8,8" Margin="0,0,0,8"/>
+            <Button  DockPanel.Dock="Top" x:Name="btnCreateOverview"  Command="{Binding CreateOverviewCommand}" Content="{Binding CreateOverview, Source={StaticResource LocStrings}}" Style="{StaticResource FirstPageButtonStyle}" HorizontalAlignment="Center" Padding="8,8,8,8" Margin="0,0,0,8"/>
             <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" Background="#cee6f2" Height="250" Margin="0,0,0,3">
                 <!--Here comes the Reservation Overview-->
+                <ItemsControl Name="ReservationOverviewDetail">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding Reservation.Client, Source={StaticResource LocStrings}}" />
+                                <TextBlock Text="{Binding Reservation.Client.Name}" Grid.Row="1" Grid.Column="0"/>
+                                <TextBlock Text="{Binding Reservation.Client.Address.Streetname}" Grid.Row="2" Grid.Column="0"/>
+                                <TextBlock Text="{Binding Reservation.Client.Address.HouseNumber}" Grid.Row="2" Grid.Column="1"/>
+                                <TextBlock Text="{Binding Reservation.Client.Address.City}" Grid.Row="3" Grid.Column="0"/>
+                                <TextBlock Text="{Binding Reservation.ReservationDate}" Grid.Row="0" Grid.Column="4"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
             <Button x:Name="btnAddReservationPage" Content="{Binding AddReservation, Source={StaticResource LocStrings}}" Style="{StaticResource FirstPageButtonStyle}" HorizontalAlignment="Center" Padding="8,8,8,8" Margin="0,0,0,8"/>
         </DockPanel>

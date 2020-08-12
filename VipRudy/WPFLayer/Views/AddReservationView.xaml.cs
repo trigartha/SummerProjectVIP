@@ -22,5 +22,10 @@ namespace WPFLayer.Views
         {
             InitializeComponent();
         }
+
+        private void btnCreateOverview_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

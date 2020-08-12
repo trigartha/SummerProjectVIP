@@ -9,10 +9,15 @@ namespace DomainLibrary.Repositories
     public interface ICarRepository
     {
         void AddCar(Car car);
-        void UpdateCarAvailability(Car car, CarAvailability availability);
         void DeleteAll();
         Car Find(int id);
         IEnumerable<Car> FindAll();
+        IEnumerable<Car> FindAllBrands();
+        IEnumerable<Car> FindAllOnArrangement(Arrangement arrangement);
+        IEnumerable<Car> FindAllOnBrand(string brand);
+        IEnumerable<Car> FindAllOnColour(string colour);
+        IEnumerable<Car> FindAllOnModel(string model);
         void Save();
+        void UpdateCarAvailability(Car car, CarAvailability availability);
     }
 }

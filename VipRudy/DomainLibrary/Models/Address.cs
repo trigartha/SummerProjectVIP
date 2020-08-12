@@ -38,7 +38,7 @@ namespace DomainLibrary
         public string Streetname 
         {
             get { return _streetName; }
-            private set
+            set
             {
                 if (_streetName != value)
                 {
@@ -50,7 +50,7 @@ namespace DomainLibrary
         public string HouseNumber
         {
             get { return _houseNumber; }
-            private set
+            set
             {
                 if (_houseNumber != value)
                 {
@@ -62,7 +62,7 @@ namespace DomainLibrary
         public string City
         {
             get { return _city; }
-            private set
+            set
             {
                 if (_city != value)
                 {

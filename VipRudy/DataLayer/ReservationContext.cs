@@ -57,6 +57,9 @@ namespace DataLayer
             modelBuilder.Entity<Reservation>()
              .HasOne(r => r.Client)
              .WithMany(c => c.Reservations);
+            modelBuilder.Entity<Price>()
+            .HasOne(p => p.Car)
+            .WithMany(c=> c.Price);
             modelBuilder.Entity<Reservation>()
             .HasOne(r => r.Car)
             .WithMany(c => c.ReservationDetails);
@@ -71,6 +74,9 @@ namespace DataLayer
                 .HasConversion<string>();
             modelBuilder.Entity<Car>()
                .Property(c => c.Availability)
+               .HasConversion<string>();
+            modelBuilder.Entity<Price>()
+               .Property(c => c.Arrangement)
                .HasConversion<string>();
         }
         #endregion

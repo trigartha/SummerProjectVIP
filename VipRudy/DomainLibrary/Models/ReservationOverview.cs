@@ -26,7 +26,8 @@ namespace DomainLibrary.Models
         #region Fields
         #endregion
         #region Constructor
-
+        public ReservationOverview()
+        { }
         #endregion
         #region Methods
 

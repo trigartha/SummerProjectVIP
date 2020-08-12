@@ -13,14 +13,14 @@ namespace DomainLibrary.Models
         private string _model;
         private string _colour;
         private int _carId;
-        private Price _price;
+        private ICollection<Price> _price;
         private CarAvailability _availability;
         private ICollection<Reservation> _reservationDetails;
        
         #endregion
         #region Constructor
         public Car() { }
-        public Car(string brand, string model, string colour, Price price)
+        public Car(string brand, string model, string colour, List<Price> price)
         {
             this.Brand = brand;
             this.Model = model;
@@ -32,7 +32,7 @@ namespace DomainLibrary.Models
         public string Brand
         {
             get { return _brand; }
-            private set
+             set
             {
                 if (_brand != value)
                 {
@@ -44,7 +44,7 @@ namespace DomainLibrary.Models
         public string Model
         {
             get { return _model; }
-            private set
+             set
             {
                 if (_model != value)
                 {
@@ -56,7 +56,7 @@ namespace DomainLibrary.Models
         public string Colour
         {
             get { return _colour; }
-            private set
+             set
             {
                 if (_colour != value)
                 {
@@ -77,10 +77,10 @@ namespace DomainLibrary.Models
                 }
             }
         }
-        public Price Price
+        public ICollection<Price> Price
         {
             get { return _price; }
-            private set
+             set
             {
                 if (_price != value)
                 {
@@ -92,7 +92,7 @@ namespace DomainLibrary.Models
         public CarAvailability Availability
         {
             get { return _availability; }
-            private set
+             set
             {
                 if (_availability != value)
                 {
@@ -104,7 +104,7 @@ namespace DomainLibrary.Models
         public ICollection<Reservation> ReservationDetails
         {
             get { return _reservationDetails; }
-            private set
+             set
             {
                 if (_reservationDetails != value)
                 {

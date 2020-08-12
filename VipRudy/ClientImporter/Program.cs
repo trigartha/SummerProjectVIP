@@ -8,8 +8,8 @@ namespace ClientImporter
         {
             Console.WriteLine("Hello World!");
 
-            FileReader.AddClients();
-            //FileReader.AddCars();
+            //FileReader.AddClients();
+            FileReader.AddCars();
             Console.ReadKey();
         }
     }

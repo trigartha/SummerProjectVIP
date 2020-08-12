@@ -14,6 +14,7 @@ namespace DomainLibrary.ViewModels
     {
         #region Properties
         public RelayCommand AddReservationCommand { get; private set; }
+        public RelayCommand CreateOverviewCommand { get; private set; }
         #endregion
         #region Fields
         /* private readonly IReservationRepository _reservationRepository;
@@ -25,6 +26,11 @@ namespace DomainLibrary.ViewModels
         private ObservableCollection<Client> _clients;
 
         private Reservation _currentReservation;
+        private ReservationOverview _reservationOverview;
+        private Client _currentClient;
+        private Car _currentCar;
+        private ReservationInfo _reservationInfo;
+        private Address _currentAddres;
         #endregion
         #region Constructor
         /// <summary>
@@ -43,15 +49,20 @@ namespace DomainLibrary.ViewModels
             Clients = new ObservableCollection<Client>(_reservationManager.FindAllClients());
             Reservations = new ObservableCollection<Reservation>(_reservationManager.FindAllReservations());
 
+            CurrentReservation = new Reservation();
+            ReservationInfo = new ReservationInfo();
+            CurrentReservationOverview = new ReservationOverview();
+            Address = new Address();
             //To manage event handling in the viewmodel
             WireCommands();
-            
+
         }
         #endregion
         #region Methods
         private void WireCommands()
         {
             AddReservationCommand = new RelayCommand(AddReservation);
+            CreateOverviewCommand = new RelayCommand(CreateOverview);
         }
         /// <summary>
         /// Gets or sets the Cars.
@@ -131,20 +142,195 @@ namespace DomainLibrary.ViewModels
                 }
             }
         }
+        public ReservationInfo ReservationInfo
+        {
+            get
+            {
+                return _reservationInfo;
+            }
+            set
+            {
+                if (_reservationInfo != value)
+                {
+                    _reservationInfo = value;
+                    RaisePropertyChanged(() => ReservationInfo);
+                }
+            }
+        }
+        public Address Address
+        {
+            get
+            {
+                return _currentAddres;
+            }
+            set
+            {
+                if (_currentAddres != value)
+                {
+                    _currentAddres = value;
+                    RaisePropertyChanged(() => Address);
+                }
+            }
+        }
+        public Client CurrentClient
+        {
+            get
+            {
+                return _currentClient;
+            }
+            set
+            {
+                if (_currentClient != value)
+                {
+                    _currentClient = value;
+                    RaisePropertyChanged(() => CurrentClient);
+
+                }
+            }
+        }
+        public Car CurrentCar
+        {
+            get
+            {
+                return _currentCar;
+            }
+            set
+            {
+                if (_currentCar != value)
+                {
+                    _currentCar = value;
+                    RaisePropertyChanged(() => CurrentCar);
+
+                }
+            }
+        }
+        public ReservationOverview CurrentReservationOverview
+        {
+            get
+            {
+                return _reservationOverview;
+            }
+            set
+            {
+                if (_reservationOverview != value)
+                {
+                    _reservationOverview = value;
+                    RaisePropertyChanged(() => CurrentReservationOverview);
+
+                }
+            }
+        }
         public List<string> Hours
         {
             get
             {
                 List<string> hours = new List<string>();
-                for(int i=1; i<25;i++)
+                for (int i = 1; i < 25; i++)
                 {
                     hours.Add(i.ToString());
                 }
                 return hours;
             }
-            
+
         }
-        
+        public string Streetname
+        {
+            get { return _currentAddres.Streetname; }
+            set
+            {
+                if (_currentAddres.Streetname != value)
+                {
+                    _currentAddres.Streetname = value;
+                    RaisePropertyChanged(() => Streetname);
+                }
+            }
+        }
+        public string HouseNumber
+        {
+            get { return _currentAddres.HouseNumber; }
+            set
+            {
+                if (_currentAddres.HouseNumber != value)
+                {
+                    _currentAddres.HouseNumber = value;
+                    RaisePropertyChanged(() => HouseNumber);
+                }
+            }
+        }
+        public string City
+        {
+            get { return _currentAddres.City; }
+            set
+            {
+                if (_currentAddres.City != value)
+                {
+                    _currentAddres.City = value;
+                    RaisePropertyChanged(() => City);
+                }
+            }
+        }
+        public Location StartLocation
+        {
+            get { return _reservationInfo.StartLocation; }
+            set
+            {
+                if (_reservationInfo.StartLocation != value)
+                {
+                    _reservationInfo.StartLocation = value;
+                    RaisePropertyChanged(() => StartLocation);
+                }
+            }
+        }
+        public Location EndLocation
+        {
+            get { return _reservationInfo.EndLocation; }
+            set
+            {
+                if (_reservationInfo.EndLocation != value)
+                {
+                    _reservationInfo.EndLocation = value;
+                    RaisePropertyChanged(() => EndLocation);
+                }
+            }
+        }
+        public Arrangement Arrangement
+        {
+            get { return _reservationInfo.Arrangement; }
+            set
+            {
+                if (_reservationInfo.Arrangement != value)
+                {
+                    _reservationInfo.Arrangement = value;
+                    RaisePropertyChanged(() => Arrangement);
+                   this.Cars = new ObservableCollection<Car>(_reservationManager.FindAllCarsOnArrangement(Arrangement).ToList());
+                   RaisePropertyChanged(() => Cars);
+                }
+            }
+        }
+        public DateTime StartTime
+        {
+            get { return _reservationInfo.StartTime; }
+            set
+            {
+                if (_reservationInfo.StartTime != value)
+                {
+                    _reservationInfo.StartTime = value;
+                    RaisePropertyChanged(() => StartTime);
+                }
+            }
+        }
+        public DateTime EndTime
+        {
+            get { return _reservationInfo.EndTime; }
+            set
+            {
+                if (_reservationInfo.EndTime != value)
+                {
+                    _reservationInfo.EndTime = value;
+                    RaisePropertyChanged(() => EndTime);
+                }
+            }
+        }
         /// <summary>
         /// Adds a Reservation to the list and repo.
         /// </summary>
@@ -158,6 +344,17 @@ namespace DomainLibrary.ViewModels
 
             CurrentReservation = new Reservation();
         }
+        private void CreateOverview()
+        {
+            CreateReservationInfo();
+            var reservation = new Reservation(CurrentClient, CurrentCar, ReservationInfo);
+            this.CurrentReservationOverview = _reservationManager.CreateOverview(reservation);
+        }
+        private void CreateReservationInfo()
+        {
+            var reservationInfo = new ReservationInfo(StartLocation, EndLocation, StartTime, Arrangement, EndTime,Address);
+            this.ReservationInfo = reservationInfo;
+        }
         /// <summary>
         /// Check if Reservation was made and can be added
         /// </summary>
@@ -165,15 +362,6 @@ namespace DomainLibrary.ViewModels
         private bool CanAddReservation()
         {
             return CurrentReservation.Client != null;
-        }
-        private string ConvertEnumToString(Location location)
-        {
-            return location.ToString();
-        }
-
-        public Location ConvertStringToEnum(string location)
-        {
-            return (Location)Enum.Parse(typeof(Location), location);
         }
         #endregion
     }
