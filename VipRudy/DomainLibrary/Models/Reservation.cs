@@ -28,7 +28,7 @@ namespace DomainLibrary.Models
         public Client Client
         {
             get { return _client; }
-            private set
+            set
             {
                 if (_client != value)
                 {
@@ -40,7 +40,7 @@ namespace DomainLibrary.Models
         public Car Car
         {
             get { return _car; }
-            private set
+            set
             {
                 if (_car != value)
                 {
@@ -52,7 +52,7 @@ namespace DomainLibrary.Models
         public DateTime ReservationDate
         {
             get { return _reservationDate; }
-            private set
+            set
             {
                 if (_reservationDate != value)
                 {
@@ -64,7 +64,7 @@ namespace DomainLibrary.Models
         public int ReservationId
         {
             get { return _reservationId; }
-            private set
+            set
             {
                 if (_reservationId != value)
                 {
@@ -76,7 +76,7 @@ namespace DomainLibrary.Models
         public ReservationInfo ReservationInfo
         {
             get { return _reservationInfo; }
-            private set
+            set
             {
                 if (_reservationInfo != value)
                 {

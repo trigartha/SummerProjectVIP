@@ -2,6 +2,7 @@
 using DomainLibrary.Framework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DomainLibrary.Models
@@ -13,7 +14,7 @@ namespace DomainLibrary.Models
         private string _model;
         private string _colour;
         private int _carId;
-        private ICollection<Price> _price;
+        private List<Price> _price;
         private CarAvailability _availability;
         private ICollection<Reservation> _reservationDetails;
        
@@ -29,6 +30,7 @@ namespace DomainLibrary.Models
            
         }
         #endregion
+       
         public string Brand
         {
             get { return _brand; }
@@ -68,7 +70,7 @@ namespace DomainLibrary.Models
         public int CarId
         {
             get { return _carId; }
-            private set
+            set
             {
                 if (_carId != value)
                 {
@@ -77,9 +79,9 @@ namespace DomainLibrary.Models
                 }
             }
         }
-        public ICollection<Price> Price
+        public List<Price> Price
         {
-            get { return new List<Price>(); }
+            get { return _price; }
             set
             {
                 if (_price != value)

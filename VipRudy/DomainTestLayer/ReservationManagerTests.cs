@@ -29,7 +29,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2100, 12, 12, 12, 0, 0);
             Arrangement arrangement = Arrangement.Airport;
@@ -52,7 +52,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             rm.UpdateCarAvailability(car, CarAvailability.NotAvailable);
             DateTime startTime = new DateTime(2100, 12, 12, 12, 0, 0);
@@ -76,7 +76,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2019, 12, 12, 12, 0, 0);
             Arrangement arrangement = Arrangement.Airport;
@@ -99,7 +99,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 11, 0, 0);
             Arrangement arrangement = Arrangement.Airport;
@@ -122,7 +122,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 11, 0, 0);
             Arrangement arrangement = Arrangement.Wellness;
@@ -145,7 +145,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 5, 0, 0);
             Arrangement arrangement = Arrangement.Wedding;
@@ -168,7 +168,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 17, 0, 0);
             Arrangement arrangement = Arrangement.Wedding;
@@ -191,7 +191,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 5, 0, 0);
             Arrangement arrangement = Arrangement.Wellness;
@@ -214,7 +214,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 17, 0, 0);
             Arrangement arrangement = Arrangement.Wellness;
@@ -237,7 +237,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 17, 0, 0);
             Arrangement arrangement = Arrangement.NightLife;
@@ -260,7 +260,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 2, 0, 0);
             Arrangement arrangement = Arrangement.NightLife;
@@ -286,7 +286,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 21, 0, 0);
             Arrangement arrangement = Arrangement.NightLife;
@@ -311,7 +311,7 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Address address = new Address("Teaparty", "1", "Wonderland");
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 21, 0, 0);
             Arrangement arrangement = Arrangement.NightLife;

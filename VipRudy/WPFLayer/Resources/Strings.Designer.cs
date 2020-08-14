@@ -79,6 +79,15 @@ namespace WPFLayer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount Hours:.
+        /// </summary>
+        public static string AmountHours {
+            get {
+                return ResourceManager.GetString("AmountHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Arrangement:.
         /// </summary>
         public static string Arrangement {
@@ -151,6 +160,24 @@ namespace WPFLayer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delivery Addres:.
+        /// </summary>
+        public static string DeliveryAddres {
+            get {
+                return ResourceManager.GetString("DeliveryAddres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discount:.
+        /// </summary>
+        public static string Discount {
+            get {
+                return ResourceManager.GetString("Discount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End Day:.
         /// </summary>
         public static string EndDay {
@@ -169,11 +196,29 @@ namespace WPFLayer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First Hour Price:.
+        /// </summary>
+        public static string FirstHourPrice {
+            get {
+                return ResourceManager.GetString("FirstHourPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to N°:.
         /// </summary>
         public static string HouseNumber {
             get {
                 return ResourceManager.GetString("HouseNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id:.
+        /// </summary>
+        public static string Id {
+            get {
+                return ResourceManager.GetString("Id", resourceCulture);
             }
         }
         
@@ -214,6 +259,60 @@ namespace WPFLayer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Night Hour Price:.
+        /// </summary>
+        public static string NightHourPrice {
+            get {
+                return ResourceManager.GetString("NightHourPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Over Time Price:.
+        /// </summary>
+        public static string OverTimePrice {
+            get {
+                return ResourceManager.GetString("OverTimePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reservation:.
+        /// </summary>
+        public static string Reservation {
+            get {
+                return ResourceManager.GetString("Reservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date Reservation:.
+        /// </summary>
+        public static string ReservationDate {
+            get {
+                return ResourceManager.GetString("ReservationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reservation stored succesfull!.
+        /// </summary>
+        public static string ReservationSavedMsg {
+            get {
+                return ResourceManager.GetString("ReservationSavedMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Reservation(s).
+        /// </summary>
+        public static string ShowReservation {
+            get {
+                return ResourceManager.GetString("ShowReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start Day:.
         /// </summary>
         public static string StartDay {
@@ -246,6 +345,60 @@ namespace WPFLayer.Resources {
         public static string Street {
             get {
                 return ResourceManager.GetString("Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SubTotal:.
+        /// </summary>
+        public static string SubTotal {
+            get {
+                return ResourceManager.GetString("SubTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tax:.
+        /// </summary>
+        public static string Tax {
+            get {
+                return ResourceManager.GetString("Tax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tax Number:.
+        /// </summary>
+        public static string TaxNumber {
+            get {
+                return ResourceManager.GetString("TaxNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Pay:.
+        /// </summary>
+        public static string ToPay {
+            get {
+                return ResourceManager.GetString("ToPay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total:.
+        /// </summary>
+        public static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excl. Tax:.
+        /// </summary>
+        public static string TotalExclTax {
+            get {
+                return ResourceManager.GetString("TotalExclTax", resourceCulture);
             }
         }
         

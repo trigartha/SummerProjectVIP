@@ -16,6 +16,7 @@ namespace DataLayer
         public DbSet<Client> Clients { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Price> Prices { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         #endregion
         #region Fields
         private string _connectionString;
@@ -55,21 +56,29 @@ namespace DataLayer
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Reservation>()
-             .HasOne(r => r.Client)
-             .WithMany(c => c.Reservations);
-            modelBuilder.Entity<Price>()
-            .HasOne(p => p.Car)
-            .WithMany(c=> c.Price);
-            modelBuilder.Entity<Reservation>()
-            .HasOne(r => r.Car)
-            .WithMany(c => c.ReservationDetails);
-            modelBuilder.Entity<Client>()
-                .Property(c=>c.ClientNumber)
-                .ValueGeneratedNever();
+            /* modelBuilder.Entity<Reservation>()
+              .HasOne(r => r.Client)
+              .WithMany(c => c.Reservations);
+
+             modelBuilder.Entity<Reservation>()
+             .HasOne(r => r.Car)
+             .WithMany(c => c.ReservationDetails);*/
+            /* modelBuilder.Entity<Client>()
+                 .Property(c=>c.ClientNumber)
+                 .ValueGeneratedNever();
+            */
+            //modelBuilder.Entity<Car>().HasMany(c => c.Price).WithOne();
+            /*modelBuilder.Entity<Car>().OwnsMany(c => c.Price, a =>
+              {
+                  a.WithOwner().HasForeignKey("CarId");
+                  a.Property<int>("Id");
+                  a.HasKey("Id");
+              });*/
+            modelBuilder.Entity<Client>().OwnsOne(c => c.Address);
+            modelBuilder.Entity<ReservationInfo>().OwnsOne(c => c.Address);
             modelBuilder.Entity<Client>()
                .HasKey(c => c.ClientNumber)
-               .HasName("PrimaryKey_ClientId");
+               .HasName("PrimaryKey_ClientId"); ;
             modelBuilder.Entity<Client>()
                 .Property(c => c.ClientCategory)
                 .HasConversion<string>();

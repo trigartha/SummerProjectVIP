@@ -31,6 +31,10 @@ namespace WPFLayer.FrameworkMvvm
         {
             get { return _bootStrapper.Container.Resolve<FindReservationViewModel>(); }
         }
+        public OverViewReservationViewModel OverViewReservationViewModel
+        {
+            get { return _bootStrapper.Container.Resolve<OverViewReservationViewModel>(); }
+        }
 
 
     }

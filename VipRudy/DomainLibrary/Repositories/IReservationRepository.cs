@@ -12,6 +12,7 @@ namespace DomainLibrary.Repositories
         IEnumerable<Reservation> FindAll();
         IEnumerable<Reservation> FindOnDate(DateTime date);
         IEnumerable<Reservation> FindOnClient(Client client);
+        IEnumerable<Reservation> FindOnDateAndClient(DateTime date, Client client);
 
         void DeleteAll();
         void Save();

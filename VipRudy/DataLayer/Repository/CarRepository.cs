@@ -1,6 +1,7 @@
 ﻿using DomainLibrary.Enums;
 using DomainLibrary.Models;
 using DomainLibrary.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace DataLayer.Repository
         }
         public IEnumerable<Car> FindAll()
         {
-            return _context.Cars.OrderBy(c => c.CarId).AsEnumerable<Car>();
+            return _context.Cars.Include(c=>c.Price).AsEnumerable<Car>();
         }
         public IEnumerable<Car>FindAllBrands()
         {

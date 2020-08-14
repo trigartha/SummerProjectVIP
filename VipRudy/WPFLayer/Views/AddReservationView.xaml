@@ -141,12 +141,12 @@
                     <Label Content="{Binding LocationStart, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="0"/>
                     <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="LocationsStartComboBox" Grid.Column="1"
                       Margin="7 0 0 0" ItemsSource="{Binding Source={StaticResource getDataFromEnumLocation}}" 
-                      Style="{StaticResource ComboBoxForForms}"  SelectedItem="{Binding StartLocation}">
+                      Style="{StaticResource ComboBoxForForms}"  SelectedItem="{Binding StartLocation, Mode=TwoWay}">
                     </ComboBox>
                     <Label Content="{Binding LocationEnd, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="2"/>
                     <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="LocationsEndComboBox" Grid.Column="3"
                       Margin="7 0 0 0" ItemsSource="{Binding Source={StaticResource getDataFromEnumLocation}}" 
-                      SelectedItem="{Binding EndLocation}" Style="{StaticResource ComboBoxForForms}">
+                      SelectedItem="{Binding EndLocation, Mode=TwoWay}" Style="{StaticResource ComboBoxForForms}">
                     </ComboBox>
                 </Grid>
             </Border>
@@ -165,9 +165,8 @@
                             <Label Content="{Binding StartHour, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" />
                             <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="HourComboBox1" 
                       ItemsSource="{Binding Hours}"
-                      SelectedItem="{Binding ReservationInfo.StartTime.Hour, Mode=OneWay}" 
+                      SelectedItem="{Binding StartTimeHour,  Mode=TwoWay}" 
                                Style="{StaticResource ComboBoxForForms}" Margin="16,0,0,0">
-                                
                             </ComboBox>
                         </StackPanel>
                     </StackPanel>
@@ -177,22 +176,30 @@
                             <Label Content="{Binding EndHour, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" />
                             <ComboBox  Template="{DynamicResource ComboBoxTemplate1}" x:Name="HourComboBox2" 
                       ItemsSource="{Binding Hours}"
-                      SelectedItem="{Binding ReservationInfo.EndTime.Hour, Mode=OneWay}"
+                      SelectedItem="{Binding EndTimeHour,  Mode=TwoWay}"
                                Style="{StaticResource ComboBoxForForms}" Margin="16,0,0,0">
-                               
                             </ComboBox>
                         </StackPanel>
                     </StackPanel>
-
-                    <Calendar SelectedDate="{Binding ReservationInfo.StartTime}" Style="{DynamicResource CalendarStyle1}" x:Name="StartDayCalender" Grid.Column="1"/>
-                    <Calendar SelectedDate="{Binding ReservationInfo.EndTime}" Style="{DynamicResource CalendarStyle1}" x:Name="EndDayCalender" Grid.Column="3"/>
+                    <!--<xctk:DateTimePicker Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" />-->
+                    <Calendar SelectedDate="{Binding StartTime}" Style="{DynamicResource CalendarStyle1}" x:Name="StartDayCalender" Grid.Column="1"/>
+                    <Calendar SelectedDate="{Binding EndTime}" Style="{DynamicResource CalendarStyle1}" x:Name="EndDayCalender" Grid.Column="3"/>
                 </Grid>
             </Border>
             <!--Bottom-->
-            <Button  DockPanel.Dock="Top" x:Name="btnCreateOverview"  Command="{Binding CreateOverviewCommand}" Content="{Binding CreateOverview, Source={StaticResource LocStrings}}" Style="{StaticResource FirstPageButtonStyle}" HorizontalAlignment="Center" Padding="8,8,8,8" Margin="0,0,0,8"/>
-            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" Background="#cee6f2" Height="250" Margin="0,0,0,3">
-                <!--Here comes the Reservation Overview-->
-                <ItemsControl Name="ReservationOverviewDetail">
+            <Grid  DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    
+                </Grid.ColumnDefinitions>
+                <!--<Button  x:Name="btnCreateOverview"  Command="{Binding CreateOverviewCommand}" Content="{Binding CreateOverview, Source={StaticResource LocStrings}}" Style="{StaticResource FirstPageButtonStyle}" HorizontalAlignment="Center" Padding="8,8,8,8" Margin="0,0,0,8"/>
+                --><Button   x:Name="btnShowOverview"  Click="btnShowOverview_Click" Content="{Binding ShowReservation, Source={StaticResource LocStrings}}" Style="{StaticResource FirstPageButtonStyle}" HorizontalAlignment="Center" Padding="8,8,8,8" Margin="0,0,0,8" Grid.Column="0"/>
+                <Button x:Name="btnAddReservationPage" Click="btnAddReservationPage_Click" Content="{Binding AddReservation, Source={StaticResource LocStrings}}" Style="{StaticResource FirstPageButtonStyle}" HorizontalAlignment="Center" Padding="8,8,8,8" Margin="0,0,0,8" Grid.Column="1"/>
+            </Grid>
+<!--             <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" Background="#cee6f2" MinHeight="200" Margin="0,0,0,3">
+                --> <!--Here comes the Reservation Overview-->
+            <!--      <ItemsControl Name="ReservationOverviewDetail">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="0,0,0,0">
@@ -219,12 +226,9 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
-            <Button x:Name="btnAddReservationPage" Content="{Binding AddReservation, Source={StaticResource LocStrings}}" Style="{StaticResource FirstPageButtonStyle}" HorizontalAlignment="Center" Padding="8,8,8,8" Margin="0,0,0,8"/>
+            -->
+            <Label Visibility="Collapsed" Content="{Binding ReservationSavedMsg, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" />
         </DockPanel>
-        <StatusBar Background="#068d8f" DockPanel.Dock="Bottom" Height="36">
-            <StatusBarItem DockPanel.Dock="Left" HorizontalAlignment="Left">
-                <TextBlock Text="{Binding StatusBarText, Source={StaticResource LocStrings}}" Height="40" HorizontalAlignment="Stretch" FontFamily="Bahnschrift Light" FontSize="16" Foreground="#FFEBFCF6" Margin="0,8,0,0"/>
-            </StatusBarItem>
-        </StatusBar>
+        
     </DockPanel>
 </Window>

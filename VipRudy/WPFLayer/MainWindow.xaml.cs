@@ -40,5 +40,13 @@ namespace WPFLayer
             showAddReservation.DataContext = new AddReservationViewModel(_reservationManager);
             showAddReservation.Show();
         }
+
+        private void BtnFindReservation_Click(object sender, RoutedEventArgs e)
+        {
+
+            var showFindReservation = new FindReservationView();
+            showFindReservation.DataContext = new FindReservationViewModel(_reservationManager);
+            showFindReservation.Show();
+        }
     }
 }

@@ -17,21 +17,61 @@ namespace DomainLibrary.Models
         private Arrangement _arrangement;
         private DateTime _startTime;
         private DateTime _endTime;
-        private Address _address;
+        private int _startHour;
+        private int _endHour;
+        private DeliveryAddress _address;
 
         #endregion
         #region Constructor
         public ReservationInfo() { }
-        public ReservationInfo (Location start, Location stop,  DateTime startT, Arrangement arrangement, DateTime end, Address address)
+        public ReservationInfo (Location start, Location stop,  DateTime startT, Arrangement arrangement, DateTime end, DeliveryAddress address, int startHour, int endHour)
         {
             this.StartLocation = start;
             this.EndLocation = stop;
             this.StartTime = startT;
             this.Arrangement = arrangement;
-            this.EndTime = end;
+            this.StartHour = startHour;
+            this.EndHour = endHour;
+            this.StartTime = new DateTime(startT.Year, startT.Month, startT.Day, StartHour, 0, 0);
+            this.EndTime = new DateTime(end.Year, end.Month, end.Day, endHour, 0, 0);
+            this.Address =address ;
+        }
+        public ReservationInfo(Location start, Location stop, DateTime startT, Arrangement arrangement, DateTime end, DeliveryAddress address)
+        {
+            this.StartLocation = start;
+            this.EndLocation = stop;
+            this.StartTime = startT;
+            this.Arrangement = arrangement;
+           
+            this.EndTime = startT;
+            this.StartTime = end;
             this.Address = address;
         }
         #endregion
+        public int StartHour
+        {
+            get { return _startHour; }
+             set
+            {
+                if (_startHour != value)
+                {
+                    _startHour = value;
+                    RaisePropertyChanged(() => StartHour);
+                }
+            }
+        }
+        public int EndHour
+        {
+            get { return _endHour; }
+             set
+            {
+                if (_endHour != value)
+                {
+                    _endHour = value;
+                    RaisePropertyChanged(() => EndHour);
+                }
+            }
+        }
         public int ReservationInfoId
         {
             get { return _reservationInfoId; }
@@ -105,7 +145,7 @@ namespace DomainLibrary.Models
                 }
             }
         }
-        public Address Address
+        public DeliveryAddress Address
         {
             get { return _address; }
             set

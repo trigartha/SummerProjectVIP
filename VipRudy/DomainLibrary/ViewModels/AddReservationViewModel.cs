@@ -30,7 +30,7 @@ namespace DomainLibrary.ViewModels
         private Client _currentClient;
         private Car _currentCar;
         private ReservationInfo _reservationInfo;
-        private Address _currentAddres;
+        private DeliveryAddress _currentAddres;
         #endregion
         #region Constructor
         /// <summary>
@@ -52,7 +52,7 @@ namespace DomainLibrary.ViewModels
             CurrentReservation = new Reservation();
             ReservationInfo = new ReservationInfo();
             CurrentReservationOverview = new ReservationOverview();
-            Address = new Address();
+            Address = new DeliveryAddress();
             //To manage event handling in the viewmodel
             WireCommands();
 
@@ -157,7 +157,7 @@ namespace DomainLibrary.ViewModels
                 }
             }
         }
-        public Address Address
+        public DeliveryAddress Address
         {
             get
             {
@@ -220,14 +220,14 @@ namespace DomainLibrary.ViewModels
                 }
             }
         }
-        public List<string> Hours
+        public List<int> Hours
         {
             get
             {
-                List<string> hours = new List<string>();
+                List<int> hours = new List<int>();
                 for (int i = 1; i < 25; i++)
                 {
-                    hours.Add(i.ToString());
+                    hours.Add(i);
                 }
                 return hours;
             }
@@ -319,6 +319,19 @@ namespace DomainLibrary.ViewModels
                 }
             }
         }
+        public int StartTimeHour
+        {
+            get { return _reservationInfo.StartHour; }
+            set
+            {
+                if (_reservationInfo.StartHour != value)
+                {
+                    _reservationInfo.StartHour = value;
+                    RaisePropertyChanged(() => StartTimeHour);
+    
+                }
+            }
+        }
         public DateTime EndTime
         {
             get { return _reservationInfo.EndTime; }
@@ -328,6 +341,19 @@ namespace DomainLibrary.ViewModels
                 {
                     _reservationInfo.EndTime = value;
                     RaisePropertyChanged(() => EndTime);
+                }
+            }
+        }
+        public int EndTimeHour
+        {
+            get { return _reservationInfo.EndHour; }
+            set
+            {
+                if (_reservationInfo.EndHour != value)
+                {
+                    _reservationInfo.EndHour = value;
+                    RaisePropertyChanged(() => EndTimeHour);
+                   
                 }
             }
         }
@@ -350,9 +376,14 @@ namespace DomainLibrary.ViewModels
             var reservation = new Reservation(CurrentClient, CurrentCar, ReservationInfo);
             this.CurrentReservationOverview = _reservationManager.CreateOverview(reservation);
         }
+        public ReservationOverview CreateNewOverview()
+        {
+            CreateOverview();
+            return CurrentReservationOverview;
+        }
         private void CreateReservationInfo()
         {
-            var reservationInfo = new ReservationInfo(StartLocation, EndLocation, StartTime, Arrangement, EndTime,Address);
+            var reservationInfo = new ReservationInfo(StartLocation, EndLocation, StartTime, Arrangement, EndTime,Address,StartTimeHour, EndTimeHour);
             this.ReservationInfo = reservationInfo;
         }
         /// <summary>

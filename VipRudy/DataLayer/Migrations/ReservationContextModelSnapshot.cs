@@ -4,16 +4,14 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DataLayer.Migrations.ReservationContextMigrations
+namespace DataLayer.Migrations
 {
     [DbContext(typeof(ReservationContext))]
-    [Migration("20200812113311_AdaptionPriceCar3")]
-    partial class AdaptionPriceCar3
+    partial class ReservationContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,33 +19,9 @@ namespace DataLayer.Migrations.ReservationContextMigrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DomainLibrary.Address", b =>
-                {
-                    b.Property<int>("AddressId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HouseNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Streetname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AddressId");
-
-                    b.ToTable("Address");
-                });
-
             modelBuilder.Entity("DomainLibrary.Client", b =>
                 {
                     b.Property<int>("ClientNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("ClientCategory")
@@ -62,8 +36,6 @@ namespace DataLayer.Migrations.ReservationContextMigrations
 
                     b.HasKey("ClientNumber")
                         .HasName("PrimaryKey_ClientId");
-
-                    b.HasIndex("AddressId");
 
                     b.ToTable("Clients");
                 });
@@ -114,7 +86,7 @@ namespace DataLayer.Migrations.ReservationContextMigrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Price");
+                    b.ToTable("Prices");
                 });
 
             modelBuilder.Entity("DomainLibrary.Models.Reservation", b =>
@@ -154,10 +126,10 @@ namespace DataLayer.Migrations.ReservationContextMigrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AddressId")
+                    b.Property<int>("Arrangement")
                         .HasColumnType("int");
 
-                    b.Property<int>("Arrangement")
+                    b.Property<int>("EndHour")
                         .HasColumnType("int");
 
                     b.Property<int>("EndLocation")
@@ -165,6 +137,9 @@ namespace DataLayer.Migrations.ReservationContextMigrations
 
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("StartHour")
+                        .HasColumnType("int");
 
                     b.Property<int>("StartLocation")
                         .HasColumnType("int");
@@ -174,21 +149,40 @@ namespace DataLayer.Migrations.ReservationContextMigrations
 
                     b.HasKey("ReservationInfoId");
 
-                    b.HasIndex("AddressId");
-
                     b.ToTable("ReservationInfo");
                 });
 
             modelBuilder.Entity("DomainLibrary.Client", b =>
                 {
-                    b.HasOne("DomainLibrary.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
+                    b.OwnsOne("DomainLibrary.Address", "Address", b1 =>
+                        {
+                            b1.Property<int>("ClientNumber")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("AddressId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("HouseNumber")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Streetname")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("ClientNumber");
+
+                            b1.ToTable("Addresses");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ClientNumber");
+                        });
                 });
 
             modelBuilder.Entity("DomainLibrary.Models.Price", b =>
                 {
-                    b.HasOne("DomainLibrary.Models.Car", "Car")
+                    b.HasOne("DomainLibrary.Models.Car", null)
                         .WithMany("Price")
                         .HasForeignKey("CarId");
                 });
@@ -210,9 +204,32 @@ namespace DataLayer.Migrations.ReservationContextMigrations
 
             modelBuilder.Entity("DomainLibrary.Models.ReservationInfo", b =>
                 {
-                    b.HasOne("DomainLibrary.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
+                    b.OwnsOne("DomainLibrary.DeliveryAddress", "Address", b1 =>
+                        {
+                            b1.Property<int>("ReservationInfoId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<int>("AddressId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("HouseNumber")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Streetname")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("ReservationInfoId");
+
+                            b1.ToTable("ReservationInfo");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ReservationInfoId");
+                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -15,19 +15,12 @@
             <StackPanel Orientation="Vertical">
                 <Button  Name ="BtnAddReservation" Click="BtnAddReservation_Click" Content="{Binding AddReservation, Source={StaticResource LocStrings}}" Margin="16,32,16,16" Style="{StaticResource FirstPageButtonStyle}"/>
                 <!--Command="{Binding NewReservationViewCommand}"-->
-                <Button Name ="BtnFindReservation"  Content="{Binding LookUpReservation, Source={StaticResource LocStrings}}" Margin="16,16,16,16" Style="{StaticResource FirstPageButtonStyle}"/>
+                <Button Name ="BtnFindReservation" Click="BtnFindReservation_Click" Content="{Binding LookUpReservation, Source={StaticResource LocStrings}}" Margin="16,16,16,16" Style="{StaticResource FirstPageButtonStyle}"/>
             </StackPanel>
             <ContentControl Grid.Column="1" Content="{Binding}"/>
        
         <StatusBar Background="#068d8f" DockPanel.Dock="Bottom" Height="36">
-            <StatusBarItem DockPanel.Dock="Right">
-                <Slider x:Name="zoomSlider" Width="125"
-                        Minimum="1" Maximum="4"
-                        Value="1" />
-            </StatusBarItem>
-            <StatusBarItem DockPanel.Dock="Right" HorizontalContentAlignment="Right">
-                <TextBlock Text="{Binding Zoom, Source={StaticResource LocStrings}}" FontFamily="Bahnschrift Light" FontSize="16" Foreground="#FFEBFCF6" Margin="0,8,0,0" />
-            </StatusBarItem>
+           
             <StatusBarItem DockPanel.Dock="Left" HorizontalAlignment="Left">
                 <TextBlock Text="{Binding StatusBarText, Source={StaticResource LocStrings}}" Height="40" HorizontalAlignment="Stretch" FontFamily="Bahnschrift Light" FontSize="16" Foreground="#FFEBFCF6" Margin="0,8,0,0"/>
             </StatusBarItem>

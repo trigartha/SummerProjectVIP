@@ -3,6 +3,7 @@ using DomainLibrary.Framework;
 using DomainLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DomainLibrary
@@ -56,10 +57,11 @@ namespace DomainLibrary
             return clientCategory;
         }
         #endregion
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ClientNumber
         {
             get { return _clientNumber; }
-            private set
+             set
             {
                 if (_clientNumber != value)
                 {
@@ -71,7 +73,7 @@ namespace DomainLibrary
         public string Name
         {
             get { return _name; }
-            private set
+             set
             {
                 if (_name != value)
                 {
@@ -83,7 +85,7 @@ namespace DomainLibrary
         public string TaxNumber
         {
             get { return _taxNumber; }
-            private set
+             set
             {
                 if (_taxNumber != value)
                 {
@@ -95,7 +97,7 @@ namespace DomainLibrary
         public ClientCategory ClientCategory
         {
             get { return _clientCategory; }
-            private set
+             set
             {
                 if (_clientCategory != value)
                 {
@@ -107,7 +109,7 @@ namespace DomainLibrary
         public Address Address
         {
             get { return _address; }
-            private set
+             set
             {
                 if (_address != value)
                 {
@@ -119,7 +121,7 @@ namespace DomainLibrary
         public ICollection<Reservation> Reservations
         {
             get { return _reservations; }
-            private set
+             set
             {
                 if (_reservations != value)
                 {

@@ -20,7 +20,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox Name="ClientCheckBox" IsChecked="{Binding ClientIsChecked}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Label Content="{Binding Client, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="1"/>
+                <Label Content="{Binding Client, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBox Template="{DynamicResource ComboBoxTemplate1}" x:Name="ClientsComboBox" Grid.Column="2"
                       Margin="7 0 0 0" ItemsSource="{Binding Clients}"
                       SelectedItem="{Binding CurrentClient, Mode=TwoWay}" Style="{StaticResource ComboBoxForForms}">
@@ -41,32 +41,40 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox Name="DateCheckBox" IsChecked="{Binding DateIsChecked}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Label Content="{Binding Date, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="1"/>
+                <Label Content="{Binding Date, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Calendar SelectedDate="{Binding PickedTime}" Style="{DynamicResource CalendarStyle1}" x:Name="ChosenDayCalender" Grid.Column="2"/>
             </Grid>
         </Border>
+        <!--Button-->
+        <Button DockPanel.Dock="Top" x:Name="btn_ShowReservations" Command="{Binding ShowReservationCommand}" Style="{StaticResource FirstPageButtonStyle}" Content="{Binding ShowReservation, Source={StaticResource LocStrings } }" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="8,8,8,8"/>
         <!--List Items-->
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding Reservations}">
+            <ItemsControl Background="#cee6f2" ItemsSource="{Binding Reservations}" Margin="32,32,32,32">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Border Style="{StaticResource ItemBorder}">
+                            <Button x:Name="btn_ReservationItem" Click="btn_ReservationItem_Click">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Border Style="{StaticResource ItemBorder}">
-                                <TextBlock Text="{Binding Name}"/>
-                               
-                                
-                            </Border>
-                        </Grid>
-                       
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Content="{Binding Client.Name}"/>
+                                <Label Content="{Binding ReservationId}" Grid.Column="2"/>
+                                <Label Content="{Binding ReservationDate}" Grid.Row="1"/>
+                            </Grid>
+                            </Button>
+                        </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

@@ -21,5 +21,15 @@ namespace WPFLayer.Views
         {
             InitializeComponent();
         }
+
+        private void btn_ShowReservations_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_ReservationItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

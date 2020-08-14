@@ -33,7 +33,7 @@ namespace WPFLayer.FrameworkMvvm
             Container.RegisterType<MainViewModel>();
             Container.RegisterType<AddReservationViewModel>();
             Container.RegisterType<FindReservationViewModel>();
-
+            Container.RegisterType<OverViewReservationViewModel>();
         }
     }
 }
