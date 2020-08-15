@@ -37,30 +37,7 @@ namespace DomainLibrary.Tests
 
             Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
         }
-        [TestMethod()]
-        public void CreateReservationTest_ShouldThrowDomainException_WhenCarIsNotAvailable()
-        {
-            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
-            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
-            rm.AddClient(client);
-            Location start = Location.Antwerpen;
-            Location stop = Location.Brussel;
-            List<Price> prices = new List<Price>();
-            prices.Add(new Price(Arrangement.Airport, 100m));
-            prices.Add(new Price(Arrangement.Business, 100m));
-            prices.Add(new Price(Arrangement.NightLife, 900m));
-            prices.Add(new Price(Arrangement.Wedding, 800m));
-            prices.Add(new Price(Arrangement.Wellness, 750m));
-            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
-            rm.AddCar(car);
-            rm.UpdateCarAvailability(car, CarAvailability.NotAvailable);
-            DateTime startTime = new DateTime(2100, 12, 12, 12, 0, 0);
-            Arrangement arrangement = Arrangement.Airport;
-            DateTime endTime = new DateTime(2100, 12, 12, 15, 0, 0);
 
-            Assert.ThrowsException<DomainException>(() => rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
-        }
         [TestMethod()]
         public void CreateReservationTest_ShouldThrowDomainException_WhenStartTimeIsInTHePast()
         {
@@ -322,11 +299,36 @@ namespace DomainLibrary.Tests
             Assert.IsTrue(rm.FindAllClients().ToList().Count == amountClients);
         }
         [TestMethod()]
+        public void AddReservationTest_DidNotAddCarAgain()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+            rm.AddClient(client);
+            Location start = Location.Antwerpen;
+            Location stop = Location.Brussel;
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
+            rm.AddCar(car);
+            DateTime startTime = new DateTime(2020, 12, 12, 21, 0, 0);
+            Arrangement arrangement = Arrangement.NightLife;
+            DateTime endTime = new DateTime(2020, 12, 13, 1, 0, 0);
+            int amountCars = rm.FindAllCars().ToList().Count;
+
+            rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
+            Assert.IsTrue(rm.FindAllCars().ToList().Count == amountCars);
+        }
+        [TestMethod()]
         public void AddClientTest_DidAddClient()
         {
             ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
             Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
-           
+
             int amountClients = rm.FindAllClients().ToList().Count;
             rm.AddClient(client);
 
@@ -343,8 +345,8 @@ namespace DomainLibrary.Tests
             prices.Add(new Price(Arrangement.Wedding, 800m));
             prices.Add(new Price(Arrangement.Wellness, 750m));
             Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            
-           
+
+
 
             int amountCars = rm.FindAllCars().ToList().Count;
             rm.AddCar(car);
@@ -352,6 +354,389 @@ namespace DomainLibrary.Tests
             Assert.IsTrue(rm.FindAllCars().ToList().Count == amountCars + 1);
         }
         #endregion
+
+        [TestMethod()]
+        public void FindAllReservationsTest_ReturnsRightAmount()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+            rm.AddClient(client);
+            Location start = Location.Antwerpen;
+            Location stop = Location.Brussel;
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
+            rm.AddCar(car);
+            DateTime startTime = new DateTime(2020, 12, 12, 21, 0, 0);
+            Arrangement arrangement = Arrangement.NightLife;
+            DateTime endTime = new DateTime(2020, 12, 13, 1, 0, 0);
+
+
+            rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
+
+            Client client2 = new Client(777, "MaddHatter", "Tea", ClientCategory.Vip, new Address());
+            rm.AddClient(client2);
+            Location start2 = Location.Antwerpen;
+            Location stop2 = Location.Brussel;
+            List<Price> prices2 = new List<Price>();
+            prices2.Add(new Price(Arrangement.Airport, 150m));
+            prices2.Add(new Price(Arrangement.Business, 110m));
+            prices2.Add(new Price(Arrangement.NightLife, 400m));
+            prices2.Add(new Price(Arrangement.Wedding, 500m));
+            prices2.Add(new Price(Arrangement.Wellness, 650m));
+            Car car2 = new Car("Teacup", "Extra Fragile", "White", prices2);
+            DeliveryAddress address2 = new DeliveryAddress("RabbitHole", "3", "Wonderland");
+            rm.AddCar(car2);
+            DateTime startTime2 = new DateTime(2020, 12, 12, 21, 0, 0);
+            Arrangement arrangement2 = Arrangement.Airport;
+            DateTime endTime2 = new DateTime(2020, 12, 13, 1, 0, 0);
+
+            rm.AddReservation(rm.CreateReservation(client2, start2, stop2, car2, startTime2, arrangement2, endTime2, address2));
+
+            Assert.IsTrue(rm.FindAllReservations().ToList().Count == 2);
+        }
+        [TestMethod()]
+        public void FindAllReservationsTest_LoadsClient()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+            rm.AddClient(client);
+            Location start = Location.Antwerpen;
+            Location stop = Location.Brussel;
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
+            rm.AddCar(car);
+            DateTime startTime = new DateTime(2020, 12, 12, 21, 0, 0);
+            Arrangement arrangement = Arrangement.NightLife;
+            DateTime endTime = new DateTime(2020, 12, 13, 1, 0, 0);
+
+
+            rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
+            Reservation r = rm.FindAllReservations().Where(r => r.Car.Model == car.Model).FirstOrDefault();
+            Assert.IsTrue(r.Client!=null);
+            Assert.IsTrue(r.Client.Name == client.Name);
+        }
+        [TestMethod()]
+        public void FindAllReservationsTest_LoadsCar()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+            rm.AddClient(client);
+            Location start = Location.Antwerpen;
+            Location stop = Location.Brussel;
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
+            rm.AddCar(car);
+            DateTime startTime = new DateTime(2020, 12, 12, 21, 0, 0);
+            Arrangement arrangement = Arrangement.NightLife;
+            DateTime endTime = new DateTime(2020, 12, 13, 1, 0, 0);
+
+
+            rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
+            Reservation r = rm.FindAllReservations().Where(r => r.Client.Name == client.Name).FirstOrDefault();
+            Assert.IsTrue(r.Car != null);
+            Assert.IsTrue(r.Car.Model == car.Model);
+        }
+        public void FindAllReservationsTest_LoadsReservationInfo()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+            rm.AddClient(client);
+            Location start = Location.Antwerpen;
+            Location stop = Location.Brussel;
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
+            rm.AddCar(car);
+            DateTime startTime = new DateTime(2020, 12, 12, 21, 0, 0);
+            Arrangement arrangement = Arrangement.NightLife;
+            DateTime endTime = new DateTime(2020, 12, 13, 1, 0, 0);
+
+
+            rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
+            Reservation r = rm.FindAllReservations().Where(r => r.Client.Name == client.Name).FirstOrDefault();
+            Assert.IsTrue(r.ReservationInfo != null);
+            Assert.IsTrue(r.ReservationInfo.Address.City == address.City);
+        }
+
+        [TestMethod()]
+        public void FindAllReservationsOnClientTest_GivesRghtAmountResBack()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+            rm.AddClient(client);
+            Location start = Location.Antwerpen;
+            Location stop = Location.Brussel;
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
+            rm.AddCar(car);
+            DateTime startTime = new DateTime(2020, 12, 12, 21, 0, 0);
+            Arrangement arrangement = Arrangement.NightLife;
+            DateTime endTime = new DateTime(2020, 12, 13, 1, 0, 0);
+
+
+            rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
+
+            Client client2 = new Client(777, "MaddHatter", "Tea", ClientCategory.Vip, new Address());
+            rm.AddClient(client2);
+            Location start2 = Location.Antwerpen;
+            Location stop2 = Location.Brussel;
+            List<Price> prices2 = new List<Price>();
+            prices2.Add(new Price(Arrangement.Airport, 150m));
+            prices2.Add(new Price(Arrangement.Business, 110m));
+            prices2.Add(new Price(Arrangement.NightLife, 400m));
+            prices2.Add(new Price(Arrangement.Wedding, 500m));
+            prices2.Add(new Price(Arrangement.Wellness, 650m));
+            Car car2 = new Car("Teacup", "Extra Fragile", "White", prices2);
+            DeliveryAddress address2 = new DeliveryAddress("RabbitHole", "3", "Wonderland");
+            rm.AddCar(car2);
+            DateTime startTime2 = new DateTime(2020, 12, 12, 21, 0, 0);
+            Arrangement arrangement2 = Arrangement.Airport;
+            DateTime endTime2 = new DateTime(2020, 12, 13, 1, 0, 0);
+
+            rm.AddReservation(rm.CreateReservation(client2, start2, stop2, car2, startTime2, arrangement2, endTime2, address2));
+
+
+            Location start3 = Location.Antwerpen;
+            Location stop3 = Location.Brussel;
+            List<Price> prices3 = new List<Price>();
+            prices3.Add(new Price(Arrangement.Airport, 150m));
+            prices3.Add(new Price(Arrangement.Business, 110m));
+            prices3.Add(new Price(Arrangement.NightLife, 400m));
+            prices3.Add(new Price(Arrangement.Wedding, 500m));
+            prices3.Add(new Price(Arrangement.Wellness, 650m));
+
+            DeliveryAddress address3 = new DeliveryAddress("RedQueensCastle", "3", "Wonderland");
+
+            DateTime startTime3 = new DateTime(2020, 12, 12, 21, 0, 0);
+            Arrangement arrangement3 = Arrangement.Airport;
+            DateTime endTime3 = new DateTime(2020, 12, 13, 1, 0, 0);
+
+            rm.AddReservation(rm.CreateReservation(client2, start3, stop3, car2, startTime3, arrangement3, endTime3, address3));
+
+            Assert.IsTrue(rm.FindAllReservationsOnClient(client2).ToList().Count == 2);
+        }
+
+        [TestMethod()]
+        public void FindAllReservationsOnDateTest_GivesRghtAmountResBack()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+            rm.AddClient(client);
+            Location start = Location.Antwerpen;
+            Location stop = Location.Brussel;
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
+            rm.AddCar(car);
+            DateTime startTime = new DateTime(2020, 12, 12, 21, 0, 0);
+            Arrangement arrangement = Arrangement.NightLife;
+            DateTime endTime = new DateTime(2020, 12, 13, 1, 0, 0);
+
+
+            rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
+
+            Client client2 = new Client(777, "MaddHatter", "Tea", ClientCategory.Vip, new Address());
+            rm.AddClient(client2);
+            Location start2 = Location.Antwerpen;
+            Location stop2 = Location.Brussel;
+            List<Price> prices2 = new List<Price>();
+            prices2.Add(new Price(Arrangement.Airport, 150m));
+            prices2.Add(new Price(Arrangement.Business, 110m));
+            prices2.Add(new Price(Arrangement.NightLife, 400m));
+            prices2.Add(new Price(Arrangement.Wedding, 500m));
+            prices2.Add(new Price(Arrangement.Wellness, 650m));
+            Car car2 = new Car("Teacup", "Extra Fragile", "White", prices2);
+            DeliveryAddress address2 = new DeliveryAddress("RabbitHole", "3", "Wonderland");
+            rm.AddCar(car2);
+            DateTime startTime2 = new DateTime(2020, 12, 12, 21, 0, 0);
+            Arrangement arrangement2 = Arrangement.Airport;
+            DateTime endTime2 = new DateTime(2020, 12, 13, 1, 0, 0);
+
+            rm.AddReservation(rm.CreateReservation(client2, start2, stop2, car2, startTime2, arrangement2, endTime2, address2));
+
+
+            Location start3 = Location.Antwerpen;
+            Location stop3 = Location.Brussel;
+            List<Price> prices3 = new List<Price>();
+            prices3.Add(new Price(Arrangement.Airport, 150m));
+            prices3.Add(new Price(Arrangement.Business, 110m));
+            prices3.Add(new Price(Arrangement.NightLife, 400m));
+            prices3.Add(new Price(Arrangement.Wedding, 500m));
+            prices3.Add(new Price(Arrangement.Wellness, 650m));
+
+            DeliveryAddress address3 = new DeliveryAddress("RedQueensCastle", "3", "Wonderland");
+
+            DateTime startTime3 = new DateTime(2020, 12, 12, 21, 0, 0);
+            Arrangement arrangement3 = Arrangement.Airport;
+            DateTime endTime3 = new DateTime(2020, 12, 13, 1, 0, 0);
+
+            rm.AddReservation(rm.CreateReservation(client2, start3, stop3, car2, startTime3, arrangement3, endTime3, address3));
+
+            Assert.IsTrue(rm.FindAllReservationsOnDate(DateTime.Today).ToList().Count == 3);
+        }
+
+        [TestMethod()]
+        public void FindAllCarsTest_ReturnsRightAmount()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            List<Price> prices2 = new List<Price>();
+            prices2.Add(new Price(Arrangement.Airport, 150m));
+            prices2.Add(new Price(Arrangement.Business, 110m));
+            prices2.Add(new Price(Arrangement.NightLife, 400m));
+            prices2.Add(new Price(Arrangement.Wedding, 500m));
+            prices2.Add(new Price(Arrangement.Wellness, 650m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Car car2 = new Car("Teacup", "Extra Fragile", "White", prices2);
+            rm.AddCar(car);
+            rm.AddCar(car2);
+            Assert.IsTrue(rm.FindAllCars().ToList().Count == 2);
+        }
+
+        [TestMethod()]
+        public void FindAllClientsTest_ReturnsRightAmount()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+            Client client2 = new Client(777, "MaddHatter", "Tea", ClientCategory.Vip, new Address());
+            Client client3 = new Client(666, "RedQueen", "Heads", ClientCategory.Vip, new Address());
+            rm.AddClient(client);
+            rm.AddClient(client2);
+            rm.AddClient(client3);
+            Assert.IsTrue(rm.FindAllClients().ToList().Count == 3);
+        }
+
+        [TestMethod()]
+        public void FindAllBrandsTest_ReturnsRightAmount()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            List<Price> prices2 = new List<Price>();
+            prices2.Add(new Price(Arrangement.Airport, 150m));
+            prices2.Add(new Price(Arrangement.Business, 110m));
+            prices2.Add(new Price(Arrangement.NightLife, 400m));
+            prices2.Add(new Price(Arrangement.Wedding, 500m));
+            prices2.Add(new Price(Arrangement.Wellness, 650m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Car car2 = new Car("Teacup", "Extra Fragile", "White", prices2);
+            rm.AddCar(car);
+            rm.AddCar(car2);
+            Assert.IsTrue(rm.FindAllBrands().ToList().Count == 2);
+        }
+
+        [TestMethod()]
+        public void FindAllCarsOnArrangementTest_WhenNoPriceExist()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, null));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            List<Price> prices2 = new List<Price>();
+            prices2.Add(new Price(Arrangement.Airport, 150m));
+            prices2.Add(new Price(Arrangement.Business, 110m));
+            prices2.Add(new Price(Arrangement.NightLife, 400m));
+            prices2.Add(new Price(Arrangement.Wedding, 500m));
+            prices2.Add(new Price(Arrangement.Wellness, 650m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Car car2 = new Car("Teacup", "Extra Fragile", "White", prices2);
+            rm.AddCar(car);
+            rm.AddCar(car2);
+            Assert.IsTrue(rm.FindAllCarsOnArrangement(Arrangement.Wedding).ToList().Count == 1);
+        }
+
+        [TestMethod()]
+        public void FindAllOnBrandTest_ReturnsRightAmount()
+        {
+
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, null));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            List<Price> prices2 = new List<Price>();
+            prices2.Add(new Price(Arrangement.Airport, 150m));
+            prices2.Add(new Price(Arrangement.Business, 110m));
+            prices2.Add(new Price(Arrangement.NightLife, 400m));
+            prices2.Add(new Price(Arrangement.Wedding, 500m));
+            prices2.Add(new Price(Arrangement.Wellness, 650m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Car car2 = new Car("Teacup", "Extra Fragile", "White", prices2);
+            rm.AddCar(car);
+            rm.AddCar(car2);
+            Assert.IsTrue(rm.FindAllOnBrand("RabbitHole").ToList().Count == 1);
+        }
+
+        [TestMethod()]
+        public void FindAllOnColourTest()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, null));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            List<Price> prices2 = new List<Price>();
+            prices2.Add(new Price(Arrangement.Airport, 150m));
+            prices2.Add(new Price(Arrangement.Business, 110m));
+            prices2.Add(new Price(Arrangement.NightLife, 400m));
+            prices2.Add(new Price(Arrangement.Wedding, 500m));
+            prices2.Add(new Price(Arrangement.Wellness, 650m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            Car car2 = new Car("Teacup", "Extra Fragile", "White", prices2);
+            rm.AddCar(car);
+            rm.AddCar(car2);
+            Assert.IsTrue(rm.FindAllOnColour("White").ToList().Count == 1);
+        }
     }
 }
 

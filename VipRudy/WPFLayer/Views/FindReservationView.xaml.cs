@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainLibrary.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,15 +22,19 @@ namespace WPFLayer.Views
         {
             InitializeComponent();
         }
-
-        private void btn_ShowReservations_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btn_ReservationItem_Click(object sender, RoutedEventArgs e)
         {
-
+            var showOverviewReservation = new OverviewReservationView();
+            showOverviewReservation.DataContext = new OverViewReservationViewModel(Vm.CreateNewOverview());
+            showOverviewReservation.Show();
         }
+        public FindReservationViewModel Vm
+        {
+            get
+            {
+                return (FindReservationViewModel)DataContext;
+            }
+        }
+        
     }
 }

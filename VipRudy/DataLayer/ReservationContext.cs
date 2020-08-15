@@ -59,10 +59,8 @@ namespace DataLayer
             /* modelBuilder.Entity<Reservation>()
               .HasOne(r => r.Client)
               .WithMany(c => c.Reservations);
-
-             modelBuilder.Entity<Reservation>()
-             .HasOne(r => r.Car)
-             .WithMany(c => c.ReservationDetails);*/
+            */
+            
             /* modelBuilder.Entity<Client>()
                  .Property(c=>c.ClientNumber)
                  .ValueGeneratedNever();
@@ -82,9 +80,9 @@ namespace DataLayer
             modelBuilder.Entity<Client>()
                 .Property(c => c.ClientCategory)
                 .HasConversion<string>();
-            modelBuilder.Entity<Car>()
+           /* modelBuilder.Entity<Car>()
                .Property(c => c.Availability)
-               .HasConversion<string>();
+               .HasConversion<string>();*/
             modelBuilder.Entity<Price>()
                .Property(c => c.Arrangement)
                .HasConversion<string>();

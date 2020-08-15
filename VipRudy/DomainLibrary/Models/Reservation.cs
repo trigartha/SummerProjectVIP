@@ -1,6 +1,7 @@
 ﻿using DomainLibrary.Framework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DomainLibrary.Models
@@ -8,11 +9,11 @@ namespace DomainLibrary.Models
     public class Reservation : Notifier
     {
         #region Fields
-        private Client _client { get; set; }
-        private Car _car { get; set; }
-        private DateTime _reservationDate { get; set; }
-        private int _reservationId { get; set; }
-        private ReservationInfo _reservationInfo { get; set; }
+        private Client _client;
+        private Car _car;
+        private DateTime _reservationDate;
+        private int _reservationId;
+        private ReservationInfo _reservationInfo;
         #endregion
         #region Constructor
         public Reservation() { }
@@ -23,8 +24,16 @@ namespace DomainLibrary.Models
             this.ReservationDate = DateTime.Now;
             this.ReservationInfo = reservationInfo;
         }
+        public Reservation(Client client, Car car,DateTime date, ReservationInfo reservationInfo)
+        {
+            this.Client = client;
+            this.Car = car;
+            this.ReservationDate = date;
+            this.ReservationInfo = reservationInfo;
+        }
 
         #endregion
+        [ForeignKey("ClientNumber")]
         public Client Client
         {
             get { return _client; }
@@ -37,6 +46,7 @@ namespace DomainLibrary.Models
                 }
             }
         }
+        [ForeignKey("CarId")]
         public Car Car
         {
             get { return _car; }
@@ -73,6 +83,7 @@ namespace DomainLibrary.Models
                 }
             }
         }
+        [ForeignKey("ReservationInfoId")]
         public ReservationInfo ReservationInfo
         {
             get { return _reservationInfo; }

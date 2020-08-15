@@ -33,6 +33,9 @@
     <Page Update="Styles\ItemBorder.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Styles\LabelItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Styles\LabelForm.xaml">
       <SubType>Designer</SubType>
     </Page>

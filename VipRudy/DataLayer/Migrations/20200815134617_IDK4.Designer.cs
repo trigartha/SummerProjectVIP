@@ -4,14 +4,16 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(ReservationContext))]
-    partial class ReservationContextModelSnapshot : ModelSnapshot
+    [Migration("20200815134617_IDK4")]
+    partial class IDK4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,7 +97,7 @@ namespace DataLayer.Migrations
                     b.Property<int?>("CarId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClientNumber")
+                    b.Property<int?>("ClientId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ReservationDate")
@@ -108,7 +110,7 @@ namespace DataLayer.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.HasIndex("ClientNumber");
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("ReservationInfoId");
 
@@ -191,7 +193,7 @@ namespace DataLayer.Migrations
 
                     b.HasOne("DomainLibrary.Client", "Client")
                         .WithMany("Reservations")
-                        .HasForeignKey("ClientNumber");
+                        .HasForeignKey("ClientId");
 
                     b.HasOne("DomainLibrary.Models.ReservationInfo", "ReservationInfo")
                         .WithMany()

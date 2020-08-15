@@ -25,6 +25,7 @@ namespace WPFLayer.Views
         {
             _reservationManager = new ReservationManager(new UnitOfWork(new ReservationContext("Reservation")));
             InitializeComponent();
+            ReservationSavedLabel.Visibility = Visibility.Collapsed;
         }
 
         private void btnShowOverview_Click(object sender, RoutedEventArgs e)
@@ -43,8 +44,8 @@ namespace WPFLayer.Views
 
         private void btnAddReservationPage_Click(object sender, RoutedEventArgs e)
         {
-            Vm.CreateNewOverview();
-            _reservationManager.AddReservation(Vm.CurrentReservation);
+            Vm.AddReservation();
+            ReservationSavedLabel.Visibility = Visibility.Visible;
         }
     }
 }

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\WPFLayer\App.xaml
-10606710708
+11200006374
 
 91656014147
 230205740519
-MainWindow.xaml;Styles\Button.xaml;Styles\CalendarForms.xaml;Styles\ComboBoxForms.xaml;Styles\ItemBorder.xaml;Styles\LabelForm.xaml;Styles\TextBoxForms.xaml;Views\AddReservationView.xaml;Views\FindReservationView.xaml;Views\OverviewReservationView.xaml;
+MainWindow.xaml;Styles\Button.xaml;Styles\CalendarForms.xaml;Styles\ComboBoxForms.xaml;Styles\ItemBorder.xaml;Styles\LabelForm.xaml;Styles\LabelItem.xaml;Styles\TextBoxForms.xaml;Views\AddReservationView.xaml;Views\FindReservationView.xaml;Views\OverviewReservationView.xaml;
 
 False
 

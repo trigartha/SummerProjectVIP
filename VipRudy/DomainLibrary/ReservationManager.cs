@@ -41,7 +41,7 @@ namespace DomainLibrary
         public Reservation CreateReservation(Client client, Location start, Location stop, Car car, DateTime startTime, Arrangement arrangement, DateTime endTime, DeliveryAddress address)
         {
             if (_uow.Clients.Find(client.ClientNumber) == null) throw new DomainException("Client doesn't exist");
-            if (car.Availability != CarAvailability.Available) throw new DomainException("Car is not available");
+            //if (car.Availability != CarAvailability.Available) throw new DomainException("Car is not available");
             if (startTime < DateTime.Now) throw new DomainException("StartTime is in the past");
             if (arrangement == Arrangement.Wedding) if (!ControlStartTimeWedding(startTime)) throw new DomainException("Wedding Arrangement doesn't allow this startime");
             if (arrangement == Arrangement.Wellness) if (!ControlStartTimeWellness(startTime)) throw new DomainException("Wellness Arrangement doesn't allow this startime");
@@ -51,7 +51,7 @@ namespace DomainLibrary
             return new Reservation(_uow.Clients.Find(client.ClientNumber), car, new ReservationInfo(start, stop, startTime, arrangement, endTime, address));
 
         }
-        public ReservationOverview CreateOverview(Reservation reservation)
+        public ReservationOverview CreateOverview(Reservation reservation)/**/
         {
             ReservationOverview rO = new ReservationOverview();
             rO.Reservation = reservation;

@@ -15,7 +15,7 @@ namespace DomainLibrary.Models
         private string _colour;
         private int _carId;
         private List<Price> _price;
-        private CarAvailability _availability;
+        //private CarAvailability _availability;
         private ICollection<Reservation> _reservationDetails;
        
         #endregion
@@ -91,7 +91,7 @@ namespace DomainLibrary.Models
                 }
             }
         } 
-        public CarAvailability Availability
+        /*public CarAvailability Availability
         {
             get { return _availability; }
              set
@@ -102,7 +102,7 @@ namespace DomainLibrary.Models
                     RaisePropertyChanged(() => Availability);
                 }
             }
-        }
+        }*/
         public ICollection<Reservation> ReservationDetails
         {
             get { return _reservationDetails; }

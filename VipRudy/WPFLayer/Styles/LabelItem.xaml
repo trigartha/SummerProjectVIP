@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WPFLayer.Styles">
+    
+    <Style x:Key="LabelItem" TargetType="Label">
+        <Setter Property="Foreground" Value="#03486e"/>
+        <Setter Property="Margin" Value="16,0,0,0"/>
+        
+    </Style>
+</ResourceDictionary>

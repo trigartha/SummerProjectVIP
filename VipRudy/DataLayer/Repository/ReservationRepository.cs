@@ -1,6 +1,7 @@
 ﻿using DomainLibrary;
 using DomainLibrary.Models;
 using DomainLibrary.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,8 @@ namespace DataLayer.Repository
         }
         public IEnumerable<Reservation> FindAll()
         {
-            return _context.Reservations.OrderBy(r => r.ReservationInfo.StartTime).AsEnumerable<Reservation>();
+            return _context.Reservations.AsEnumerable<Reservation>();
+           
         }
         public IEnumerable<Reservation> FindOnDate(DateTime date)
         {

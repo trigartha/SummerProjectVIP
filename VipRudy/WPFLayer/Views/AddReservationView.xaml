@@ -227,7 +227,7 @@
                 </ItemsControl>
             </ScrollViewer>
             -->
-            <Label Visibility="Collapsed" Content="{Binding ReservationSavedMsg, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" />
+            <Label  Name="ReservationSavedLabel" Visibility="Collapsed" Content="{Binding ReservationSavedMsg, Source={StaticResource LocStrings}}" Style="{StaticResource LabelForForms}" />
         </DockPanel>
         
     </DockPanel>

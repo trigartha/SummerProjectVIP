@@ -360,20 +360,22 @@ namespace DomainLibrary.ViewModels
         /// <summary>
         /// Adds a Reservation to the list and repo.
         /// </summary>
-        private void AddReservation()
+        public void AddReservation()
         {
-            if (CurrentReservation.Client != null) return; // We don't want an empty reservation :)
+            CreateReservationInfo();
+            var reservation = new Reservation(CurrentClient, CurrentCar, ReservationInfo);
+            this.CurrentReservation = reservation;
+            if (CurrentReservation.Client == null) return; // We don't want an empty reservation :)
 
             if (!Reservations.Contains(CurrentReservation))
                 Reservations.Add(CurrentReservation);
             _reservationManager.AddReservation(CurrentReservation);
-
-            CurrentReservation = new Reservation();
         }
         private void CreateOverview()
         {
             CreateReservationInfo();
             var reservation = new Reservation(CurrentClient, CurrentCar, ReservationInfo);
+            this.CurrentReservation = reservation;
             this.CurrentReservationOverview = _reservationManager.CreateOverview(reservation);
         }
         public ReservationOverview CreateNewOverview()

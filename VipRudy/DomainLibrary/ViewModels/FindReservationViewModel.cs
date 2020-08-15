@@ -15,7 +15,7 @@ namespace DomainLibrary.ViewModels
         private ReservationManager _reservationManager;
         private ObservableCollection<Reservation> _reservations;
         private ObservableCollection<Client> _clients;
-
+        private ReservationOverview _reservationOverview;
         private Reservation _currentReservation;
         private Client _currentClient;
         private DateTime _pickedTime;
@@ -30,7 +30,7 @@ namespace DomainLibrary.ViewModels
             Clients = new ObservableCollection<Client>(_reservationManager.FindAllClients());
             Reservations = new ObservableCollection<Reservation>(_reservationManager.FindAllReservations());
 
-            ShowReservationCommand = new RelayCommand(ShowReservations);
+            ShowReservationCommand = new RelayCommand(GetReservations);
         }
         #endregion
         #region Methods
@@ -89,6 +89,21 @@ namespace DomainLibrary.ViewModels
                 }
             }
         }
+        public Reservation CurrentReservation
+        {
+            get
+            {
+                return _currentReservation;
+            }
+            set
+            {
+                if (_currentReservation != value)
+                {
+                    _currentReservation = value;
+                    RaisePropertyChanged(() => CurrentReservation);
+                }
+            }
+        }
         public DateTime PickedTime
         {
             get { return _pickedTime; }
@@ -121,7 +136,47 @@ namespace DomainLibrary.ViewModels
                 RaisePropertyChanged(() => DateIsChecked);
             }
         }
-        private void ShowReservations()
+        /*public string Name
+        {
+            get { return _currentReservation.Client.Name; }
+            set
+            {
+                if (_currentReservation.Client.Name != value)
+                {
+                    _currentReservation.Client.Name = value;
+                    RaisePropertyChanged(() => Name);
+                }
+            }
+        }*/
+        public DateTime ReservationDate
+        {
+            get { return _currentReservation.ReservationDate; }
+            set
+            {
+                if (_currentReservation.ReservationDate != value)
+                {
+                    _currentReservation.ReservationDate = value;
+                    RaisePropertyChanged(() => ReservationDate);
+                }
+            }
+        }
+        public ReservationOverview CurrentReservationOverview
+        {
+            get
+            {
+                return _reservationOverview;
+            }
+            set
+            {
+                if (_reservationOverview != value)
+                {
+                    _reservationOverview = value;
+                    RaisePropertyChanged(() => CurrentReservationOverview);
+
+                }
+            }
+        }
+        private void GetReservations()
         {
             if(_clientIsChecked && _dateIsChecked)
             {
@@ -135,6 +190,21 @@ namespace DomainLibrary.ViewModels
             {
                 this.Reservations = new ObservableCollection<Reservation>(_reservationManager.FindAllReservationsOnDate(_pickedTime));
             }
+            else if (!_clientIsChecked && !_dateIsChecked)
+            {
+                this.Reservations = new ObservableCollection<Reservation>(_reservationManager.FindAllReservations());
+            }
+
+        }
+        public ReservationOverview CreateNewOverview()
+        {
+            CreateOverview();
+            return CurrentReservationOverview;
+        }
+        private void CreateOverview()
+        {
+            
+            this.CurrentReservationOverview = _reservationManager.CreateOverview(_currentReservation);
         }
     }
 }
