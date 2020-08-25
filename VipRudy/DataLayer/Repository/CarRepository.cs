@@ -40,7 +40,7 @@ namespace DataLayer.Repository
         public IEnumerable<Car>FindAllBrands()
         {
             return _context.Cars.GroupBy(c => c.Brand).Select(grp => grp.First()).AsEnumerable<Car>();
-        }
+        }   
         public IEnumerable<Car> FindAllOnArrangement(Arrangement arrangement)
         {
 

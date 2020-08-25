@@ -423,8 +423,9 @@ namespace DomainLibrary.Tests
 
 
             rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
-            Reservation r = rm.FindAllReservations().Where(r => r.Car.Model == car.Model).FirstOrDefault();
-            Assert.IsTrue(r.Client!=null);
+            ReservationManager rmNew = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Reservation r = rmNew.FindAllReservations().FirstOrDefault();
+            Assert.IsTrue(r.Client != null);
             Assert.IsTrue(r.Client.Name == client.Name);
         }
         [TestMethod()]
@@ -450,10 +451,12 @@ namespace DomainLibrary.Tests
 
 
             rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
-            Reservation r = rm.FindAllReservations().Where(r => r.Client.Name == client.Name).FirstOrDefault();
+            ReservationManager rmNew = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Reservation r = rmNew.FindAllReservations().FirstOrDefault();
             Assert.IsTrue(r.Car != null);
             Assert.IsTrue(r.Car.Model == car.Model);
         }
+        [TestMethod()]
         public void FindAllReservationsTest_LoadsReservationInfo()
         {
             ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
@@ -476,7 +479,8 @@ namespace DomainLibrary.Tests
 
 
             rm.AddReservation(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
-            Reservation r = rm.FindAllReservations().Where(r => r.Client.Name == client.Name).FirstOrDefault();
+            ReservationManager rmNew = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Reservation r = rmNew.FindAllReservations().FirstOrDefault();
             Assert.IsTrue(r.ReservationInfo != null);
             Assert.IsTrue(r.ReservationInfo.Address.City == address.City);
         }
@@ -606,7 +610,7 @@ namespace DomainLibrary.Tests
 
             rm.AddReservation(rm.CreateReservation(client2, start3, stop3, car2, startTime3, arrangement3, endTime3, address3));
 
-            Assert.IsTrue(rm.FindAllReservationsOnDate(DateTime.Today).ToList().Count == 3);
+            Assert.IsTrue(rm.FindAllReservationsOnDate(DateTime.Now).ToList().Count == 3);
         }
 
         [TestMethod()]
@@ -644,7 +648,7 @@ namespace DomainLibrary.Tests
             rm.AddClient(client3);
             Assert.IsTrue(rm.FindAllClients().ToList().Count == 3);
         }
-
+        /*
         [TestMethod()]
         public void FindAllBrandsTest_ReturnsRightAmount()
         {
@@ -667,7 +671,7 @@ namespace DomainLibrary.Tests
             rm.AddCar(car2);
             Assert.IsTrue(rm.FindAllBrands().ToList().Count == 2);
         }
-
+        */
         [TestMethod()]
         public void FindAllCarsOnArrangementTest_WhenNoPriceExist()
         {
@@ -736,6 +740,12 @@ namespace DomainLibrary.Tests
             rm.AddCar(car);
             rm.AddCar(car2);
             Assert.IsTrue(rm.FindAllOnColour("White").ToList().Count == 1);
+        }
+
+        [TestMethod()]
+        public void CreateOverviewTest_AirportArrangement_CalculatesRightPrices()
+        {
+            Assert.Fail();
         }
     }
 }

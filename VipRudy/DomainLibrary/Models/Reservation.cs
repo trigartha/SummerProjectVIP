@@ -10,10 +10,14 @@ namespace DomainLibrary.Models
     {
         #region Fields
         private Client _client;
+        private int _clientId;
         private Car _car;
+        private int _carId;
         private DateTime _reservationDate;
         private int _reservationId;
         private ReservationInfo _reservationInfo;
+        private int _reservationInfoId;
+        private Discount discount;
         #endregion
         #region Constructor
         public Reservation() { }
@@ -31,9 +35,29 @@ namespace DomainLibrary.Models
             this.ReservationDate = date;
             this.ReservationInfo = reservationInfo;
         }
+        public Reservation(int client, int car, DateTime date, int reservationInfo)
+        {
+            this.ClientId = client;
+            this.CarId = car;
+            this.ReservationDate = date;
+            this.ReservationInfoId = reservationInfo;
+        }
 
         #endregion
         [ForeignKey("ClientNumber")]
+        public int ClientId
+            
+        {
+            get { return _clientId; }
+            set
+            {
+                if (_clientId != value)
+                {
+                    _clientId = value;
+                    RaisePropertyChanged(() => ClientId);
+                }
+            }
+        }
         public Client Client
         {
             get { return _client; }
@@ -47,6 +71,19 @@ namespace DomainLibrary.Models
             }
         }
         [ForeignKey("CarId")]
+        public int CarId
+
+        {
+            get { return _carId; }
+            set
+            {
+                if (_carId != value)
+                {
+                    _carId = value;
+                    RaisePropertyChanged(() => CarId);
+                }
+            }
+        }
         public Car Car
         {
             get { return _car; }
@@ -56,6 +93,18 @@ namespace DomainLibrary.Models
                 {
                     _car = value;
                     RaisePropertyChanged(() => Car);
+                }
+            }
+        }
+        public Discount Discount
+        {
+            get { return discount; }
+            set
+            {
+                if (discount != value)
+                {
+                    discount = value;
+                    RaisePropertyChanged(() => Discount);
                 }
             }
         }
@@ -84,6 +133,19 @@ namespace DomainLibrary.Models
             }
         }
         [ForeignKey("ReservationInfoId")]
+        public int ReservationInfoId
+
+        {
+            get { return _reservationInfoId; }
+            set
+            {
+                if (_reservationInfoId != value)
+                {
+                    _reservationInfoId = value;
+                    RaisePropertyChanged(() => ReservationInfoId);
+                }
+            }
+        }
         public ReservationInfo ReservationInfo
         {
             get { return _reservationInfo; }

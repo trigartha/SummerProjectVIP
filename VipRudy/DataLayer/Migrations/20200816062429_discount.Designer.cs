@@ -4,14 +4,16 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(ReservationContext))]
-    partial class ReservationContextModelSnapshot : ModelSnapshot
+    [Migration("20200816062429_discount")]
+    partial class discount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,21 +63,6 @@ namespace DataLayer.Migrations
                     b.ToTable("Cars");
                 });
 
-            modelBuilder.Entity("DomainLibrary.Models.Discount", b =>
-                {
-                    b.Property<int>("DiscountId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DiscountCategory")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DiscountId");
-
-                    b.ToTable("Discount");
-                });
-
             modelBuilder.Entity("DomainLibrary.Models.Price", b =>
                 {
                     b.Property<int>("PriceId")
@@ -107,28 +94,23 @@ namespace DataLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarId")
+                    b.Property<int?>("CarId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DiscountId")
+                    b.Property<int?>("ClientNumber")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ReservationInfoId")
+                    b.Property<int?>("ReservationInfoId")
                         .HasColumnType("int");
 
                     b.HasKey("ReservationId");
 
                     b.HasIndex("CarId");
 
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("DiscountId");
+                    b.HasIndex("ClientNumber");
 
                     b.HasIndex("ReservationInfoId");
 
@@ -166,29 +148,6 @@ namespace DataLayer.Migrations
                     b.HasKey("ReservationInfoId");
 
                     b.ToTable("ReservationInfo");
-                });
-
-            modelBuilder.Entity("DomainLibrary.Models.Staffel", b =>
-                {
-                    b.Property<int>("StaffelId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Discount")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DiscountId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StaffelId");
-
-                    b.HasIndex("DiscountId");
-
-                    b.ToTable("Staffel");
                 });
 
             modelBuilder.Entity("DomainLibrary.Client", b =>
@@ -229,26 +188,16 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DomainLibrary.Models.Reservation", b =>
                 {
                     b.HasOne("DomainLibrary.Models.Car", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("ReservationDetails")
+                        .HasForeignKey("CarId");
 
                     b.HasOne("DomainLibrary.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLibrary.Models.Discount", "Discount")
-                        .WithMany()
-                        .HasForeignKey("DiscountId");
+                        .WithMany("Reservations")
+                        .HasForeignKey("ClientNumber");
 
                     b.HasOne("DomainLibrary.Models.ReservationInfo", "ReservationInfo")
                         .WithMany()
-                        .HasForeignKey("ReservationInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ReservationInfoId");
                 });
 
             modelBuilder.Entity("DomainLibrary.Models.ReservationInfo", b =>
@@ -279,13 +228,6 @@ namespace DataLayer.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("ReservationInfoId");
                         });
-                });
-
-            modelBuilder.Entity("DomainLibrary.Models.Staffel", b =>
-                {
-                    b.HasOne("DomainLibrary.Models.Discount", null)
-                        .WithMany("StaffelKorting")
-                        .HasForeignKey("DiscountId");
                 });
 #pragma warning restore 612, 618
         }

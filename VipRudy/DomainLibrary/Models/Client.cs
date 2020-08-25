@@ -16,7 +16,7 @@ namespace DomainLibrary
         private string _taxNumber;
         private ClientCategory _clientCategory;
         private Address _address;
-        private ICollection<Reservation> _reservations;
+       // private ICollection<Reservation> _reservations;
         #endregion
         #region Constructor
         public Client() { }
@@ -118,6 +118,7 @@ namespace DomainLibrary
                 }
             }
         }
+        /*
         public ICollection<Reservation> Reservations
         {
             get { return _reservations; }
@@ -129,6 +130,6 @@ namespace DomainLibrary
                     RaisePropertyChanged(() => Reservations);
                 }
             }
-        }
+        }*/
     }
 }

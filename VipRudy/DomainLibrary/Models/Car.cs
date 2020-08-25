@@ -16,7 +16,7 @@ namespace DomainLibrary.Models
         private int _carId;
         private List<Price> _price;
         //private CarAvailability _availability;
-        private ICollection<Reservation> _reservationDetails;
+        //private ICollection<Reservation> _reservationDetails;
        
         #endregion
         #region Constructor
@@ -103,6 +103,7 @@ namespace DomainLibrary.Models
                 }
             }
         }*/
+        /*
         public ICollection<Reservation> ReservationDetails
         {
             get { return _reservationDetails; }
@@ -114,7 +115,7 @@ namespace DomainLibrary.Models
                     RaisePropertyChanged(() => ReservationDetails);
                 }
             }
-        }
+        }*/
        
         public override string ToString()
         {

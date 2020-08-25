@@ -11,7 +11,7 @@ namespace DomainLibrary.Models
     {
         #region Properties
         private int _discountId;
-        private ClientCategory _clientCategory;
+        private string _discountCategory;
         private List<Staffel> _staffelKorting;
 
         #endregion
@@ -30,15 +30,15 @@ namespace DomainLibrary.Models
                 }
             }
         }
-        public ClientCategory ClientCategory
+        public string DiscountCategory
         {
-            get { return _clientCategory; }
+            get { return _discountCategory; }
             private set
             {
-                if (_clientCategory != value)
+                if (_discountCategory != value)
                 {
-                    _clientCategory = value;
-                    RaisePropertyChanged(() => ClientCategory);
+                    _discountCategory = value;
+                    RaisePropertyChanged(() => DiscountCategory);
                 }
             }
         }
