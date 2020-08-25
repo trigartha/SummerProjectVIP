@@ -204,7 +204,7 @@ namespace DomainLibrary.ViewModels
         private void CreateOverview()
         {
             
-            this.CurrentReservationOverview = _reservationManager.CreateOverview(_currentReservation);
+            this.CurrentReservationOverview = _reservationManager.CreateOverview(CurrentReservation);
         }
     }
 }

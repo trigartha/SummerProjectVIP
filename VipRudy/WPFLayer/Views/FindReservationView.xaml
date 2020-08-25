@@ -49,11 +49,11 @@
         <Button DockPanel.Dock="Top" x:Name="btn_ShowReservations" Command="{Binding ShowReservationCommand}" Style="{StaticResource FirstPageButtonStyle}" Content="{Binding ShowReservation, Source={StaticResource LocStrings } }" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="8,8,8,8"/>
         <!--List Items-->
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <ListBox Background="#cee6f2" ItemsSource="{Binding Reservations}" Margin="32,32,32,32" SelectedItem="{Binding CurrentReservation}">
+            <ListBox Background="#cee6f2" ItemsSource="{Binding Reservations}" Margin="32,32,32,32" SelectedItem="{Binding CurrentReservation}" HorizontalContentAlignment="Stretch">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Style="{StaticResource ItemBorder}">
-                            <Button x:Name="btn_ReservationItem" Click="btn_ReservationItem_Click">
+                            <Button x:Name="btn_ReservationItem" Click="btn_ReservationItem_Click" >
                                 <Button.Template>
                                     <ControlTemplate TargetType="{x:Type Button}">
                                         <ContentPresenter />
@@ -63,8 +63,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>

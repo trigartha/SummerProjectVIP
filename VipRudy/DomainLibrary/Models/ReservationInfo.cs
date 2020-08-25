@@ -43,8 +43,8 @@ namespace DomainLibrary.Models
             this.StartTime = startT;
             this.Arrangement = arrangement;
            
-            this.EndTime = startT;
-            this.StartTime = end;
+            this.EndTime = end;
+            this.StartTime = startT;
             this.Address = address;
         }
         #endregion

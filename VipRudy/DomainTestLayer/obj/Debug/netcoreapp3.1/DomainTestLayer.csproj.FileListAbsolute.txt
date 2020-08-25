@@ -139,8 +139,10 @@ C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainTestLayer\bin\Deb
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainTestLayer\obj\Debug\netcoreapp3.1\DomainTestLayer.csprojAssemblyReference.cache
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainTestLayer\obj\Debug\netcoreapp3.1\DomainTestLayer.AssemblyInfoInputs.cache
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainTestLayer\obj\Debug\netcoreapp3.1\DomainTestLayer.AssemblyInfo.cs
-C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainTestLayer\obj\Debug\netcoreapp3.1\DomainTestLayer.csproj.CoreCompileInputs.cache
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainTestLayer\obj\Debug\netcoreapp3.1\DomainTestLayer.csproj.CopyComplete
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainTestLayer\obj\Debug\netcoreapp3.1\DomainTestLayer.dll
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainTestLayer\obj\Debug\netcoreapp3.1\DomainTestLayer.pdb
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainTestLayer\obj\Debug\netcoreapp3.1\DomainTestLayer.genruntimeconfig.cache
+C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainTestLayer\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainTestLayer\bin\Debug\netcoreapp3.1\Shouldly.dll
+C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\DomainTestLayer\obj\Debug\netcoreapp3.1\DomainTestLayer.csproj.CoreCompileInputs.cache

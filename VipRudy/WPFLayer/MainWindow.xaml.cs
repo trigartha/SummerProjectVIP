@@ -25,10 +25,10 @@ namespace WPFLayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ReservationManager _reservationManager;
+        //private ReservationManager _reservationManager;
         public MainWindow()
         {
-            _reservationManager = new ReservationManager(new UnitOfWork(new ReservationContext("Reservation")));
+           // _reservationManager = new ReservationManager(new UnitOfWork(new ReservationContext("Reservation")));
             InitializeComponent();
            
         }
@@ -37,7 +37,7 @@ namespace WPFLayer
         {
            
             var showAddReservation = new AddReservationView();
-            showAddReservation.DataContext = new AddReservationViewModel(_reservationManager);
+            showAddReservation.DataContext = new AddReservationViewModel(new ReservationManager(new UnitOfWork(new ReservationContext("Reservation"))));
             showAddReservation.Show();
         }
 
@@ -45,7 +45,7 @@ namespace WPFLayer
         {
 
             var showFindReservation = new FindReservationView();
-            showFindReservation.DataContext = new FindReservationViewModel(_reservationManager);
+            showFindReservation.DataContext = new FindReservationViewModel(new ReservationManager(new UnitOfWork(new ReservationContext("Reservation"))));
             showFindReservation.Show();
         }
     }

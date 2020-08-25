@@ -53,7 +53,7 @@ namespace WPFLayer.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WPFLayer;V1.0.0.0;component/views/overviewreservationview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WPFLayer;component/views/overviewreservationview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\OverviewReservationView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

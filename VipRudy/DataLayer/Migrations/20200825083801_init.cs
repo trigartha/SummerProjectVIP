@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataLayer.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,8 +15,7 @@ namespace DataLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Brand = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),
-                    Colour = table.Column<string>(nullable: true),
-                    Availability = table.Column<string>(nullable: false)
+                    Colour = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -38,11 +37,26 @@ namespace DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Discount",
+                columns: table => new
+                {
+                    DiscountId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DiscountCategory = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Discount", x => x.DiscountId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ReservationInfo",
                 columns: table => new
                 {
                     ReservationInfoId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    StartHour = table.Column<int>(nullable: false),
+                    EndHour = table.Column<int>(nullable: false),
                     StartLocation = table.Column<int>(nullable: false),
                     EndLocation = table.Column<int>(nullable: false),
                     Arrangement = table.Column<int>(nullable: false),
@@ -101,6 +115,27 @@ namespace DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Staffel",
+                columns: table => new
+                {
+                    StaffelId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Amount = table.Column<int>(nullable: false),
+                    Discount = table.Column<int>(nullable: false),
+                    DiscountId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Staffel", x => x.StaffelId);
+                    table.ForeignKey(
+                        name: "FK_Staffel_Discount_DiscountId",
+                        column: x => x.DiscountId,
+                        principalTable: "Discount",
+                        principalColumn: "DiscountId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reservations",
                 columns: table => new
                 {
@@ -108,6 +143,7 @@ namespace DataLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClientNumber = table.Column<int>(nullable: true),
                     CarId = table.Column<int>(nullable: true),
+                    DiscountId = table.Column<int>(nullable: true),
                     ReservationDate = table.Column<DateTime>(nullable: false),
                     ReservationInfoId = table.Column<int>(nullable: true)
                 },
@@ -125,6 +161,12 @@ namespace DataLayer.Migrations
                         column: x => x.ClientNumber,
                         principalTable: "Clients",
                         principalColumn: "ClientNumber",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Reservations_Discount_DiscountId",
+                        column: x => x.DiscountId,
+                        principalTable: "Discount",
+                        principalColumn: "DiscountId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reservations_ReservationInfo_ReservationInfoId",
@@ -150,9 +192,19 @@ namespace DataLayer.Migrations
                 column: "ClientNumber");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reservations_DiscountId",
+                table: "Reservations",
+                column: "DiscountId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reservations_ReservationInfoId",
                 table: "Reservations",
                 column: "ReservationInfoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Staffel_DiscountId",
+                table: "Staffel",
+                column: "DiscountId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -167,6 +219,9 @@ namespace DataLayer.Migrations
                 name: "Reservations");
 
             migrationBuilder.DropTable(
+                name: "Staffel");
+
+            migrationBuilder.DropTable(
                 name: "Cars");
 
             migrationBuilder.DropTable(
@@ -174,6 +229,9 @@ namespace DataLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "ReservationInfo");
+
+            migrationBuilder.DropTable(
+                name: "Discount");
         }
     }
 }

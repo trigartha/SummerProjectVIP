@@ -34,7 +34,7 @@ namespace DomainLibrary.Models
             this.Car = car;
             this.ReservationDate = date;
             this.ReservationInfo = reservationInfo;
-        }
+        }/*
         public Reservation(int client, int car, DateTime date, int reservationInfo)
         {
             this.ClientId = client;
@@ -42,10 +42,10 @@ namespace DomainLibrary.Models
             this.ReservationDate = date;
             this.ReservationInfoId = reservationInfo;
         }
-
+        */
         #endregion
-        [ForeignKey("ClientNumber")]
-        public int ClientId
+       /*
+        public  int ClientId
             
         {
             get { return _clientId; }
@@ -57,8 +57,9 @@ namespace DomainLibrary.Models
                     RaisePropertyChanged(() => ClientId);
                 }
             }
-        }
-        public Client Client
+        }*/
+        [ForeignKey("ClientNumber")]
+        public virtual Client Client
         {
             get { return _client; }
             set
@@ -70,7 +71,7 @@ namespace DomainLibrary.Models
                 }
             }
         }
-        [ForeignKey("CarId")]
+      /*
         public int CarId
 
         {
@@ -83,8 +84,9 @@ namespace DomainLibrary.Models
                     RaisePropertyChanged(() => CarId);
                 }
             }
-        }
-        public Car Car
+        }*/
+        [ForeignKey("CarId")]
+        public virtual Car Car
         {
             get { return _car; }
             set
@@ -132,7 +134,7 @@ namespace DomainLibrary.Models
                 }
             }
         }
-        [ForeignKey("ReservationInfoId")]
+        /*
         public int ReservationInfoId
 
         {
@@ -145,8 +147,9 @@ namespace DomainLibrary.Models
                     RaisePropertyChanged(() => ReservationInfoId);
                 }
             }
-        }
-        public ReservationInfo ReservationInfo
+        }*/
+        [ForeignKey("ReservationInfoId")]
+        public virtual ReservationInfo ReservationInfo
         {
             get { return _reservationInfo; }
             set

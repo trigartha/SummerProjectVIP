@@ -35,7 +35,12 @@ namespace DataLayer.Repository
         }
         public IEnumerable<Reservation> FindAll()
         {
-            return _context.Reservations.AsEnumerable<Reservation>();
+            return _context.Reservations
+                .Include(r=>r.Client)
+                .Include(r=>r.ReservationInfo)
+                .Include(r => r.Car)
+                    .ThenInclude(c=>c.Price)
+                .AsEnumerable<Reservation>();
            
         }
         public IEnumerable<Reservation> FindOnDate(DateTime date)

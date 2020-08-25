@@ -62,3 +62,5 @@ C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\ClientImporter\obj\Debu
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\ClientImporter\obj\Debug\netcoreapp3.1\ClientImporter.dll
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\ClientImporter\obj\Debug\netcoreapp3.1\ClientImporter.pdb
 C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\ClientImporter\obj\Debug\netcoreapp3.1\ClientImporter.genruntimeconfig.cache
+C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\ClientImporter\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\Users\Triga\Documents\GitHub\SummerProjectVIP\VipRudy\ClientImporter\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll

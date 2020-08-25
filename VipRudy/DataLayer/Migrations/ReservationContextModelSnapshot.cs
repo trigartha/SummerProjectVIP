@@ -15,7 +15,7 @@ namespace DataLayer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.6")
+                .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -107,10 +107,10 @@ namespace DataLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarId")
+                    b.Property<int?>("CarId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClientId")
+                    b.Property<int?>("ClientNumber")
                         .HasColumnType("int");
 
                     b.Property<int?>("DiscountId")
@@ -119,14 +119,14 @@ namespace DataLayer.Migrations
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ReservationInfoId")
+                    b.Property<int?>("ReservationInfoId")
                         .HasColumnType("int");
 
                     b.HasKey("ReservationId");
 
                     b.HasIndex("CarId");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("ClientNumber");
 
                     b.HasIndex("DiscountId");
 
@@ -230,15 +230,11 @@ namespace DataLayer.Migrations
                 {
                     b.HasOne("DomainLibrary.Models.Car", "Car")
                         .WithMany()
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CarId");
 
                     b.HasOne("DomainLibrary.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClientNumber");
 
                     b.HasOne("DomainLibrary.Models.Discount", "Discount")
                         .WithMany()
@@ -246,9 +242,7 @@ namespace DataLayer.Migrations
 
                     b.HasOne("DomainLibrary.Models.ReservationInfo", "ReservationInfo")
                         .WithMany()
-                        .HasForeignKey("ReservationInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ReservationInfoId");
                 });
 
             modelBuilder.Entity("DomainLibrary.Models.ReservationInfo", b =>

@@ -60,7 +60,7 @@ namespace DataLayer
               .HasOne(r => r.Client)
               .WithMany(c => c.Reservations);
             */
-            
+
             /* modelBuilder.Entity<Client>()
                  .Property(c=>c.ClientNumber)
                  .ValueGeneratedNever();
@@ -72,6 +72,13 @@ namespace DataLayer
                   a.Property<int>("Id");
                   a.HasKey("Id");
               });*/
+            /*modelBuilder.Entity<Reservation>()
+                .HasRequired(r=>r.Car)
+                .HasForeignKey(r => r.CarId);
+            modelBuilder.Entity<Reservation>()
+                .HasKey(r => r.ClientId);
+            modelBuilder.Entity<Reservation>()
+               .HasKey(r => r.ReservationInfoId);*/
             modelBuilder.Entity<Client>().OwnsOne(c => c.Address);
             modelBuilder.Entity<ReservationInfo>().OwnsOne(c => c.Address);
             modelBuilder.Entity<Client>()
