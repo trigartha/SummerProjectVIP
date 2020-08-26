@@ -649,30 +649,7 @@ namespace DomainLibrary.Tests
             rm.AddClient(client3);
             Assert.IsTrue(rm.FindAllClients().ToList().Count == 3);
         }
-        /*
-        [TestMethod()]
-        public void FindAllBrandsTest_ReturnsRightAmount()
-        {
-            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
-            List<Price> prices = new List<Price>();
-            prices.Add(new Price(Arrangement.Airport, 100m));
-            prices.Add(new Price(Arrangement.Business, 100m));
-            prices.Add(new Price(Arrangement.NightLife, 900m));
-            prices.Add(new Price(Arrangement.Wedding, 800m));
-            prices.Add(new Price(Arrangement.Wellness, 750m));
-            List<Price> prices2 = new List<Price>();
-            prices2.Add(new Price(Arrangement.Airport, 150m));
-            prices2.Add(new Price(Arrangement.Business, 110m));
-            prices2.Add(new Price(Arrangement.NightLife, 400m));
-            prices2.Add(new Price(Arrangement.Wedding, 500m));
-            prices2.Add(new Price(Arrangement.Wellness, 650m));
-            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
-            Car car2 = new Car("Teacup", "Extra Fragile", "White", prices2);
-            rm.AddCar(car);
-            rm.AddCar(car2);
-            Assert.IsTrue(rm.FindAllBrands().ToList().Count == 2);
-        }
-        */
+       
         [TestMethod()]
         public void FindAllCarsOnArrangementTest_WhenNoPriceExist()
         {
@@ -742,7 +719,7 @@ namespace DomainLibrary.Tests
             rm.AddCar(car2);
             Assert.IsTrue(rm.FindAllOnColour("White").ToList().Count == 1);
         }
-
+        #region CreateOverViewTests
         [TestMethod()]
         public void CreateOverviewTest_AirportArrangement_CalculatesRightPricesNoOverTime()
         {
@@ -764,7 +741,7 @@ namespace DomainLibrary.Tests
             Arrangement arrangement = Arrangement.Airport;
             DateTime endTime = new DateTime(2020, 12, 12, 12, 0, 0);
 
-           
+
             ReservationOverview reservationOverview = rm.CreateOverview(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
             reservationOverview.TotalNormal.ShouldBe(295m);
             reservationOverview.TotalBeforeDiscount.ShouldBe(295m);
@@ -907,7 +884,7 @@ namespace DomainLibrary.Tests
             DateTime endTime = new DateTime(2020, 12, 12, 8, 0, 0);
 
             ReservationOverview reservationOverview = rm.CreateOverview(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
-           
+
             reservationOverview.TotalNormal.ShouldBe(900);
             reservationOverview.TotalOverTime.ShouldBe(140);
             reservationOverview.TotalBeforeDiscount.ShouldBe(1040m);
@@ -961,7 +938,7 @@ namespace DomainLibrary.Tests
             rm.AddCar(car);
             DateTime startTime = new DateTime(2020, 12, 12, 8, 0, 0);
             Arrangement arrangement = Arrangement.Wedding;
-            DateTime endTime = new DateTime(2020, 12, 12, 19, 0, 0); 
+            DateTime endTime = new DateTime(2020, 12, 12, 19, 0, 0);
 
             ReservationOverview reservationOverview = rm.CreateOverview(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
 
@@ -1029,6 +1006,8 @@ namespace DomainLibrary.Tests
             reservationOverview.Tax.ShouldBe(45m);
             reservationOverview.TotalToPay.ShouldBe(795m);
         }
+        #endregion
+        
     }
 }
 

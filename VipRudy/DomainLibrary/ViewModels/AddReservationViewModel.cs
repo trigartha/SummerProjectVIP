@@ -14,7 +14,7 @@ namespace DomainLibrary.ViewModels
     {
         #region Properties
         public RelayCommand AddReservationCommand { get; private set; }
-        public RelayCommand CreateOverviewCommand { get; private set; }
+       // public RelayCommand CreateOverviewCommand { get; private set; }
         #endregion
         #region Fields
         /* private readonly IReservationRepository _reservationRepository;
@@ -62,7 +62,7 @@ namespace DomainLibrary.ViewModels
         private void WireCommands()
         {
             AddReservationCommand = new RelayCommand(AddReservation);
-            CreateOverviewCommand = new RelayCommand(CreateOverview);
+            //CreateOverviewCommand = new RelayCommand(CreateOverview);
         }
         /// <summary>
         /// Gets or sets the Cars.
@@ -362,7 +362,8 @@ namespace DomainLibrary.ViewModels
         /// </summary>
         public void AddReservation()
         {
-            CreateReservationInfo();
+            if(ReservationInfo==null) CreateReservationInfo();
+
             var reservation = new Reservation(CurrentClient, CurrentCar, ReservationInfo);
             this.CurrentReservation = reservation;
             if (CurrentReservation.Client == null) return; // We don't want an empty reservation :)
@@ -373,7 +374,7 @@ namespace DomainLibrary.ViewModels
         }
         private void CreateOverview()
         {
-            CreateReservationInfo();
+            if (ReservationInfo == null) CreateReservationInfo();
             var reservation = new Reservation(CurrentClient, CurrentCar, ReservationInfo);
             this.CurrentReservation = reservation;
             this.CurrentReservationOverview = _reservationManager.CreateOverview(reservation);

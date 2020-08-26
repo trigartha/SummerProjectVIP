@@ -53,7 +53,7 @@ namespace DataLayer.Repository
         }
         public IEnumerable<Reservation> FindOnDateAndClient(DateTime date, Client client)
         {
-            return _context.Reservations.Where(r => r.Client.ClientNumber == client.ClientNumber&&r.ReservationDate==date).OrderBy(r => r.ReservationDate).AsEnumerable<Reservation>();
+            return _context.Reservations.Where(r => r.Client.ClientNumber == client.ClientNumber && r.ReservationDate.Year==date.Year && r.ReservationDate.Month == date.Month && r.ReservationDate.Day == date.Day).OrderBy(r => r.ReservationDate).AsEnumerable<Reservation>();
         }
         public void DeleteAll()
         {

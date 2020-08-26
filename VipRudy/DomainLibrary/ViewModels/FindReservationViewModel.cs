@@ -150,7 +150,7 @@ namespace DomainLibrary.ViewModels
         }*/
         public DateTime ReservationDate
         {
-            get { return _currentReservation.ReservationDate; }
+            get  { return _currentReservation.ReservationDate; }
             set
             {
                 if (_currentReservation.ReservationDate != value)
@@ -180,7 +180,7 @@ namespace DomainLibrary.ViewModels
         {
             if(_clientIsChecked && _dateIsChecked)
             {
-                this.Reservations = new ObservableCollection<Reservation>(_reservationManager.FindAllReservationsOnDateAndClient(_pickedTime, _currentClient));
+                this.Reservations = new ObservableCollection<Reservation>(_reservationManager.FindAllReservationsOnDateAndClient(PickedTime, CurrentClient));
             }
             else if (_clientIsChecked && !_dateIsChecked)
             {
@@ -203,7 +203,6 @@ namespace DomainLibrary.ViewModels
         }
         private void CreateOverview()
         {
-            
             this.CurrentReservationOverview = _reservationManager.CreateOverview(CurrentReservation);
         }
     }
