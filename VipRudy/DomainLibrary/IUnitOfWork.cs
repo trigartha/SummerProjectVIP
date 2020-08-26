@@ -11,6 +11,7 @@ namespace DomainLibrary
         IReservationRepository Reservations { get; set; }
 
         ICarRepository Cars { get; set; }
+        IDiscountRepository Discounts { get; set; }
         int Complete();
         void Dispose();
     }

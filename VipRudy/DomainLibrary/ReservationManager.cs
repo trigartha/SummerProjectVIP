@@ -63,7 +63,7 @@ namespace DomainLibrary
                     var normalAirportprice = (decimal)reservation.Car.Price.Where(p => p.Arrangement == Arrangement.Airport).Select(p => p.PriceRate).FirstOrDefault();
                     rO.HourPriceNormalPrice = normalAirportprice;
                     rO.TotalNormal = CalculateTotalNormalAmount(rO.TotalHoursNormalPrice, rO.HourPriceNormalPrice);
-                    rO.HourPriceNightPrice = Math.Round(((rO.HourPriceNormalPrice * 1.4m) / 5) ,0) * 5; 
+                    rO.HourPriceNightPrice = Math.Round(((rO.HourPriceNormalPrice * 1.4m) / 5), 0) * 5;
                     rO.TotalNight = CalculateTotalNightAmount(rO.TotalHoursNightPrice, rO.HourPriceNormalPrice);
                     rO.TotalOverTime = 0;
                     break;
@@ -85,9 +85,9 @@ namespace DomainLibrary
                     rO.TotalNormal = rO.HourPriceNormalPrice;
                     var baseOvertimeWeddingprice = (decimal)reservation.Car.Price.Where(p => p.Arrangement == Arrangement.Airport).Select(p => p.PriceRate).FirstOrDefault();
                     rO.HourPriceOverTimePrice = Math.Round(((baseOvertimeWeddingprice * 0.65m) / 5), 0) * 5;
-                    rO.TotalOverTime = Math.Round(CalculateTotalOverTimeAmount(rO.TotalHoursOverTimePrice, baseOvertimeWeddingprice),0);
+                    rO.TotalOverTime = Math.Round(CalculateTotalOverTimeAmount(rO.TotalHoursOverTimePrice, baseOvertimeWeddingprice), 0);
                     rO.TotalNight = CalculateTotalNightAmount(CalculateTotalNightHours(reservation.ReservationInfo.StartTime, reservation.ReservationInfo.EndTime), baseOvertimeWeddingprice);
-                   
+
                     break;
                 case Arrangement.NightLife:
                     rO.TotalHoursNormalPrice = 7;
@@ -97,23 +97,23 @@ namespace DomainLibrary
                     rO.HourPriceNormalPrice = (decimal)reservation.Car.Price.Where(p => p.Arrangement == Arrangement.Airport).Select(p => p.PriceRate).FirstOrDefault();
                     rO.TotalNormal = normalNightLifeprice;
                     rO.HourPriceOverTimePrice = Math.Round(((rO.HourPriceNormalPrice * 1.4m) / 5), 0) * 5;
-                    rO.TotalOverTime = Math.Round(CalculateTotalNightAmount(rO.TotalHoursNightPrice, rO.HourPriceNormalPrice),0);
-                    
+                    rO.TotalOverTime = Math.Round(CalculateTotalNightAmount(rO.TotalHoursNightPrice, rO.HourPriceNormalPrice), 0);
+
                     break;
                 case Arrangement.Wellness:
                     rO.TotalHoursNormalPrice = 10;
                     var normalWellnessprice = (decimal)reservation.Car.Price.Where(p => p.Arrangement == Arrangement.Wellness).Select(p => p.PriceRate).FirstOrDefault();
                     rO.HourPriceNormalPrice = normalWellnessprice;
-                    rO.TotalNormal = Math.Round(rO.HourPriceNormalPrice,0);
+                    rO.TotalNormal = Math.Round(rO.HourPriceNormalPrice, 0);
                     rO.TotalOverTime = 0;
                     rO.TotalNight = 0;
                     break;
             }
             rO.TotalBeforeDiscount = rO.TotalNormal + rO.TotalNight + rO.TotalOverTime;
-            rO.Discount = CalculateDiscount(reservation.Client);
-            rO.TotalBeforeTaxAfterDiscount = Math.Round((rO.TotalBeforeTaxAfterDiscount - rO.Discount),0);
-            rO.Tax = Math.Round(rO.TotalBeforeTaxAfterDiscount * 0.06m,0);
-            rO.TotalToPay = Math.Round(rO.TotalBeforeTaxAfterDiscount + rO.Tax,0);
+            rO.Discount = CalculateDiscount(rO.TotalBeforeDiscount,GetDiscount(reservation.Client, ""));
+            rO.TotalBeforeTaxAfterDiscount = Math.Round((rO.TotalBeforeTaxAfterDiscount - rO.Discount), 0);
+            rO.Tax = Math.Round(rO.TotalBeforeTaxAfterDiscount * 0.06m, 0);
+            rO.TotalToPay = Math.Round(rO.TotalBeforeTaxAfterDiscount + rO.Tax, 0);
             return rO;
         }
         public void UpdateCarAvailability(Car car, CarAvailability availability)
@@ -176,10 +176,19 @@ namespace DomainLibrary
             return _uow.Cars.FindAllOnModel(model);
         }
 
-        private decimal CalculateDiscount(Client client)
+        private decimal GetDiscount(Client client, string category)
         {
             //TODO Figure out what the base is for discountcategory if not clientcategory 
             decimal total = 0m;
+            int amountResYear = _uow.Reservations.FindOnClient(client).Where(r => r.ReservationInfo.StartTime.Year == DateTime.Today.Year).Count();
+            Discount discount = _uow.Discounts.FindOnCategory(category);
+            decimal disPercent = discount.StaffelKorting.Where(s => s.Amount == amountResYear).Select(s=>s.Discount).FirstOrDefault();
+            return total;
+        }
+        private decimal CalculateDiscount(decimal price, decimal percentage)
+        {
+            decimal total = 0;
+            total = price * percentage;
             return total;
         }
         private decimal CalculateTotalBeforeDiscount(decimal normal, decimal night, decimal overtime)
@@ -191,7 +200,7 @@ namespace DomainLibrary
         {
             decimal total = 0m;
             if (totalHours > 0) { total = price + ((totalHours - 1) * (Math.Round((price * 0.65m) / 5) * 5)); }
-           
+
             return total;
         }
         private decimal CalculateTotalNightAmount(int totalHours, decimal price)
@@ -220,27 +229,46 @@ namespace DomainLibrary
             }
             else
             {
-                total = 22 - startTime.Hour + endTime.Hour - 7;
+                if (startTime.Hour < 22) total = 22 - startTime.Hour;
+                if (endTime.Hour > 7) total += endTime.Hour - 7;
+
             }
             return total;
         }
         private int CalculateTotalNightHours(DateTime startTime, DateTime endTime)
         {
             int total = 0;
-            if (endTime.Hour > 22 )
-                total += endTime.Hour - 22;
-            if(endTime.Hour == 0)
-                total += 24 - 22;
-            if (startTime.Hour < 7)
-                total += 7 - startTime.Hour;
+            if (startTime.Day == endTime.Day)
+            {
+                if (endTime.Hour > 22)
+                    total += endTime.Hour - 22;
+                if (endTime.Hour == 0)
+                    total += 24 - 22;
+                if (startTime.Hour < 7)
+                    total += 7 - startTime.Hour;
+            }
+            else
+            {
+                if (startTime.Hour < 22) total += 2;
+                if (endTime.Hour > 7) total += 7;
+                if (endTime.Hour <= 7) total += endTime.Hour;
+            }
             return total;
         }
         private int CalculateTotalOverTimeHours(DateTime startTime, DateTime endTime)
         {
             int total = 0;
-            if (endTime.Hour == 0 || endTime.Hour == 23) total = 22 - startTime.Hour - 7;
-            else total =  endTime.Hour - startTime.Hour - 7;
-
+            if (startTime.Day == endTime.Day)
+            {
+                if (endTime.Hour == 0 || endTime.Hour == 23) total = 22 - startTime.Hour - 7;
+                else total = endTime.Hour - startTime.Hour - 7;
+            }
+            else
+            {
+                if (startTime.Hour < 22) if(22-startTime.Hour>7) total += 22-startTime.Hour -7;
+               
+               
+            }
             return total;
         }
         private bool ControlStartTimeWedding(DateTime time)
@@ -265,7 +293,7 @@ namespace DomainLibrary
             int end = 24;
             int midnight = 0;
             int real = time.Hour;
-            if(real == midnight) return true;
+            if (real == midnight) return true;
             else if (start <= real && real <= end) return true;
             return false;
         }

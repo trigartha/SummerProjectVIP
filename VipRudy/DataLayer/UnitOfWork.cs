@@ -13,6 +13,7 @@ namespace DataLayer
         public IClientRepository Clients { get; set; }
         public IReservationRepository Reservations { get; set; }
         public ICarRepository Cars { get; set; }
+        public IDiscountRepository Discounts { get; set; }
         #endregion
         #region Fields
         private ReservationContext _context;

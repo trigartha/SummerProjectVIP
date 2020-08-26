@@ -17,6 +17,7 @@ namespace DataLayer
         public DbSet<Car> Cars { get; set; }
         public DbSet<Price> Prices { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
         #endregion
         #region Fields
         private string _connectionString;

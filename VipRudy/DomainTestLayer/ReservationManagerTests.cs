@@ -355,7 +355,7 @@ namespace DomainLibrary.Tests
             Assert.IsTrue(rm.FindAllCars().ToList().Count == amountCars + 1);
         }
         #endregion
-
+        #region Find Functions
         [TestMethod()]
         public void FindAllReservationsTest_ReturnsRightAmount()
         {
@@ -649,7 +649,7 @@ namespace DomainLibrary.Tests
             rm.AddClient(client3);
             Assert.IsTrue(rm.FindAllClients().ToList().Count == 3);
         }
-       
+
         [TestMethod()]
         public void FindAllCarsOnArrangementTest_WhenNoPriceExist()
         {
@@ -719,6 +719,7 @@ namespace DomainLibrary.Tests
             rm.AddCar(car2);
             Assert.IsTrue(rm.FindAllOnColour("White").ToList().Count == 1);
         }
+        #endregion
         #region CreateOverViewTests
         [TestMethod()]
         public void CreateOverviewTest_AirportArrangement_CalculatesRightPricesNoOverTime()
@@ -778,6 +779,35 @@ namespace DomainLibrary.Tests
             reservationOverview.TotalToPay.ShouldBe(678m);
         }
         [TestMethod()]
+        public void CreateOverviewTest_AirportArrangement_CalculatesRightPricesWithNightTimeAndDifferentStartEndDate()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+            rm.AddClient(client);
+            Location start = Location.Antwerpen;
+            Location stop = Location.Brussel;
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
+            rm.AddCar(car);
+            DateTime startTime = new DateTime(2020, 12, 12, 20, 0, 0);
+            Arrangement arrangement = Arrangement.Airport;
+            DateTime endTime = new DateTime(2020, 12, 13, 4, 0, 0);
+
+
+            ReservationOverview reservationOverview = rm.CreateOverview(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
+            reservationOverview.TotalNormal.ShouldBe(165);
+            reservationOverview.TotalNight.ShouldBe(840);
+            reservationOverview.TotalBeforeDiscount.ShouldBe(1005);
+            reservationOverview.Tax.ShouldBe(60m);
+            reservationOverview.TotalToPay.ShouldBe(1065m);
+        }
+        [TestMethod()]
         public void CreateOverviewTest_BusinessArrangement_CalculatesRightPricesNoOverTime()
         {
             ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
@@ -833,6 +863,35 @@ namespace DomainLibrary.Tests
             reservationOverview.TotalBeforeDiscount.ShouldBe(640);
             reservationOverview.Tax.ShouldBe(38m);
             reservationOverview.TotalToPay.ShouldBe(678m);
+        }
+        [TestMethod()]
+        public void CreateOverviewTest_BusinesArrangement_CalculatesRightPricesWithNightTimeAndDifferentStartEndDate()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+            rm.AddClient(client);
+            Location start = Location.Antwerpen;
+            Location stop = Location.Brussel;
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
+            rm.AddCar(car);
+            DateTime startTime = new DateTime(2020, 12, 12, 20, 0, 0);
+            Arrangement arrangement = Arrangement.Business;
+            DateTime endTime = new DateTime(2020, 12, 13, 4, 0, 0);
+
+
+            ReservationOverview reservationOverview = rm.CreateOverview(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
+            reservationOverview.TotalNormal.ShouldBe(165);
+            reservationOverview.TotalNight.ShouldBe(840);
+            reservationOverview.TotalBeforeDiscount.ShouldBe(1005);
+            reservationOverview.Tax.ShouldBe(60m);
+            reservationOverview.TotalToPay.ShouldBe(1065m);
         }
         [TestMethod()]
         public void CreateOverviewTest_NightLifeArrangement_CalculatesRightPricesNoOverTime()
@@ -979,6 +1038,65 @@ namespace DomainLibrary.Tests
             reservationOverview.TotalToPay.ShouldBe(1283m);
         }
         [TestMethod()]
+        public void CreateOverviewTest_WeddingArrangement_CalculatesRightPricesWithNightTimeAndDifferentStartEndDate()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+            rm.AddClient(client);
+            Location start = Location.Antwerpen;
+            Location stop = Location.Brussel;
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
+            rm.AddCar(car);
+            DateTime startTime = new DateTime(2020, 12, 12, 15, 0, 0);
+            Arrangement arrangement = Arrangement.Wedding;
+            DateTime endTime = new DateTime(2020, 12, 13, 1, 0, 0);
+
+
+            ReservationOverview reservationOverview = rm.CreateOverview(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
+            reservationOverview.TotalNormal.ShouldBe(800);
+            reservationOverview.TotalNight.ShouldBe(420);
+            reservationOverview.TotalBeforeDiscount.ShouldBe(1220);
+            reservationOverview.Tax.ShouldBe(73m);
+            reservationOverview.TotalToPay.ShouldBe(1293m);
+        }
+        [TestMethod()]
+        public void CreateOverviewTest_WeddingArrangement_CalculatesRightPricesWithNightTimeAndOverTimeAndDifferentStartEndDate()
+        {
+            ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
+            Client client = new Client(999, "Alice", "Cards", ClientCategory.Vip, new Address());
+            rm.AddClient(client);
+            Location start = Location.Antwerpen;
+            Location stop = Location.Brussel;
+            List<Price> prices = new List<Price>();
+            prices.Add(new Price(Arrangement.Airport, 100m));
+            prices.Add(new Price(Arrangement.Business, 100m));
+            prices.Add(new Price(Arrangement.NightLife, 900m));
+            prices.Add(new Price(Arrangement.Wedding, 800m));
+            prices.Add(new Price(Arrangement.Wellness, 750m));
+            Car car = new Car("RabbitHole", "Delux", "Brown", prices);
+            DeliveryAddress address = new DeliveryAddress("Teaparty", "1", "Wonderland");
+            rm.AddCar(car);
+            DateTime startTime = new DateTime(2020, 12, 12, 13, 0, 0);
+            Arrangement arrangement = Arrangement.Wedding;
+            DateTime endTime = new DateTime(2020, 12, 13, 0, 0, 0);
+
+
+            ReservationOverview reservationOverview = rm.CreateOverview(rm.CreateReservation(client, start, stop, car, startTime, arrangement, endTime, address));
+            reservationOverview.TotalNormal.ShouldBe(800);
+            reservationOverview.TotalNight.ShouldBe(280);
+            reservationOverview.TotalOverTime.ShouldBe(130);
+            reservationOverview.TotalBeforeDiscount.ShouldBe(1210);
+            reservationOverview.Tax.ShouldBe(73m);
+            reservationOverview.TotalToPay.ShouldBe(1283m);
+        }
+        [TestMethod()]
         public void CreateOverviewTest_WellnessArrangement_CalculatesRightPrices()
         {
             ReservationManager rm = new ReservationManager(new UnitOfWork(new ReservationContextTest()));
@@ -1007,6 +1125,7 @@ namespace DomainLibrary.Tests
             reservationOverview.TotalToPay.ShouldBe(795m);
         }
         #endregion
+
         
     }
 }

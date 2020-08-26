@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainTestLayer", "DomainTestLayer\DomainTestLayer.csproj", "{C154FA1E-1073-4C68-AA65-8073B8B63A21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFLayer", "WPFLayer\WPFLayer.csproj", "{EFCFE256-CE1D-4DDE-B5A4-C59E1109DAF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFLayer", "WPFLayer\WPFLayer.csproj", "{EFCFE256-CE1D-4DDE-B5A4-C59E1109DAF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

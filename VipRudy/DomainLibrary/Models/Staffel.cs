@@ -7,14 +7,14 @@ namespace DomainLibrary.Models
     {
         #region Properties
         private int _amount;
-        private int _discount;
+        private decimal _discount;
         private int _staffelId;
         #endregion
         #region Fields
         #endregion
         #region Constructor
         public Staffel() { }
-        public Staffel(int amount, int discount)
+        public Staffel(int amount, decimal discount)
         {
             this.Amount = amount;
             this.Discount = discount;
@@ -35,7 +35,7 @@ namespace DomainLibrary.Models
                 }
             }
         }
-        public int Discount
+        public decimal Discount
         {
             get { return _discount; }
             private set
